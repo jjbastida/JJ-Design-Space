@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    font-family: "Open Sans", "Verdana", "Helvetica", sans-serif;
+}
+*:focus{
+    outline: 0;
+    border: none;
+}
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding 0;
+    transition: all 2s ease;
+    overflow: hidden;
+}
+
+#title {
+    position: fixed;
+    display: block;
+    font-weight: 700;
+    color: #40405A;
+    font-size: 3em;
+    letter-spacing: -2;
+    padding: .5em;
+}
+
+.overwater {
+    background: linear-gradient(to bottom, #FCFCFC 0%, #88889F 100%)
+}

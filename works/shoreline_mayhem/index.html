@@ -1,0 +1,66 @@
+<html lang="en">
+
+<head>
+    <!DOCTYPE html>
+    <meta charset="utf-8">
+    <title>Shoreline Mayhem</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="../../images/icons/favicon.ico" type="../../images/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/icons/apple-touch-icon.png">
+    <link rel="icon" type="../../images/png" sizes="32x32" href="../../images/icons/apple-touch-icon.png">
+    <link rel="icon" type="../../images/png" sizes="192x192" href="../images/icons/android-chrome-192x192.png">
+    <link rel="icon" type="../../images/png" sizes="256x256" href="../images/icons/android-chrome-256x256.png">
+    <link rel="mask-icon" href="../../images/icons/safari-pinned-tab.svg" color="#406eeb">
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113867348-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'UA-113867348-1');
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500,500i,700" rel="stylesheet"> </head>
+
+<body class="overwater">
+    <div id="loading"> <span id="loadingtext">Loading</span> </div>
+    <div class="titleOverlay">
+        <h1 class="title" id="title">Shoreline<br>Mayhem</h1>
+        <button id="underwawa">Submerge</button>
+        <div class="minitext firstMessage">press me to begin</div>
+    </div>
+    <div id="slidecontainer">
+        <input type="range" min="1" max="7" step="1" value="0" id="slider"> </div>
+    <div id="underbubbles">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div id="buttons">
+        <div id="back">Previous</div>
+        <div id="next">Next</div>
+    </div>
+    <div class="minitext secondMessage">use me to navigate</div>
+    <div id="jslocation"></div>
+    <script src="js/three.min.js"></script>
+    <!--    THREE JS LIBRARY-->
+    <script src="js/Detector.js"></script>
+    <!-- RAYCASTER LIBRARY-->
+    <script src="js/ImprovedNoise.js"></script>
+    <!-- PERLIN NOISE LIBRARY-->
+    <script src="js/Tween.js"></script>
+    <!-- TWEEN JS LIBRARY-->
+    <script src="js/ColladaLoader.js"></script>
+    <!-- Collada Loader LIBRARY-->
+    <script src="js/script.js"></script>
+</body>
+
+</html>
