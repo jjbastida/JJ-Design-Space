@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<!--JuanJose Bastida 2020-->
+<!-- HTML & CSS V2.0 -->
+<!--These projects were made to be looked into, so if you're reading this that’s great! I tried to keep these to be 'best practice' but that being said please never put all of your CSS and JS in one HTML file, seperate them out and if you have multiple pages seperate out your files so you only import what you need!-->
+<!--Other than that thank you for reading! Hope it helps, if you have any questions feel free to reach out jj.bastida@outlook.com-->
+<html lang="en-CA">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,700&display=swap" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/81783a94a9.js" samesite="secure"></script>
+  <title>Let’s Play &lt;Tag&gt; with Html And Style It</title>
+  <style>
+    :root {
+      --spice-main: #ff4f4f;
+      --spice-alt: #d34254;
+      --obsidian: #242430;
+      --dusk: #45455b;
+      --pavement: #88889f;
+      --egg-whites: #eaeaea;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: 'Source Code Pro', 'Ubuntu', monospace;
+    }
+
+    body {
+      width: 100%;
+      height: 100%;
+      counter-reset: code-counter;
+    }
+
+    pre {
+      white-space: break-spaces;
+    }
+
+    nav {
+      height: 100vh;
+      box-sizing: border-box;
+      width: 8rem;
+      position: fixed;
+      background-color: var(--spice-main);
+      z-index: 100;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    h1 {
+      font-size: 4rem;
+      font-weight: 700;
+      background-color: var(--spice-main);
+      padding: 2rem;
+      color: white;
+      max-width: 1080px;
+    }
+
+    h2 {
+      font-size: 2.3rem;
+      font-weight: 700;
+      color: var(--obsidian);
+    }
+
+    h3 {
+      margin-top: 1rem;
+      margin-bottom: .5rem !important;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--obsidian);
+    }
+
+    h3::before {
+      display: none;
+    }
+
+    strong {
+      font-size: inherit;
+      font-weight: 700;
+      color: inherit;
+    }
+
+    h4 {
+      color: black;
+      color: var(--obsidian);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    p {
+      font-size: 1.15rem;
+      line-height: 1.4;
+      font-weight: 400;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .inline-link {
+      color: var(--spice-main) !important;
+      display: inline-block;
+      transition: color 0.5s ease;
+      position: relative;
+    }
+
+    .inline-link::before {
+      content: " ";
+      padding: 0 0.5em 0 1em;
+    }
+
+    .inline-link::after {
+      content: "\f019";
+      font-family: "Font Awesome 5 Pro";
+      font-size: 0.65em;
+      padding-left: 0.5em;
+      position: absolute;
+      top: 1em;
+      left: 0;
+      transform: translateY(-50%) scale(1.3);
+    }
+
+    .inline-link[target="_blank"]::before {
+      padding: 0 0.5em;
+    }
+
+    .inline-link[target="_blank"]::after {
+      content: "\f08e";
+      padding-left: 0;
+      transform: translateY(-50%) scale(1);
+    }
+
+    .inline-link:hover {
+      text-decoration: underline !important;
+      color: var(--spice-alt) !important;
+      transition: color 0.5s ease;
+    }
+
+    section *::selection {
+      color: white;
+      background: var(--obsidian);
+    }
+
+    pre::before {
+      display: none !important;
+    }
+
+    .not-counted::before {
+      display: none !important;
+    }
+
+    code {
+      display: inline-block;
+      color: white;
+      background-color: var(--obsidian);
+      border-radius: 8px;
+      padding: 2.2rem 1.5em 1.5em;
+      box-sizing: border-box;
+      position: relative;
+      margin: 0.5em 0;
+    }
+
+    code::before {
+      display: block;
+      height: 1.2rem;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      padding: 0.5em 0 0.75em;
+      font-weight: 600;
+    }
+
+    code::after {
+      color: white;
+      display: block;
+      width: 100%;
+      position: absolute;
+      box-sizing: border-box;
+      top: 0;
+      left: 0.25rem;
+      padding: 0.5em 0.5em 0;
+      font-weight: 600;
+    }
+
+    .css-code::before {
+      content: '';
+      background-color: #406eeb;
+    }
+
+    .html-code::before {
+      content: '';
+      background-color: #ff4040;
+    }
+
+    .js-code::before {
+      content: '';
+      background-color: #fff039;
+    }
+
+    .php-code::before {
+      content: '';
+      background-color: #5332f9;
+    }
+
+    .terminal-code::before {
+      content: '';
+      background-color: #45455b;
+    }
+
+    .css-code::after {
+      content: 'CSS';
+    }
+
+    .html-code::after {
+      content: 'HTML';
+    }
+
+    .js-code::after {
+      content: 'JS';
+    }
+
+    .php-code::after {
+      content: 'PHP';
+    }
+
+    .terminal-code::after {
+      content: 'Terminal';
+    }
+
+    .html-code .code-color-main {
+      color: #ff4040 !important;
+    }
+
+    .css-code .code-color-main {
+      color: #406eeb !important;
+    }
+
+    .js-code .code-color-main {
+      color: #fff039 !important;
+    }
+
+    .php-code .code-color-main {
+      color: #5332f9 !important;
+    }
+
+    .terminal-code .code-color-main {
+      font-weight: 700;
+    }
+
+    .html-note,
+    .css-note,
+    .js-note {
+      font-size: 0.9rem !important;
+      color: var(--pavement) !important;
+    }
+
+    .html-note::before {
+      content: '<!-- ' !important;
+    }
+
+    .html-note::after {
+      content: ' ->' !important;
+    }
+
+    .css-note::before {
+      content: '/* ' !important;
+    }
+
+    .css-note::after {
+      content: ' */' !important;
+    }
+
+    .js-note::before {
+      content: '// ' !important;
+    }
+
+    .subtitle-one {
+      font-size: 1.6rem;
+      line-height: 1.3;
+      padding: 0.5em 0 0;
+    }
+
+    .subtitle-two {
+      font-size: 1.6rem;
+      line-height: 1.3;
+      padding: 0.5em 0 0;
+      color: white;
+    }
+
+    .no-break {
+      word-break: keep-all;
+      white-space: nowrap;
+    }
+
+    .raw {
+      font-size: initial !important;
+      font-family: initial !important;
+      color: initial !important;
+      font-weight: initial !important;
+      padding: initial !important;
+      margin: initial !important;
+      background-color: initial !important;
+      line-height: initial !important;
+    }
+
+    .raw::selection {
+      color: white !important;
+      background-color: blue !important;
+    }
+
+    #main-menu-list {
+      height: auto;
+      width: 100%;
+      display: flex;
+      flex-wrap: nowrap;
+      flex-direction: column;
+      align-content: center;
+      justify-content: flex-start;
+      user-select: none;
+    }
+
+    .menu-item {
+      text-align: center;
+      padding: 1em 0.25em;
+      box-sizing: border-box;
+      cursor: pointer;
+      min-width: 7rem;
+      position: relative;
+    }
+
+    .menu-item::after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 90%;
+      height: 100%;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -1px);
+      border-bottom: 2px var(--obsidian) solid;
+      z-index: 5;
+    }
+
+    .menu-item:focus {
+      outline: 2px solid #FFFFFF;
+      background-color: #FF8383;
+    }
+
+    .selected:focus {
+      outline: none;
+    }
+
+    .main {
+      display: grid;
+      grid-template-columns: [navigation] calc(8rem - 20px) 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-gap: 20px;
+      max-width: 120rem;
+    }
+
+    .main section {
+      grid-column: 2 / span 11;
+      padding-left: 1rem;
+      min-height: 100vh;
+      padding-top: 1rem;
+    }
+
+    #final-section {
+      grid-column: 2 / span 11 !important;
+      background-color: var(--spice-main);
+    }
+
+    .single-column {
+      grid-column: 2 / span 8 !important;
+    }
+
+    .two-column {
+      grid-column: 2 / span 11 !important;
+    }
+
+    .two-column .column-container {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .two-column .column-container>div {
+      width: 45%;
+      padding-right: 2.5%;
+    }
+
+    #html-css {
+      grid-column: 2 / span 9;
+      padding-left: 0;
+      padding-top: 11rem;
+    }
+
+    .unselected {
+      color: var(--obsidian);
+    }
+
+    .selected {
+      background-color: var(--obsidian) !important;
+      color: var(--egg-whites) !important;
+      transform: scaleY(1.03) !important;
+    }
+
+    .selected::after {
+      display: none !important;
+    }
+
+    .unselected-title {
+      color: var(--obsidian);
+    }
+
+    .selected-title {
+      background-color: var(--obsidian);
+      color: var(--egg-whites);
+    }
+
+    .fal {
+      vertical-align: middle;
+    }
+
+    .fa-fw {
+      display: block;
+      height: 1em;
+      width: 1em;
+      margin: 0 auto 0.5em;
+      padding: 0.5em;
+      border-radius: 1000px;
+      text-align: center;
+    }
+
+    .fa-code::before {
+      display: block;
+      transform: translate(-2px, 1px);
+    }
+
+    .fa-h1::before {
+      display: block;
+      transform: translate(-1px, 1px);
+    }
+
+    .unselected-icon {
+      border: 2px solid var(--obsidian);
+      color: var(--obsidian);
+      transform: scale(0.9);
+      transition: transform ease 0.5s, color ease 0.5s;
+    }
+
+    .selected-icon {
+      background-color: var(--egg-whites);
+      color: var(--obsidian);
+      transition: transform ease 0.5s, color ease 0.5s, border 0.5s ease;
+    }
+
+    .unselected:hover {
+      background-color: var(--spice-alt);
+    }
+
+
+    .inline-link[href^="#"]::after {
+      content: "\f354";
+      transform: translateY(-40%) scale(1.5);
+    }
+
+
+    #floating-enter-notification {
+      position: fixed;
+      font-size: 1rem;
+      bottom: 30px;
+      background-color: rgba(255, 255, 255, 0);
+      right: calc((11vw / 2) - 20px);
+      text-align: left;
+      user-select: none;
+      color: var(--pavement);
+      padding: 1em 1.5em;
+      border-radius: 25px;
+      border: 1px solid black;
+      border-color: var(--pavement);
+      cursor: pointer;
+      transition: opacity 0.7s ease;
+    }
+
+    #floating-enter-notification:hover {
+      background-color: rgba(0, 0, 0, .01);
+    }
+
+    #floating-enter-notification:focus {
+      background-color: rgba(0, 0, 0, .01);
+      outline: none;
+      border-color: #1E4CC1;
+      color: #1E4CC1;
+    }
+
+    #floating-enter-notification:active {
+      background-color: rgba(0, 0, 0, .02);
+      border-color: var(--pavement);
+      color: var(--pavement);
+    }
+
+    .left-space {
+      padding-left: 2rem;
+    }
+
+    .counted-content>* {
+      margin-bottom: 0.8em;
+    }
+
+    .counted-content>h3:first-child {
+      margin-top: -.5rem !important;
+    }
+
+    .counted-content>*::before {
+      counter-increment: code-counter 1;
+      content: counter(code-counter) ' ';
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--pavement);
+    }
+
+    .heading-box {
+      padding-bottom: 1.1rem;
+    }
+
+    .body-list {
+      font-size: 1.15rem;
+      line-height: 1.4;
+    }
+
+    .body-list li {
+      font-size: 1rem;
+      line-height: 1.5;
+      padding: 0 1em 0.8em;
+      list-style: circle;
+      list-style-position: inside;
+    }
+
+    .tab-in {
+      margin: 0.5em 0 0.5em 1.5em;
+      display: inline-block;
+    }
+
+    .stacked-shortcut {
+      position: relative;
+    }
+
+    .stacked-shortcut::before {
+      content: '+';
+      padding: 0 0.5em 0 1.75em;
+    }
+
+    .stacked-shortcut::after {
+      content: 'cmd \A ctrl';
+      display: block;
+      font-size: 0.6em;
+      line-height: 1;
+      white-space: pre-wrap;
+      padding-right: 0.25em;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    @media all and (min-width: 120rem) {
+      .main section {
+        padding-left: 2rem;
+        padding-top: 2rem;
+      }
+
+    }
+
+    @media all and (max-width: 60rem) {
+      .single-column {
+        grid-column: 2 / span 10 !important;
+      }
+
+      .two-column {
+        grid-column: 2 / span 10 !important;
+      }
+
+      .two-column .column-container>div {
+        width: 100%;
+        padding-right: 0;
+      }
+
+      #floating-enter-notification {
+        display: none;
+      }
+    }
+
+    @media all and (max-width: 40rem) {
+      h1 {
+        font-size: 3rem;
+        padding: 1rem;
+      }
+
+      .subtitle-one {
+        font-size: 1.4rem;
+      }
+
+      .subtitle-two {
+        font-size: 1.4rem;
+      }
+
+      nav {
+        width: 100vw;
+        height: auto;
+        border-bottom: 2px var(--obsidian) solid;
+      }
+
+      #main-menu-list {
+        flex-direction: row;
+        overflow-x: scroll;
+        position: relative;
+      }
+
+      .menu-border {
+        display: none;
+      }
+
+      .menu-item {
+        text-align: center;
+        padding: 1em 1.2em;
+        box-sizing: border-box;
+        border-right: 2px var(--obsidian) solid;
+        min-height: 5rem;
+        min-width: 8rem;
+      }
+
+      .menu-item-last {
+        border: none;
+        padding-right: 2em;
+      }
+
+      .main {
+        grid-template-columns: 1rem 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1rem;
+        grid-gap: 0;
+      }
+
+      .main section {
+        grid-column: 1 / span 11 !important;
+        padding-top: 9rem;
+      }
+
+      #final-section {
+        grid-column: 1 / span 12 !important;
+        padding-right: 1rem;
+      }
+
+      #html-css {
+        grid-column: 1 / span 12 !important;
+        padding-left: 0;
+        padding-top: 11rem;
+      }
+
+      .left-space {
+        padding-left: 1rem;
+      }
+
+      .menu-item::after {
+        display: none !important;
+      }
+    }
+
+    @media all and (-ms-high-contrast: none),
+    (-ms-high-contrast: active) {
+      nav {
+        display: none;
+      }
+
+      h1 {
+        color: black;
+      }
+
+      code {
+        color: black;
+        border: 1px solid black;
+      }
+
+      section *::selection {
+        color: white;
+        background: black;
+      }
+
+      th {
+        color: black;
+        background-color: #ffb62e;
+        padding: 0 5rem 0 .5rem;
+      }
+
+      tr:nth-child(even) {
+        background-color: lightgray;
+      }
+
+      #floating-enter-notification {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <ul id="main-menu-list">
+      <li class="menu-item unselected" tabindex="0">
+        <i class="fas fa-h1 fa-fw unselected-icon"></i>
+        <h4 class="unselected-title">HTML &amp; CSS</h4>
+      </li>
+      <li class="menu-item unselected" tabindex="0">
+        <i class="fas fa-info unselected-icon fa-fw"></i>
+        <h4 class="unselected-title">General Info</h4>
+      </li>
+      <li class="menu-item unselected" tabindex="0">
+        <i class="fas fa-code unselected-icon fa-fw"></i>
+        <h4 class="unselected-title">Who is HTML?</h4>
+      </li>
+      <li class="menu-item unselected" tabindex="0">
+        <i class="fas fa-paint-brush unselected-icon fa-fw"></i>
+        <h4 class="unselected-title">Styling with CSS</h4>
+      </li>
+      <li class="menu-item unselected" tabindex="0">
+        <i class="fas fa-question unselected-icon fa-fw"></i>
+        <h4 class="unselected-title">Help</h4>
+      </li>
+      <li class="menu-item unselected menu-item-last" tabindex="0">
+        <i class="fas fa-sparkles unselected-icon fa-fw"></i>
+        <h4 class="unselected-title">Tips</h4>
+      </li>
+    </ul>
+  </nav>
+  <div id="floating-enter-notification" aria-hidden="true">
+    <i class="fal fa-arrow-square-right"></i>
+  </div>
+  <div class="main">
+    <section id="html-css" class="main-section">
+      <h1 class="main-title">
+        Let’s Play &lt;Tag&gt; with Html And Style It
+      </h1>
+      <p class="subtitle-one left-space">
+        HTML &amp; CSS Workshop &amp; Information
+      </p>
+      <p class="subtitle-one left-space">
+        JJ Bastida
+      </p>
+    </section>
+    <section class="main-body single-column main-section" id="general-info">
+      <div class="heading-box">
+        <h2 class="main-title">General Info</h2>
+        <p class="html-note">Before we start the lesson...</p>
+      </div>
+      <div class="counted-content">
+        <h3>
+          Be sure to download either
+          <a class="inline-link" target="_blank" href="http://brackets.io/" title="Brackets Homepage">Brackets,</a>
+          <a class="inline-link" target="_blank" href="https://atom.io/" title="Atom Homepage">Atom,</a>
+          or
+          <a class="inline-link" target="_blank" href="https://code.visualstudio.com/"
+            title="Visual Studio Code Homepage">Visual Studio Code.</a>
+        </h3>
+        <p>
+          Download a code editor and use it when coding, it makes your life
+          easier.
+        </p>
+        <p>
+          Have a template HTML, CSS, and JS folder structure so you don’t have
+          to start from scratch each time,
+          <a class="inline-link" href="./Blank.zip" title="Zip File with Pre-made Folder Structure">I have included one
+            here.</a>
+        </p>
+        <p>
+          Keep all files in an organized folder structure, having a folder for
+          different code languages, images, videos, pages, etc.
+        </p>
+        <p>
+          Be concise with your code!
+          <span class="html-note">
+            If you can do something in 1 line of code, don’t write 10.</span>
+        </p>
+        <ul class="body-list">
+          Naming files and tags:
+          <li>
+            Always name your homepage <strong>index.html</strong> if you try
+            to put a site online without an 'index page', nothing will appear.
+          </li>
+          <li>
+            Following naming conventions for files, ids, &amp; class names
+            like lowercase or camelCase is suggested
+            (camel<wbr />Case<wbr />Is<wbr />Putting<wbr />No<wbr />Spaces<wbr />But<wbr />Capitalizing<wbr />Each<wbr />Word<wbr />Like<wbr />This)
+            </li>
+          <li>
+            Name all files, ids, &amp; class names in a way that makes sense.
+            Other people will probably read your code so be sure to make it
+            readable.
+          </li>
+        </ul>
+        <p>
+          Ideally, you can have multiple CSS files, one per large section of a
+          site (for example one for the nav, one for the footer, one for a
+          specific page or section, etc.), that way you only import what you
+          need per page.
+        </p>
+        <p>
+          Do not use a &lt;style&gt; tag to style everything on each page, it
+          creates redundancies, and will make things hard to update.
+        </p>
+      </div>
+    </section>
+    <section class="main-body single-column ignore-section">
+      <div class="heading-box">
+        <h2 class="main-title">General Info +</h2>
+        <p class="html-note">Just a little extra</p>
+      </div>
+      <div class="counted-content">
+        <p>
+          Be sure to do a CSS reset to make your sites consistent across
+          browsers:
+        </p>
+        <pre>
+<code class='css-code'>
+<span class='code-color-main'>*</span> {
+    margin: 0;
+    padding: 0;
+} </code> 
+</pre>
+
+        <p>
+          Sometimes you may want a full reset, in which case this
+          <a class="inline-link" target="_blank" href="https://gist.github.com/DavidWells/18e73022e723037a50d6"
+            title="David Wells' CSS Reset">open-source reset</a>
+          may be of use.
+        </p>
+        <p>
+          Be sure to have a 'Beautify' plug-in to format your code, so that it
+          is easier to read.
+        </p>
+        <p>
+          Drag the entire folder into your code editor when working, it makes
+          the workflow smoother, and in some cases allows for more accurate
+          previews.
+        </p>
+        <p>
+          If code becomes complicated be sure to take notes!<br />
+          <span class="html-note">Like this HTML note</span><br />
+          <span class="css-note">Or this CSS note</span><br />
+          <span class="js-note">Or even this JS note</span>
+        </p>
+        <p>
+          <a class="inline-link" href="https://www.google.com" target="_blank" title="Google Homepage">Google</a>,
+          <a class="inline-link" href="https://www.w3schools.com/" target="_blank"
+            title="W3Scools Homepage">W3Schools</a>,
+          <a class="inline-link" href="https://stackoverflow.com/" target="_blank" title="Stack Overflow Homepage">Stack
+            Overflow</a>, and
+          <a class="inline-link" href="https://developer.mozilla.org/en-US/" target="_blank"
+            title="Mozilla Docs Homepage">Mozilla Docs</a>
+          are your 4 new besties, they will help you with virtually anything.
+        </p>
+        <p>
+          And if all else fails be sure to ask a friend, mentor, tutor,
+          teacher, or whichever God or Deity you worship.
+          <span class="html-note">Are you there Dwayne the Rock Johnson?🙏</span>
+        </p>
+      </div>
+    </section>
+    <section class="main-body two-column ignore-section">
+      <div class="heading-box">
+        <h2 class="main-title">Parents and Children</h2>
+        <p class="html-note">The birds 🐦 and the bees 🐝</p>
+      </div>
+      <div class="column-container">
+        <div class="counted-content left-column">
+          <p>
+            Parents, children, and siblings are terminology people use to
+            refer to a hierarchical code structure.
+          </p>
+          <p>
+            When you create any single element and it is empty it has no
+            classification. When you add things around, inside of it, or
+            outside of it, it becomes part of a family.
+          </p>
+          <p>
+            It’s important to remember that children follow the parents' rules
+            and if the parent dies or is erased the children all die too.
+          </p>
+          <p>
+            Children can rarely affect a parent, and any styling done to a
+            parent will be carried down to its child.
+          </p>
+        </div>
+        <div class="counted-content right-column">
+          <span class="not-counted">
+            <code class="html-code"><br /><span class="code-color-main">&lt;ul&gt; </span
+                ><span class="html-note">Parent to the list items</span><br />
+                <span class="tab-in"
+                  >&lt;li&gt;
+                  <span class="html-note"
+                    >First Child to ul, sibling to the other list items</span
+                  >&lt;/li&gt;<br
+                /></span>
+                <span class="tab-in"
+                  >&lt;li&gt;
+                  <span class="html-note"
+                    >Second Child to ul, sibling to the other list items</span
+                  >&lt;/li&gt;<br
+                /></span>
+                <span class="tab-in"
+                  >&lt;li&gt;
+                  <span class="html-note"
+                    >Last Child to ul, sibling to the other list items</span
+                  >&lt;/li&gt;<br
+                /></span>
+                <span class="code-color-main">&lt;/ul&gt;</span></code>
+          </span>
+        </div>
+      </div>
+    </section>
+    <section class="main-body single-column main-section" id="who-is-html?">
+      <div class="heading-box">
+        <h2 class="main-title">Who is HTML?</h2>
+        <p class="html-note">
+          HyperText Markup Shufflebottom? No wait that’s HTMS
+        </p>
+      </div>
+      <div class="counted-content">
+        <p>
+          HTML (Hypertext Markup Language) is one of the primary ways in which
+          information is displayed on the web.
+        </p>
+        <p>
+          HTML’s written structure is very unique, in that it is a
+          &ldquo;markup&rdquo; language, meaning that it writes pre-formatted
+          text into a structure. It can be read with relative ease because it
+          is pretty much a document with formatting.
+        </p>
+        <p>
+          HTML works with other languages like CSS, Javascript, PHP, C#, .net,
+          SVG, XML, and more to form together what we perceive to be a website
+        </p>
+        <p>
+          Generally, markup languages feature tags and have a distinct parent-child structure.
+        </p>
+        <p>
+          It’s usually best to group similar elements, keep
+          parents and children in mind when creating containers with things in
+          them.
+        </p>
+        <p>
+          HTML will almost always have an opening and closing tag and look
+          like this:<br /><code class="html-code"><br /><span class="code-color-main">&lt;p&gt;</span>Lorem
+              Ipsum<span class="code-color-main">&lt;/p&gt;</span></code>
+        </p>
+        <p class="raw">Raw HTML looks like this</p>
+      </div>
+    </section>
+    <section class="main-body two-column ignore-section">
+      <div class="heading-box">
+        <h2 class="main-title">Let’s Learn Some Tags!</h2>
+        <p class="html-note">
+          If someone calls me a &lt;p&gt; tag should I be offended?
+        </p>
+      </div>
+      <div class="column-container">
+        <div class="counted-content left-column">
+          <p>
+            <strong>&lt;head&gt;</strong> - The head is all of the content
+            that is not shown physically on the website; it includes metadata, site descriptions, font links, etc.
+          </p>
+          <p>
+            <strong>&lt;body&gt;</strong> - The body is the main content that
+            is displayed on the website; it contains text, videos, images,
+            etc.
+          </p>
+          <p>
+            <strong>&lt;div&gt;</strong> - A div is a multipurpose container,
+            It doesn't look like anything and won't do much unless you style
+            it (it will break text though).
+          </p>
+          <p>
+            <strong>&lt;span&gt;</strong> - A span, like a div, is a
+            multipurpose container, It also does not look like or do anything
+            and will display inline with text.
+          </p>
+          <p>
+            <strong>&lt;h1&gt;</strong> - A heading tag is meant to hold header or title text in it, it will display it
+            with specific header styling.
+          </p>
+          <p>
+            <strong>&lt;p&gt;</strong> - A paragraph tag is meant to hold any kind of text, it will display as default
+            text.
+          </p>
+          <p>
+            <strong>&lt;a&gt;</strong> - An anchor tag, it is a link to
+            another page or part of a page.
+          </p>
+          <p>
+            <strong>&lt;img&gt;</strong> - A image tag, will hold images and
+            render them as solid blocks.
+          </p>
+        </div>
+        <div class="counted-content right-column">
+          <p><strong>&lt;br&gt;</strong> - The break creates a line break.</p>
+          <p>
+            <strong>&lt;em&gt;</strong> - The emphasis tag creates emphasis on
+            words, and is usually italics.
+          </p>
+          <p>
+            <strong>&lt;strong&gt;</strong> - A strong tag creates heavy
+            importance on words and is usually bold.
+          </p>
+          <p>
+            <strong>&lt;ul&gt;</strong> - An unordered list creates a list
+            without number incrementation, and shows bullets or dashes.
+          </p>
+          <p>
+            <strong>&lt;li&gt;</strong> - A list item tag, is a single item in
+            a list.
+          </p>
+          <p>
+            <strong>&lt;form&gt;</strong> - A form is a blank form container
+            with some sort of action once it’s contents are submitted.
+          </p>
+          <p>
+            <strong>&lt;input&gt;</strong> - An input tag is an interactive
+            form element that can change into a variety of different input
+            types like a dropdown, a textbox, radio buttons, and more.
+          </p>
+          <p>
+            <strong>&lt;iframe&gt;</strong> - An iframe is an empty window
+            that holds other entire sites within it.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="main-body single-column ignore-section">
+      <div class="heading-box">
+        <h2 class="main-title">Attributes...</h2>
+        <p class="html-note">What’s an alt tag?</p>
+      </div>
+      <div class="counted-content">
+        <p>
+          <strong>id</strong> - An id is a unique indicator, there only ever
+          be one single id for something, and you can directly style that one
+          thing at a time.
+        </p>
+        <p>
+          <strong>class</strong> - A class is a generic indicator, something
+          can have multiple classes, and multiple elements can share class
+          names.
+        </p>
+        <p>
+          <strong>href</strong> - The href is a reference to another location,
+          it can be a link, a file, folder, phone number, email, and much
+          more.
+        </p>
+        <p>
+          <strong>src</strong> - The source is a reference to a specific
+          location where linked files are located.
+        </p>
+        <p>
+          <strong>name</strong> - A name gives an element a unique indicator
+          for form submissions and occasionally screen readers.
+        </p>
+        <p>
+          <strong>alt</strong> - An alt tag can be written on images to give
+          extra information in case the image does not load, or for people
+          with screen readers.
+        </p>
+        <p>
+          <strong>title</strong> - A title tag creates the page title or gives
+          elements a hover tooltip.
+        </p>
+      </div>
+    </section>
+    <section class="main-body single-column main-section" id="styling-with-css">
+      <div class="heading-box">
+        <h2 class="main-title">Styling With CSS</h2>
+        <p class="css-note">Now we stylin’ 💅</p>
+      </div>
+      <div class="counted-content">
+        <p>
+          CSS (Cascading Style Sheets) is a style sheet language created to
+          work with HTML to style and layout pages on the web.
+        </p>
+        <p>
+          It works by stating what you want to style (be it a tag, id, class,
+          etc) followed by the style parameters that you want that element to
+          have and a semi-colon to end each line.
+        </p>
+        <p>
+          CSS generally works top to bottom (aka. cascading), and takes
+          priority on id’s, classes, and tags in that order.
+        </p>
+        <p>
+          Any time something is repeated in CSS, it will go with whatever is
+          more important in terms of the cascade.
+        </p>
+        <p>
+          Be sure to use classes when something is going to be repeated like
+          text styling, and save ids for specific single-use styling.
+        </p>
+        <p>The structure generally looks like this:</p>
+        <br />
+        <pre><code class='css-code'>
+<span class='code-color-main'>#lit</span> {
+  color: red;
+}</code></pre>
+      </div>
+    </section>
+    <section class="main-body two-column ignore-section">
+      <div class="heading-box">
+        <h2 class="main-title">Basic CSS</h2>
+        <p class="html-note">She’s padded for the gods! Slay that display!</p>
+      </div>
+      <div class="column-container">
+        <div class="counted-content left-column">
+          <p>
+            <strong>display</strong>: block | inline | flex | grid | ...
+            <br />Sets the fundamental way in which the element acts.
+          </p>
+          <p>
+            <strong>position</strong>: static | fixed | absolute | ...
+            <br />Sets how where the element is on the page, and how it acts.
+          </p>
+          <p>
+            <strong>height/width</strong>: [value]{px, em, vw/vh, %} | auto |
+            ... <br />Height or Width sets the height and width of an element,
+            respectively.
+          </p>
+          <p>
+            <strong>margin</strong>: [top, right, bottom, &amp; left
+            values]<br />Creates an invisible margin around an element,
+            pushing other elements away.
+          </p>
+          <p>
+            <strong>padding</strong>: [top, right, bottom, &amp; left
+            values]<br />Creates a solid space around an element or in an
+            element, pushing other elements away or compressing itself.
+          </p>
+          <p>
+            <strong>color</strong>: [color-value]<br />Sets the font colour of
+            an element.
+          </p>
+          <p>
+            <strong>background</strong>: url() | [color-value] | ...<br />Gives
+            an element a background; it can be all sorts of things.
+          </p>
+        </div>
+        <div class="counted-content right-column">
+          <p>
+            <strong>border</strong>: [value] [type] [color-value]
+            <br />Creates a visible border around an element.
+          </p>
+          <p>
+            <strong>box-shadow</strong>: [values] [color-value] <br />Creates
+            a drop shadow on an element (the syntax is a bit long so just look
+            it up).
+          </p>
+          <p>
+            <strong>border-radius</strong>: [value]{px, em, vw/vh, %}
+            <br />Creates a rounded edge on an element.
+          </p>
+          <p>
+            <strong>z-index</strong>: [value]<br />Positions the element on a
+            "z layer" so that things that have a higher z-index go over things
+            with lower z-index.
+          </p>
+          <p>
+            <strong>font-family</strong>: 'font-name' | [font-value]
+            <br />Sets the typeface to be used on an element.
+          </p>
+          <p>
+            <strong>font-weight</strong>: [value]<br />Sets the font weight of
+            text in the element.
+          </p>
+          <p>
+            <strong>text-align</strong>: left | center | right | ...<br />Sets
+            the text alignment of an elements' text relative to the element.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="main-body single-column main-section" id="help">
+      <div class="heading-box">
+        <h2 class="main-title">Help &amp; Troubleshooting</h2>
+        <p class="css-note">HELP! EVERYTHING IS #0000FF!</p>
+      </div>
+      <div class="counted-content">
+        <p>
+          Check that everything is spelled correctly &amp; that your
+          stylesheets and external files are linked correctly.
+        </p>
+        <p>
+          <strong>Check it again!</strong><span class="html-note">Trust me check your code again to be sure you didn't
+            miss
+            anything.</span>
+        </p>
+        <p>
+          Use the Developer Tools Inspector
+          <span class="html-note">generally by right-clicking and selecting inspect.</span>
+        </p>
+        <p>
+          Be sure you're using the correct syntax,
+          <a class="inline-link" href="https://htmlreference.io/" target="_blank" title="HTML Reference Homepage">HTML
+            Reference</a>
+          &amp;
+          <a class="inline-link" href="https://cssreference.io/" target="_blank" title="CSS Reference Homepage">CSS
+            Reference</a>
+          are two great resources to check any HTML tag or CSS property.
+        </p>
+        <p>
+          Be sure that your CSS is applying properly, and check the styles
+          that are applying, as well as the "box model" in the inspector that
+          shows margin, padding, and more.
+        </p>
+        <p>Try Google-ing the problem.</p>
+        <p>Ask a prof, peer, mentor, or me!</p>
+        <p>
+          If none of that solved your problem.. Honestly just cry and give up
+          at that point.
+        </p>
+      </div>
+    </section>
+    <section class="main-body single-column ignore-section">
+      <div class="heading-box">
+        <h2 class="main-title">Common HTML &amp; CSS Errors</h2>
+        <p class="css-note">My thing doesn't look like the thing</p>
+      </div>
+      <div class="counted-content">
+        <p><strong>Be sure to check the following:</strong></p>
+        <p>
+          Spelling of Ids and Classes is consistent and correct
+          <span class="html-note">with . for classes and # for id in CSS</span>
+        </p>
+        <p>
+          CSS properties are written correctly with American spelling and
+          dashes <span class="html-note">like background-color</span>
+        </p>
+        <p>
+          Look for missing semicolons <strong>;</strong>, apostrophes
+          <strong>' ' " "</strong>, opening or closing tags
+          <strong>&lt;div&gt; &lt;/div&gt;</strong>, squiggly brackets
+          <strong>{ }</strong>
+        </p>
+        <p>
+          File names are written correctly and use the correct path
+          <span class="html-note">./ is the current directory, ../ to go up a folder</span>
+        </p>
+      </div>
+    </section>
+    <section class="main-body single-column main-section" id="tips">
+      <div class="heading-box">
+        <h2 class="main-title">Tips</h2>
+        <p class="css-note">For all you cool kids 😎</p>
+      </div>
+      <div class="counted-content">
+        <p>
+          Get a feel for your shortcuts like copy
+          <strong><span class="stacked-shortcut">c</span></strong>, cut <strong><span
+              class="stacked-shortcut">x</span></strong>, paste <strong><span
+              class="stacked-shortcut">v</span></strong>, save
+          <strong><span class="stacked-shortcut">s</span></strong> etc.
+        </p>
+        <p>
+          Take advantage of the multi-line typing
+          <span class="html-note">Hold cmd, ctrl, or alt and click or highlight multiple
+            places</span>
+        </p>
+        <p>
+          Take advantage of formatting in your code editor to keep your code
+          organized, or download a Beautify plugin.
+        </p>
+        <p>
+          Use selectors in CSS for more advanced property selection and
+          editability.
+        </p>
+        <p>Use emmet to create lots of code incredibly quickly!</p>
+        <p>
+          Look into JS, PHP, or other languages or libraries to expand the
+          functionality of your site.
+        </p>
+        <p>
+          Use
+          <a class="inline-link" target="_blank" href="https://fonts.google.com" title="Google Fonts Homepage">Google
+            Fonts</a>
+          for free and beautiful typefaces that can be imported directly into
+          your code.
+        </p>
+        <p>
+          Checkout
+          <a class="inline-link" target="_blank" href="https://codepen.io" title="Codepen Homepage">Codepen</a>
+          for quick code snippets that can be referenced when making your own
+          things.
+        </p>
+        <p>
+          Look into
+          <a class="inline-link" target="_blank" href="https://https://fontawesome.com/"
+            title="Font Awesome Homepage">Font Awesome</a>
+          for amazing and quick icons that can be used directly in your code
+        </p>
+      </div>
+    </section>
+    <section class="main-body ignore-section" id="final-section">
+      <h1 class="main-title">That's all for now!</h1>
+      <p class="subtitle-two left-space">
+        Be sure to contact me if you have any questions or concerns
+        <i class="far fa-sparkles"></i>
+      </p>
+    </section>
+  </div>
+  <script>
+    const currentSection = {
+      element: null,
+      index: null,
+      menuPosition: null,
+    };
+    let scrollingTo;
+    let isScrolling = false;
+    const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    const mainMenuList = document.querySelector('#main-menu-list');
+    const isMobile = window.innerWidth < 40 * rem;
+    const sections = [].slice.call(document.getElementsByTagName('section'));
+    const mainSections = [].slice.call(document.getElementsByClassName('main-section'));
+    const titles = [].slice.call(document.getElementsByClassName('main-title'));
+    const menuItems = [].slice.call(document.getElementsByClassName('menu-item'));
+    const fen = document.getElementById('floating-enter-notification');
+
+    if (window.innerHeight < parseFloat(getComputedStyle(mainMenuList).height)) {
+      mainMenuList.style.height = '100%';
+      mainMenuList.style.overflowY = 'scroll';
+      mainMenuList.style.overflowX = 'hidden';
+    }
+
+    function handleTarget(event) {
+      const menuChildren = document.querySelector('#main-menu-list').children;
+      let selections;
+
+      Array.prototype.forEach.call(menuChildren, child => {
+        if (event.target === child) {
+          selections = event.target;
+        } else if (event.target.parentElement === child) {
+          selections = event.target.parentElement;
+        }
+      });
+
+      return selections;
+    }
+
+    function unselectAll(selected) {
+      selected.children[1].classList.toggle('selected-title');
+      selected.children[1].classList.toggle('unselected-title');
+      selected.children[0].classList.toggle('selected-icon');
+      selected.children[0].classList.toggle('unselected-icon');
+      selected.classList.toggle('unselected');
+      selected.classList.toggle('selected');
+    }
+
+    function handleSelection(targetElement) {
+      const currentSelection = document.getElementsByClassName('selected');
+
+      if (currentSelection.length === 0) {
+        targetElement.classList.toggle('unselected');
+        targetElement.classList.toggle('selected');
+        targetElement.children[1].classList.toggle('selected-title');
+        targetElement.children[1].classList.toggle('unselected-title');
+        targetElement.children[0].classList.toggle('unselected-icon');
+        targetElement.children[0].classList.toggle('selected-icon');
+      } else if (currentSelection.length >= 0) {
+        unselectAll(currentSelection[0]);
+        targetElement.classList.toggle('unselected');
+        targetElement.classList.toggle('selected');
+        targetElement.children[1].classList.toggle('selected-title');
+        targetElement.children[1].classList.toggle('unselected-title');
+        targetElement.children[0].classList.toggle('unselected-icon');
+        targetElement.children[0].classList.toggle('selected-icon');
+      }
+    }
+
+    function scrollToTarget(target, behavior, block, inline) {
+      isScrolling = true;
+      scrollingTo = target;
+
+      target.scrollIntoView({
+        behavior,
+        block,
+        inline,
+      });
+    }
+
+    function scrollToSection(which) {
+      if (sections[currentSection.index + which]) {
+        scrollToTarget(sections[currentSection.index + which], 'smooth', 'start', 'nearest');
+      } else {
+        scrollToTarget(sections[0], 'smooth', 'start', 'nearest');
+      }
+    }
+
+    function cleanUpHTML(target) {
+      let newTarget = target;
+
+      newTarget = newTarget.replace('&amp;', '');
+      newTarget = newTarget.toLowerCase();
+      newTarget = newTarget.replace(/\s/gm, '-');
+      newTarget = newTarget.replace('--', '-');
+
+      return newTarget;
+    }
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.intersectionRatio > 0) {
+          const thisSection = entry.target.closest('section');
+          const fen = document.getElementById('floating-enter-notification');
+
+          currentSection.element = thisSection;
+          currentSection.index = sections.indexOf(thisSection);
+          currentSection.menuPosition = mainSections.indexOf(thisSection);
+
+          if (isScrolling && scrollingTo === thisSection) {
+            isScrolling = false;
+          }
+
+          if (!thisSection.classList.contains('ignore-section') && !isScrolling) {
+            handleSelection(menuItems[currentSection.menuPosition]);
+          }
+
+          if (isMobile && !isScrolling && menuItems[currentSection.menuPosition]) {
+            const menuTarget = menuItems[currentSection.menuPosition];
+
+            setTimeout(() => {
+              menuTarget.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center',
+                inline: 'center',
+              });
+            }, 500);
+          }
+
+          if (currentSection.index === 0) {
+            fen.innerHTML = "Press Enter to<br>continue <i class='fal fa-arrow-square-right'></i>";
+            fen.style.opacity = 1;
+          } else {
+            fen.innerHTML = "Next <i class='fal fa-arrow-square-right'></i>";
+            fen.style.opacity = 0.5;
+          }
+        }
+      });
+    });
+
+    titles.forEach(title => {
+      observer.observe(title);
+    });
+
+    function handleKeyPress(event) {
+      if ((event.key === 'Enter' || event.which === 13 || event.code === 'Enter') || (event.key === 'ArrowRight' || event.which === 39 || event.code === 'ArrowRight')) {
+        event.preventDefault();
+        const selected = handleTarget(event);
+
+        if (selected) {
+          let target = selected.children[1].innerHTML;
+          target = cleanUpHTML(target);
+          scrollToTarget(document.getElementById(target), 'smooth', 'start', 'nearest');
+          handleSelection(selected);
+        } else {
+          scrollToSection(+1);
+        }
+      } else if ((event.key === 'Backspace' || event.which === 8 || event.code === 'Backspace') || (event.key === 'ArrowLeft' || event.which === 37 || event.code === 'ArrowLeft')) {
+        event.preventDefault();
+        scrollToSection(-1);
+      }
+    }
+
+    function handleClick(event) {
+      const selected = handleTarget(event);
+
+      if (selected !== undefined) {
+        let target = selected.children[1].innerHTML;
+        target = cleanUpHTML(target);
+        scrollToTarget(document.getElementById(target), 'smooth', 'start', 'nearest');
+        handleSelection(selected);
+      }
+    }
+
+    document.querySelector('#main-menu-list').addEventListener('click', handleClick);
+    fen.addEventListener('click', function () {
+      scrollToSection(+1);
+      event.preventDefault();
+
+    });
+    window.addEventListener('keydown', handleKeyPress);
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<!--JuanJose Bastida 2019-->
+<!-- Git Workshop V1.0 -->
+<!--These projects were made to be looked into, so if you're reading this that’s great! I tried to keep these to be 'best practice' but that being said please never put all of your CSS and JS in one HTML file, separate them out and if you have multiple pages separate out your files so you only import what you need!-->
+<!--Other than that thank you for reading! Hope it helps, if you have any questions feel free to reach out jj.bastida@outlook.com-->
+<html lang="en-CA">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,700&display=swap" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/81783a94a9.js" samesite="secure"></script>
+    <title>Push, Pull, and Git Into It</title>
+    <style>
+        :root {
+            --abyss-main: #17171e;
+            --abyss-alt: #45455b;
+            --obsidian: #242430;
+            --dusk: #45455b;
+            --pavement: #88889f;
+            --egg-whites: #eaeaea;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Source Code Pro', 'Ubuntu', monospace;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+            counter-reset: code-counter;
+        }
+
+        pre {
+            white-space: break-spaces;
+        }
+
+        nav {
+            height: 100vh;
+            box-sizing: border-box;
+            width: 8rem;
+            position: fixed;
+            background-color: var(--abyss-main);
+            z-index: 100;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            background-color: var(--abyss-main);
+            padding: 2rem;
+            color: white;
+            max-width: 1080px;
+        }
+
+        h2 {
+            font-size: 2.3rem;
+            font-weight: 700;
+            color: var(--obsidian);
+        }
+
+        h3 {
+            margin-top: 1rem;
+            margin-bottom: .5rem !important;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--obsidian);
+        }
+
+        h3::before {
+            display: none;
+        }
+
+        strong {
+            font-size: inherit;
+            font-weight: 700;
+            color: inherit;
+        }
+
+        h4 {
+            color: black;
+            color: var(--obsidian);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        p {
+            font-size: 1.15rem;
+            line-height: 1.4;
+            font-weight: 400;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .inline-link {
+            color: #FFFFFF !important;
+            background-color: var(--pavement) !important;
+            display: inline-block;
+            transition: background-color 0.5s ease;
+            position: relative;
+            padding: 0 0.5rem;
+        }
+
+        .inline-link[target="_blank"]::before {
+            content: " ";
+            padding: 0 0.5em;
+        }
+
+        .inline-link[target="_blank"]::after {
+            content: "\f08e";
+            font-family: "Font Awesome 5 Pro";
+            font-size: 0.65em;
+            position: absolute;
+            top: 1em;
+            left: 0.5rem;
+            transform: translateY(-50%);
+        }
+
+        .inline-link[href^="#"]::after {
+            content: "\f354";
+            transform: translateY(-40%) scale(1.5);
+        }
+
+
+        #floating-enter-notification {
+            position: fixed;
+            font-size: 1rem;
+            bottom: 30px;
+            background-color: rgba(255, 255, 255, 0);
+            right: calc((11vw / 2) - 20px);
+            text-align: left;
+            user-select: none;
+            color: var(--pavement);
+            padding: 1em 1.5em;
+            border-radius: 25px;
+            border: 1px solid black;
+            border-color: var(--pavement);
+            cursor: pointer;
+            transition: opacity 0.7s ease;
+        }
+
+        #floating-enter-notification:hover {
+            background-color: rgba(0, 0, 0, .01);
+        }
+
+        #floating-enter-notification:focus {
+            background-color: rgba(0, 0, 0, .01);
+            outline: none;
+            border-color: #1E4CC1;
+            color: #1E4CC1;
+        }
+
+        #floating-enter-notification:active {
+            background-color: rgba(0, 0, 0, .02);
+            border-color: var(--pavement);
+            color: var(--pavement);
+        }
+
+        .inline-link:hover {
+            text-decoration: underline !important;
+            transition: background-color 0.5s ease;
+            background-color: var(--abyss-alt) !important;
+        }
+
+        section *::selection {
+            color: white;
+            background: var(--obsidian);
+        }
+
+        pre::before {
+            display: none !important;
+        }
+
+        .not-counted::before {
+            display: none !important;
+        }
+
+        code {
+            display: inline-block;
+            color: white;
+            background-color: var(--obsidian);
+            border-radius: 8px;
+            padding: 2.2rem 1.5rem 1.5rem;
+            box-sizing: border-box;
+            position: relative;
+            margin: 0.5em 0;
+        }
+
+        code::before {
+            display: block;
+            height: 1.2rem;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            padding: 0.5rem 0 0.75rem;
+            font-weight: 600;
+        }
+
+        code::after {
+            color: white;
+            display: block;
+            width: 100%;
+            position: absolute;
+            box-sizing: border-box;
+            top: 0;
+            left: 0.25rem;
+            padding: 0.5em 0.5em 0;
+            font-weight: 600;
+        }
+
+        .code-snippet {
+            padding: .5em 1em;
+            font-size: 0.9rem;
+        }
+
+        .css-code::before {
+            content: '';
+            background-color: #406eeb;
+        }
+
+        .html-code::before {
+            content: '';
+            background-color: #ff4040;
+        }
+
+        .js-code::before {
+            content: '';
+            background-color: #fff039;
+        }
+
+        .php-code::before {
+            content: '';
+            background-color: #5332f9;
+        }
+
+        .terminal-code::before,
+        .git-code::before {
+            content: '';
+            background-color: #45455b;
+        }
+
+        .css-code::after {
+            content: 'CSS';
+        }
+
+        .html-code::after {
+            content: 'HTML';
+        }
+
+        .js-code::after {
+            content: 'JS';
+        }
+
+        .php-code::after {
+            content: 'PHP';
+        }
+
+        .git-code::after {
+            content: 'Git';
+        }
+
+        .terminal-code::after {
+            content: 'Terminal';
+        }
+
+        .html-code .code-color-main {
+            color: #ff4040 !important;
+        }
+
+        .css-code .code-color-main {
+            color: #406eeb !important;
+        }
+
+        .js-code .code-color-main {
+            color: #fff039 !important;
+        }
+
+        .php-code .code-color-main {
+            color: #5332f9 !important;
+        }
+
+        .terminal-code .code-color-main,
+        .git-code .code-color-main,
+        .code-snippet .code-color-main {
+            font-weight: 700;
+        }
+
+        .html-note,
+        .css-note,
+        .js-note {
+            font-size: 0.9rem !important;
+            color: var(--pavement) !important;
+        }
+
+        .html-note::before {
+            content: '<!-- ' !important;
+        }
+
+        .html-note::after {
+            content: ' ->' !important;
+        }
+
+        .css-note::before {
+            content: '/* ' !important;
+        }
+
+        .css-note::after {
+            content: ' */' !important;
+        }
+
+        .js-note::before {
+            content: '// ' !important;
+        }
+
+        .subtitle-one {
+            font-size: 1.6rem;
+            line-height: 1.3;
+            padding: 0.5em 0 0;
+        }
+
+        .subtitle-two {
+            font-size: 1.6rem;
+            line-height: 1.3;
+            padding: 0.5em 0 0;
+            color: white;
+        }
+
+        .no-break {
+            word-break: keep-all;
+            white-space: nowrap;
+        }
+
+        .raw {
+            font-size: initial !important;
+            font-family: initial !important;
+            color: initial !important;
+            font-weight: initial !important;
+            padding: initial !important;
+            margin: initial !important;
+            background-color: initial !important;
+            line-height: initial !important;
+        }
+
+        .raw::selection {
+            color: white !important;
+            background-color: blue !important;
+        }
+
+        #main-menu-list {
+            height: auto;
+            width: 100%;
+            display: flex;
+            flex-wrap: nowrap;
+            flex-direction: column;
+            align-content: center;
+            justify-content: flex-start;
+            user-select: none;
+        }
+
+        .menu-item {
+            text-align: center;
+            padding: 1em 0.25em;
+            box-sizing: border-box;
+            cursor: pointer;
+            min-width: 7rem;
+            position: relative;
+        }
+
+        .menu-item::after {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 90%;
+            height: 100%;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -1px);
+            border-bottom: 2px var(--pavement) solid;
+            z-index: 5;
+        }
+
+        .menu-item:focus {
+            outline: 2px solid #FFFFFF;
+            background-color: #7D7D8C;
+        }
+
+        .selected:focus {
+            outline: none;
+        }
+
+        .main {
+            display: grid;
+            grid-template-columns: [navigation] calc(8rem - 20px) 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+            grid-gap: 20px;
+            max-width: 120rem;
+        }
+
+        .main section {
+            grid-column: 2 / span 11;
+            padding-left: 1rem;
+            min-height: 100vh;
+            padding-top: 1rem;
+        }
+
+        #final-section {
+            grid-column: 2 / span 11 !important;
+            background-color: var(--abyss-main);
+        }
+
+        .single-column {
+            grid-column: 2 / span 8 !important;
+        }
+
+        .two-column {
+            grid-column: 2 / span 11 !important;
+        }
+
+        .two-column .column-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        .two-column .column-container>div {
+            width: 45%;
+            padding-right: 2.5%;
+        }
+
+        #git {
+            grid-column: 2 / span 7;
+            padding-left: 0;
+            padding-top: 11rem;
+        }
+
+        .unselected {
+            color: var(--pavement);
+        }
+
+        .selected {
+            background-color: var(--pavement) !important;
+            color: var(--egg-whites) !important;
+            transform: scaleY(1.03) !important;
+        }
+
+        .selected::after {
+            display: none !important;
+        }
+
+        .unselected-title {
+            color: var(--pavement);
+        }
+
+        .selected-title {
+            background-color: var(--pavement);
+            color: var(--egg-whites);
+        }
+
+        .fa-fw {
+            display: block;
+            height: 1em;
+            width: 1em;
+            margin: 0 auto 0.5em;
+            padding: 0.5em;
+            border-radius: 1000px;
+            text-align: center;
+        }
+
+        .fa-git-alt::before {
+            display: block;
+            transform: translateY(1px) scale(1.3);
+        }
+
+        .fa-code::before {
+            display: block;
+            transform: translateX(-2px);
+        }
+
+        .fa-code-branch::before {
+            display: block;
+            transform: translate(1px, 0.5px);
+        }
+
+        .unselected-icon {
+            border: 2px solid var(--pavement);
+            color: var(--pavement);
+            transform: scale(0.9);
+            transition: transform ease 0.5s, color ease 0.5s;
+        }
+
+        .selected-icon {
+            background-color: var(--egg-whites);
+            color: var(--pavement);
+            transition: transform ease 0.5s, color ease 0.5s, border 0.5s ease;
+        }
+
+        .unselected:hover {
+            background-color: var(--abyss-alt);
+        }
+
+        .inline-link[href^="#"]::after {
+            content: "\f354";
+            transform: translateY(-40%) scale(1.5);
+        }
+
+
+        #floating-enter-notification {
+            position: fixed;
+            font-size: 1rem;
+            bottom: 30px;
+            background-color: rgba(255, 255, 255, 0);
+            right: calc((11vw / 2) - 20px);
+            text-align: left;
+            user-select: none;
+            color: var(--pavement);
+            padding: 1em 1.5em;
+            border-radius: 25px;
+            border: 1px solid black;
+            border-color: var(--pavement);
+            cursor: pointer;
+            transition: opacity 0.7s ease;
+        }
+
+        #floating-enter-notification:hover {
+            background-color: rgba(0, 0, 0, .01);
+        }
+
+        #floating-enter-notification:focus {
+            background-color: rgba(0, 0, 0, .01);
+            outline: none;
+            border-color: #1E4CC1;
+            color: #1E4CC1;
+        }
+
+        #floating-enter-notification:active {
+            background-color: rgba(0, 0, 0, .02);
+            border-color: var(--pavement);
+            color: var(--pavement);
+        }
+
+        .left-space {
+            padding-left: 2rem;
+        }
+
+        .counted-content>* {
+            margin-bottom: 0.8em;
+        }
+
+        .counted-content>h3:first-child {
+            margin-top: -.5rem !important;
+        }
+
+        .counted-content>*::before {
+            counter-increment: code-counter 1;
+            content: counter(code-counter) ' ';
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--pavement);
+        }
+
+        .heading-box {
+            padding-bottom: 1.1rem;
+        }
+
+        .body-list {
+            font-size: 1.15rem;
+            line-height: 1.4;
+        }
+
+        .body-list li {
+            font-size: 1rem;
+            line-height: 1.5;
+            padding: 0 1em 0.8em;
+            list-style: circle;
+            list-style-position: inside;
+        }
+
+        .tab-in {
+            margin: 0.5em 0 0.5em 1.5em;
+            display: inline-block;
+        }
+
+        .stacked-shortcut {
+            position: relative;
+        }
+
+        .stacked-shortcut::before {
+            content: '+';
+            padding: 0 0.5em 0 1.75em;
+        }
+
+        .stacked-shortcut::after {
+            content: 'cmd \A ctrl';
+            display: block;
+            font-size: 0.6em;
+            line-height: 1;
+            white-space: pre-wrap;
+            padding-right: 0.25em;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        @media all and (min-width: 120rem) {
+            .main section {
+                padding-left: 2rem;
+                padding-top: 2rem;
+            }
+        }
+
+        @media all and (max-width: 60rem) {
+            .single-column {
+                grid-column: 2 / span 10 !important;
+            }
+
+            .two-column {
+                grid-column: 2 / span 10 !important;
+            }
+
+            .two-column .column-container>div {
+                width: 100%;
+                padding-right: 0;
+            }
+
+            #floating-enter-notification {
+                display: none;
+            }
+        }
+
+        @media all and (max-width: 40rem) {
+            h1 {
+                font-size: 3rem;
+                padding: 1rem;
+            }
+
+            .subtitle-one {
+                font-size: 1.4rem;
+            }
+
+            .subtitle-two {
+                font-size: 1.4rem;
+            }
+
+            nav {
+                width: 100vw;
+                height: auto;
+                border-bottom: 2px var(--obsidian) solid;
+            }
+
+            #main-menu-list {
+                flex-direction: row;
+                overflow-x: scroll;
+                position: relative;
+            }
+
+            .menu-border {
+                display: none;
+            }
+
+            .menu-item {
+                text-align: center;
+                padding: 1em 1.2em;
+                box-sizing: border-box;
+                border-right: 2px var(--obsidian) solid;
+                min-height: 5rem;
+                min-width: 8rem;
+            }
+
+            .menu-item-last {
+                border: none;
+                padding-right: 2em;
+            }
+
+            .main {
+                grid-template-columns: 1rem 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1rem;
+                grid-gap: 0;
+            }
+
+            .main section {
+                grid-column: 1 / span 11 !important;
+                padding-top: 9rem;
+            }
+
+            #final-section {
+                grid-column: 1 / span 12 !important;
+                padding-right: 1rem;
+            }
+
+            #git {
+                grid-column: 1 / span 12 !important;
+                padding-left: 0;
+                padding-top: 11rem;
+            }
+
+            .left-space {
+                padding-left: 1rem;
+            }
+
+            .menu-item::after {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <ul id="main-menu-list">
+            <li class="menu-item unselected" tabindex="0">
+                <i class="fas fa-code-branch fa-fw unselected-icon"></i>
+                <h4 class="unselected-title">Git</h4>
+            </li>
+            <li class="menu-item unselected" tabindex="0">
+                <i class="fas fa-info unselected-icon fa-fw"></i>
+                <h4 class="unselected-title">General Info</h4>
+            </li>
+            <li class="menu-item unselected" tabindex="0">
+                <i class="fab fa-git-alt unselected-icon fa-fw"></i>
+                <h4 class="unselected-title">Where do I Git?</h4>
+            </li>
+            <li class="menu-item unselected" tabindex="0">
+                <i class="fas fa-folder unselected-icon fa-fw"></i>
+                <h4 class="unselected-title">Using Git</h4>
+            </li>
+            <li class="menu-item unselected" tabindex="0">
+                <i class="fas fa-question unselected-icon fa-fw"></i>
+                <h4 class="unselected-title">Help</h4>
+            </li>
+            <li class="menu-item unselected menu-item-last" tabindex="0">
+                <i class="fas fa-sparkles unselected-icon fa-fw"></i>
+                <h4 class="unselected-title">Tips</h4>
+            </li>
+        </ul>
+    </nav>
+    <div id="floating-enter-notification" aria-hidden="true">
+        <i class="far fa-arrow-square-right"></i>
+    </div>
+    <div class="main">
+        <section id="git" class="main-section">
+            <h1 class="main-title">
+                Push, Pull, and<br>
+                Git Into It
+            </h1>
+            <p class="subtitle-one left-space">
+                Git Workshop &amp; Information
+            </p>
+            <p class="subtitle-one left-space">
+                JJ Bastida
+            </p>
+        </section>
+        <section class="main-body single-column main-section" id="general-info">
+            <div class="heading-box">
+                <h2 class="main-title">General Info</h2>
+                <p class="js-note">Before we start the lesson...</p>
+            </div>
+            <div class="counted-content">
+                <h3>
+                    Be sure to download and install
+                    <a class="inline-link" target="_blank" href="https://code.visualstudio.com/"> Virtual Studio
+                        Code</a>
+                    and
+                    <a class="inline-link" target="_blank" href="https://git-scm.com/downloads"> Git.</a>
+                </h3>
+                <p>
+                    In this case having VS Code will make your life a tad bit easier because of the built in terminal.
+                    <span class="js-note">You can however just use the git bash terminal just the same.</span>
+                </p>
+                <p>
+                    You need to install git to actually have and use git.
+                </p>
+                <p>
+                    Make sure you also have a <a class="inline-link" href="https://github.com/"
+                        target="_blank">Github</a> account
+                    or
+                    equivalent git program account.
+                </p>
+                <p>
+                    We're going to be using it, as it is an open source friendly and free git hosting service.
+                </p>
+                <p>
+                    Have some sort of version based project in mind when using git, you can use git with any kind of
+                    file, but
+                    generally git shines with code.
+                </p>
+            </div>
+        </section>
+        <section class="main-body single-column main-section" id="where-do-i-git?">
+            <div class="heading-box">
+                <h2 class="main-title">Where do I Git?</h2>
+                <p class="js-note">
+                    Time to git it and checkout everything
+                </p>
+            </div>
+            <div class="counted-content">
+                <p>"Git is a free and open source distributed version control system designed to handle everything from
+                    small to very large projects with speed and efficiency." - Git
+                </p>
+                <p>
+                    It was made as a solution to many pre-existing version control systems that didn't effectively keep
+                    teams working synchronously and effectively.
+                </p>
+                <p>
+                    It works by storing "snapshots" of your project in a very clean and easy to understand flowing
+                    branch structure.
+                </p>
+                <p>
+                    It works with any kind of file, and if used properly can save you time and space when working on
+                    group projects.
+                </p>
+                <p>
+                    Git ideally is stored locally and on some sort of remote service, with your local files containing
+                    all of the things that you are currently altering and the "main" (aka. master) stored elsewhere
+                    safe.
+                </p>
+                <p>
+                    The process of editing files starts with branching from the main, which in a sense is creating a
+                    perfect copy of the main to work off of so that you don't break anything that is live and working.
+                    <span class="js-note">Although you can work on the main that would kind of defeat the purpose of
+                        git.</span>
+                </p>
+            </div>
+        </section>
+        <section class="main-body two-column main-section" id="using-git">
+            <div class="heading-box">
+                <h2 class="main-title">Using Git - Setup</h2>
+                <p class="js-note">Pull! Commit! Stage! Push!!!</p>
+            </div>
+            <div class="column-container">
+                <div class="counted-content left-column">
+                    <p>
+                        Before anything you need to decide on a project that you are going to be working with, you can
+                        start with an empty folder but you need something to start with. <span class="js-note">I would
+                            suggest a blank template folder if anything with some lorem ipsum.</span>
+                    </p>
+                    <p>
+                        Now you need to create a repository on Github, to actually store your information.<a
+                            class="inline-link" href="https://github.com/new" target="_blank">You can do that here</a>
+                    </p>
+                    <p>
+                        Once created, you will be prompted to actually add things to the repository, or to create one
+                        somewhere on your computer.
+                    </p>
+                    <p>
+                        If you choose to add from an existing repository, go to your folder
+                        with all of your information and run the first code block on Gitbash from that location.
+                        <span class="js-note">Usually a secure file location like in your C:/ drive in a new folder
+                            called git is best.</span>
+                    </p>
+                    <p>
+                        If you choose to create a new repository folder, go to a secure location on your pc, in some
+                        sort of Git folder. Once there start gitbash and initialize the spot with the second code block.
+                    </p>
+                </div>
+                <div class="right-column">
+                    <code class="git-code"><br>
+                        echo "# ******" >> README.md<br>
+                        git <span class="code-color-main">init</span><br>
+                        git <span class="code-color-main">add</span> README.md<br>
+                        git <span class="code-color-main">commit</span> -m "Initial Commit"<br>
+                        git <span class="code-color-main">remote add origin</span> https://github.com/******<br>
+                        git <span class="code-color-main">push origin</span> ******<br>
+                    </code><br>
+                    <span class="js-note">Be sure to change the location and names to the appropriate ones (Don't use
+                        ******)</span><br><br>
+                    <code class="git-code"><br>
+                        git <span class="code-color-main">remote add origin</span> https://github.com/******<br>
+                        git <span class="code-color-main">push origin</span> ******<br>
+                    </code><br>
+                </div>
+            </div>
+        </section>
+        <section class="main-body two-column ignore-section">
+            <div class="heading-box">
+                <h2 class="main-title">Actually using the Git</h2>
+                <p class="js-note">I don't think you're ready for this jelly!</p>
+            </div>
+            <div class="column-container">
+                <div class="counted-content left-column">
+                    <p>
+                        Let's start by branching off of the current main; branching allows us to make changes and
+                        commit without ruining the current main.<br>
+                        <code
+                            class="code-snippet">git <span class="code-color-main">checkout -b</span> <em>NewBranch</em></code>
+                    </p>
+                    <p>
+                        Now actually make some changes to code you're working on. You are now currently working on a
+                        different branch, essentially a "snapshot" of the main.
+                    </p>
+                    <p>
+                        Once you are satisfied with the changes on your branch, it is time to add/stage the changes.
+                        Staging is just the phase before committing; it's preparing your individual files to be
+                        committed. The following will stage all of the changes you have made.
+                        <code class="code-snippet">git <span class="code-color-main">add -A</span></code>
+                    </p>
+                    <p>
+                        Finally is the commit, a commit bundles all of the changes together as a new snapshot or
+                        "version" of your branch. You can have hundreds or thousands of commits before pushing to the
+                        main. To commit, type the following with some sort of description to help you know what you
+                        changed.
+                        <code
+                            class="code-snippet">git <span class="code-color-main">commit -m</span> "<em>This message and the -m are optional</em>"</code>
+                    </p>
+                </div>
+                <div class="counted-content right-column">
+                    <p>
+                        Once you have completed all of your commits, you need to push the current branch into the
+                        main, then merge the branch into the main so that the main gets everything that is in your
+                        branch.
+                    </p>
+                    <p>
+                        First, to push your branch to Github, you need to be sure you are on your branch with nothing
+                        left to commit; then write the
+                        following.
+                        <code
+                            class="code-snippet">git <span class="code-color-main">push origin</span> <em>NewBranch</em></code>
+                    </p>
+                    <p>
+                        Once pushed there are two ways to merge the main with the branch, if you have the adequate
+                        permissions, you can do it in the code with the following.
+                        <code class="code-snippet">
+                            git <span class="code-color-main">checkout </span><em>main</em><br>
+                            git <span class="code-color-main">merge </span><em>NewBranch</em>
+                        </code>
+                    </p>
+                    <p>
+                        This can also be done on Github through merge requests. You can create a merge/pull request from
+                        the branch you just pushed, simply go to your git repository on Github. Select new pull request,
+                        select which branch you want to merge, and create the request. If you have the adequate
+                        permissions on the repository you can accept the merge/pull request and the branch will become
+                        the main.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section class="main-body two-column ignore-section">
+            <div class="heading-box">
+                <h2 class="main-title">Git Keywords</h2>
+                <p class="js-note">Ch-ch-ch-checkout that branch</p>
+            </div>
+            <div class="column-container">
+                <div class="counted-content left-column">
+                    <p>
+                        <strong>checkout</strong> - Used to switch branches and go to another branch.
+                    </p>
+                    <p>
+                        <strong>pull</strong> - Gets all of the branches & commits from either the main or another
+                        branch, it will also rebase and clean up heads, to point your branch in the right direction.
+                    </p>
+                    <p>
+                        <strong>push</strong> - Sends all of the current commits and branches on the current branch to a
+                        source, generally the origin.
+                    </p>
+                    <p>
+                        <strong>add</strong> - Stages your changes and prepares them to be committed.
+                    </p>
+                    <p>
+                        <strong>commit</strong> - Takes your staged changes and bundles them together as a current
+                        version of the branch, it generally includes a message description along with it.
+                    </p>
+                    <p>
+                        <strong>origin</strong> - The source location of all of your branches and your main. In this
+                        case it would be your repository on Github.
+                    </p>
+                    <p>
+                        <strong>merge</strong> - Takes the commits on another branch and merges them into the current
+                        branch.
+                    </p>
+                </div>
+                <div class="counted-content right-column">
+                    <p>
+                        <strong>stash</strong> - A temporary storage that saves changes that you may not want to stage
+                        or commit at the moment.
+                    </p>
+                    <p>
+                        <strong>clone</strong> - A complete copy of the entire repository, saved into a location on your
+                        computer.
+                    </p>
+                    <p>
+                        <strong>log</strong> - Shows a log of all of the previous commits and changes that were made to
+                        the branch.
+                    </p>
+                    <p>
+                        <strong>remote</strong> - Shows which repositories your current branch/project is connected to,
+                        and where pushing or pulling will grab from (aka the remote Github repo/origin).
+                    </p>
+                    <p>
+                        <strong>alias</strong> - It is essentially a way to write your own custom git shortcuts, you can
+                        assign aliases to longer git commands to make them quick and easy to write.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section class="main-body single-column main-section" id="help">
+            <div class="heading-box">
+                <h2 class="main-title">Help &amp; Troubleshooting</h2>
+                <p class="js-note">HELP! EVERYTHING IS A BRANCH AND THERE ARE MERGE CONFLICTS!</p>
+            </div>
+            <div class="counted-content">
+                <p>
+                    When merging, be sure that you are on the right branch, and that you are not merging the wrong thing
+                    into the wrong branch.
+                </p>
+                <p>
+                    DO NOT COMMIT DIRECTLY INTO THE MAIN, it will get messy really quickly.
+                </p>
+                <p>
+                    If you have made a mess of commits, consider the cherry-pick command, it lets you rewind and grab
+                    specific commits that you want to keep.
+                </p>
+                <p>
+                    Try not to branch off of a branch, and try not to have multiple people working on the same thing on
+                    the same branch from different places.
+                </p>
+                <p>
+                    You cannot continue to merge something if there are merge conflicts. ALWAYS RESOLVE MERGE CONFLICTS
+                    AS THEY APPEAR AND THEN RESUME THE MERGE. To view conflicts use
+                    <code class="code-snippet">git <span class="code-color-main">status</span></code>
+                </p>
+                <p>
+                    Once all of your
+                    conflicts have been resolved, simply restage all of your changes, and use
+                    <code class="code-snippet">git <span class="code-color-main"> merge --continue</span></code>
+                </p>
+                <p>
+                    If something is being stubborn because the main is behind or your branch structure has become
+                    messy, you can force the merge with --ff (fast-forward), this is very dangerous however, as it
+                    essentially forces the main to wherever you are pointing it, but may be of use at times.
+                </p>
+            </div>
+        </section>
+        <section class="main-body single-column main-section" id="tips">
+            <div class="heading-box">
+                <h2 class="main-title">Tips</h2>
+                <p class="js-note">For all you cool kids 😎</p>
+            </div>
+            <div class="counted-content">
+                <p>
+                    Try to commit as often as possible and write very clear and easy to understand description messages.
+                </p>
+                <p>
+                    Create a bunch of aliases to improve your workflow.
+                </p>
+                <p>
+                    Try to keep the number of branches you have to a minimum, it helps to stay organized and to not have
+                    too many open old versions of your project.
+                </p>
+                <p>
+                    Name your branches in a consistent way, and keep your naming structure easy to read.
+                </p>
+                <p>
+                    Keep open communications with teams, and always divide the work in a way where you can each be
+                    working on different non-overlapping parts of the same project.
+                </p>
+                <p>
+                    Use your code editor and the Gitlens plugin, it helps see changes, branches, and more, much more
+                    clearly.
+                </p>
+                <p>
+                    Avoid absolutely destroying a branch by making way too many commits. Once you have completed the
+                    goal of the branch, GET IT INTO THE MAIN AND RID OF IT.
+                </p>
+                <p>
+                    If you are on a team, remember to pull from the origin before pushing to the origin. This is so that
+                    you are always up to date before pushing.
+                </p>
+            </div>
+        </section>
+        <section class="main-body ignore-section" id="final-section">
+            <h1 class="main-title">That's all for now!</h1>
+            <p class="subtitle-two left-space">
+                Be sure to contact me if you have any questions or concerns
+                <i class="far fa-sparkles"></i>
+            </p>
+        </section>
+    </div>
+    <script>
+        const currentSection = {
+            element: null,
+            index: null,
+            menuPosition: null,
+        };
+        let scrollingTo;
+        let isScrolling = false;
+        const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+        const mainMenuList = document.querySelector('#main-menu-list');
+        const isMobile = window.innerWidth < 40 * rem;
+        const sections = [].slice.call(document.getElementsByTagName('section'));
+        const mainSections = [].slice.call(document.getElementsByClassName('main-section'));
+        const titles = [].slice.call(document.getElementsByClassName('main-title'));
+        const menuItems = [].slice.call(document.getElementsByClassName('menu-item'));
+        const fen = document.getElementById('floating-enter-notification');
+
+        if (window.innerHeight < parseFloat(getComputedStyle(mainMenuList).height)) {
+            mainMenuList.style.height = '100%';
+            mainMenuList.style.overflowY = 'scroll';
+            mainMenuList.style.overflowX = 'hidden';
+        }
+
+        function handleTarget(event) {
+            const menuChildren = document.querySelector('#main-menu-list').children;
+            let selections;
+
+            Array.prototype.forEach.call(menuChildren, child => {
+                if (event.target === child) {
+                    selections = event.target;
+                } else if (event.target.parentElement === child) {
+                    selections = event.target.parentElement;
+                }
+            });
+
+            return selections;
+        }
+
+        function unselectAll(selected) {
+            selected.children[1].classList.toggle('selected-title');
+            selected.children[1].classList.toggle('unselected-title');
+            selected.children[0].classList.toggle('selected-icon');
+            selected.children[0].classList.toggle('unselected-icon');
+            selected.classList.toggle('unselected');
+            selected.classList.toggle('selected');
+        }
+
+        function handleSelection(targetElement) {
+            const currentSelection = document.getElementsByClassName('selected');
+
+            if (currentSelection.length === 0) {
+                targetElement.classList.toggle('unselected');
+                targetElement.classList.toggle('selected');
+                targetElement.children[1].classList.toggle('selected-title');
+                targetElement.children[1].classList.toggle('unselected-title');
+                targetElement.children[0].classList.toggle('unselected-icon');
+                targetElement.children[0].classList.toggle('selected-icon');
+            } else if (currentSelection.length >= 0) {
+                unselectAll(currentSelection[0]);
+                targetElement.classList.toggle('unselected');
+                targetElement.classList.toggle('selected');
+                targetElement.children[1].classList.toggle('selected-title');
+                targetElement.children[1].classList.toggle('unselected-title');
+                targetElement.children[0].classList.toggle('unselected-icon');
+                targetElement.children[0].classList.toggle('selected-icon');
+            }
+        }
+
+        function scrollToTarget(target, behavior, block, inline) {
+            isScrolling = true;
+            scrollingTo = target;
+
+            target.scrollIntoView({
+                behavior,
+                block,
+                inline,
+            });
+        }
+
+        function scrollToSection(which) {
+            if (sections[currentSection.index + which]) {
+                scrollToTarget(sections[currentSection.index + which], 'smooth', 'start', 'nearest');
+            } else {
+                scrollToTarget(sections[0], 'smooth', 'start', 'nearest');
+            }
+        }
+
+        function cleanUpHTML(target) {
+            let newTarget = target;
+
+            newTarget = newTarget.replace('&amp;', '');
+            newTarget = newTarget.toLowerCase();
+            newTarget = newTarget.replace(/\s/gm, '-');
+            newTarget = newTarget.replace('--', '-');
+
+            return newTarget;
+        }
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.intersectionRatio > 0) {
+                    const thisSection = entry.target.closest('section');
+
+                    currentSection.element = thisSection;
+                    currentSection.index = sections.indexOf(thisSection);
+                    currentSection.menuPosition = mainSections.indexOf(thisSection);
+
+                    if (isScrolling && scrollingTo === thisSection) {
+                        isScrolling = false;
+                    }
+
+                    if (!thisSection.classList.contains('ignore-section') && !isScrolling) {
+                        handleSelection(menuItems[currentSection.menuPosition]);
+                    }
+
+                    if (isMobile && !isScrolling && menuItems[currentSection.menuPosition]) {
+                        const menuTarget = menuItems[currentSection.menuPosition];
+
+                        setTimeout(() => {
+                            menuTarget.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'center',
+                                inline: 'center',
+                            });
+                        }, 500);
+                    }
+
+                    if (currentSection.index === 0) {
+                        fen.innerHTML = "Press Enter to<br>continue <i class='far fa-arrow-square-right'></i>";
+                        fen.style.opacity = 1;
+                    } else {
+                        fen.innerHTML = "Next <i class='far fa-arrow-square-right'></i>";
+                        fen.style.opacity = 0.5;
+                    }
+                }
+            });
+        });
+
+        titles.forEach(title => {
+            observer.observe(title);
+        });
+
+        function handleKeyPress(event) {
+            if ((event.key === 'Enter' || event.which === 13 || event.code === 'Enter') || (event.key === 'ArrowRight' || event.which === 39 || event.code === 'ArrowRight')) {
+                event.preventDefault();
+                const selected = handleTarget(event);
+
+                if (selected) {
+                    let target = selected.children[1].innerHTML;
+
+                    target = cleanUpHTML(target);
+                    scrollToTarget(document.getElementById(target), 'smooth', 'start', 'nearest');
+                    handleSelection(selected);
+                } else {
+                    scrollToSection(+1);
+                }
+            } else if ((event.key === 'Backspace' || event.which === 8 || event.code === 'Backspace') || (event.key === 'ArrowLeft' || event.which === 37 || event.code === 'ArrowLeft')) {
+                event.preventDefault();
+                scrollToSection(-1);
+            }
+        }
+
+        function handleClick(event) {
+            const selected = handleTarget(event);
+
+            if (selected !== undefined) {
+                let target = selected.children[1].innerHTML;
+                target = cleanUpHTML(target);
+                scrollToTarget(document.getElementById(target), 'smooth', 'start', 'nearest');
+                handleSelection(selected);
+            }
+        }
+
+        document.querySelector('#main-menu-list').addEventListener('click', handleClick);
+        fen.addEventListener('click', function () {
+            scrollToSection(+1);
+            event.preventDefault();
+
+        });
+        window.addEventListener('keydown', handleKeyPress);
+    </script>
+</body>
+
+</html>

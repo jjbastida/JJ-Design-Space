@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<!--JuanJose Bastida 2019-->
+<!-- Php Workshop V1.0 -->
+<!--These projects were made to be looked into, so if you're reading this that’s great! I tried to keep these to be 'best practice' but that being said please never put all of your CSS and JS in one HTML file, separate them out and if you have multiple pages separate out your files so you only import what you need!-->
+<!--Other than that thank you for reading! Hope it helps, if you have any questions feel free to reach out jj.bastida@outlook.com-->
+<html lang="en-CA">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,700&display=swap" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/81783a94a9.js" samesite="secure"></script>
+    <title>PHP &amp; SQL, As Easy As ABC, DEF, GHI</title>
+    <style>
+        :root {
+            --plasma-main: #654afa;
+            --plasma-alt: #3535af;
+            --obsidian: #242430;
+            --dusk: #45455b;
+            --pavement: #88889f;
+            --egg-whites: #eaeaea;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "Source Code Pro", "Ubuntu", monospace;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+            counter-reset: code-counter;
+        }
+
+        pre {
+            white-space: break-spaces;
+        }
+
+        nav {
+            height: 100vh;
+            box-sizing: border-box;
+            width: 8rem;
+            position: fixed;
+            background-color: var(--plasma-main);
+            z-index: 100;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            background-color: var(--plasma-main);
+            padding: 2rem;
+            color: white;
+            max-width: 1080px;
+        }
+
+        h2 {
+            font-size: 2.3rem;
+            font-weight: 700;
+            color: var(--obsidian);
+        }
+
+        h3 {
+            margin-top: 1rem;
+            margin-bottom: 0.5rem !important;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--obsidian);
+        }
+
+        h3::before {
+            display: none;
+        }
+
+        strong {
+            font-size: inherit;
+            font-weight: 700;
+            color: inherit;
+        }
+
+        h4 {
+            color: black;
+            color: var(--obsidian);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        p {
+            font-size: 1.15rem;
+            line-height: 1.4;
+            font-weight: 400;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        table {
+            border: 2px solid #ffb62e;
+            border-spacing: unset;
+        }
+
+        tr {
+            height: 2rem;
+        }
+
+        th {
+            color: var(--obsidian);
+            background-color: #ffb62e;
+            padding: 0 5rem 0 .5rem;
+        }
+
+        tr:nth-child(even) {
+            background-color: var(--egg-whites);
+        }
+
+        .inline-link {
+            color: var(--plasma-main) !important;
+            transition: color 0.5s ease;
+            position: relative;
+            display: inline-block;
+        }
+
+        .inline-link::before {
+            content: " ";
+            padding: 0 0.5em 0 1em;
+        }
+
+        .inline-link::after {
+            content: "\f019";
+            font-family: "Font Awesome 5 Pro";
+            font-size: 0.65em;
+            padding-left: 0.5em;
+            position: absolute;
+            top: 1em;
+            left: 0;
+            transform: translateY(-50%) scale(1.3);
+        }
+
+        .inline-link[target="_blank"]::before {
+            padding: 0 0.5em;
+        }
+
+        .inline-link[target="_blank"]::after {
+            content: "\f08e";
+            padding-left: 0;
+            transform: translateY(-50%) scale(1);
+        }
+
+        .inline-link:hover {
+            text-decoration: underline !important;
+            color: var(--plasma-alt) !important;
+            transition: color 0.5s ease;
+        }
+
+        section *::selection {
+            color: white;
+            background: var(--obsidian);
+        }
+
+        pre::before {
+            display: none !important;
+        }
+
+        .not-counted::before {
+            display: none !important;
+        }
+
+        code {
+            display: inline-block;
+            color: white;
+            background-color: var(--obsidian);
+            border-radius: 8px;
+            padding: 2.2rem 1.5em 1.5em;
+            box-sizing: border-box;
+            position: relative;
+            margin: 0.5em 0;
+        }
+
+        code::before {
+            display: block;
+            height: 1.2rem;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            padding: 0.5em 0 0.75em;
+            font-weight: 600;
+        }
+
+        code::after {
+            color: white;
+            display: block;
+            width: 100%;
+            position: absolute;
+            box-sizing: border-box;
+            top: 0;
+            left: 0.25rem;
+            padding: 0.5em 0.5em 0;
+            font-weight: 600;
+        }
+
+        .css-code::before {
+            content: "";
+            background-color: #406eeb;
+        }
+
+        .html-code::before {
+            content: "";
+            background-color: #ff4040;
+        }
+
+        .js-code::before {
+            content: "";
+            background-color: #fff039;
+        }
+
+        .php-code::before {
+            content: "";
+            background-color: #654afa;
+        }
+
+        .sql-code::before {
+            content: "";
+            background-color: #ffb62e;
+        }
+
+        .terminal-code::before {
+            content: "";
+            background-color: #45455b;
+        }
+
+        .css-code::after {
+            content: "CSS";
+        }
+
+        .html-code::after {
+            content: "HTML";
+        }
+
+        .js-code::after {
+            color: var(--obsidian);
+            content: "JS";
+        }
+
+        .php-code::after {
+            content: "PHP";
+        }
+
+        .sql-code::after {
+            color: var(--obsidian);
+            content: "SQL";
+        }
+
+        .terminal-code::after {
+            content: "Terminal";
+        }
+
+        .html-code .code-color-main {
+            color: #ff4040 !important;
+        }
+
+        .css-code .code-color-main {
+            color: #406eeb !important;
+        }
+
+        .js-code .code-color-main {
+            color: #fff039 !important;
+        }
+
+        .php-code .code-color-main {
+            color: #8e7dec !important;
+        }
+
+        .php-code .code-color-second {
+            color: #ff4040 !important;
+        }
+
+        .terminal-code .code-color-main {
+            font-weight: 700;
+        }
+
+        .html-note,
+        .js-note,
+        .js-note {
+            font-size: 0.9rem !important;
+            color: var(--pavement) !important;
+        }
+
+        .html-note::before {
+            content: "<!-- " !important;
+        }
+
+        .html-note::after {
+            content: " ->" !important;
+        }
+
+        .css-note::before {
+            content: "/* " !important;
+        }
+
+        .css-note::after {
+            content: " */" !important;
+        }
+
+        .js-note::before {
+            content: "// " !important;
+        }
+
+        .subtitle-one {
+            font-size: 1.6rem;
+            line-height: 1.3;
+            padding: 0.5em 0 0;
+        }
+
+        .subtitle-two {
+            font-size: 1.6rem;
+            line-height: 1.3;
+            padding: 0.5em 0 0;
+            color: white;
+        }
+
+        .no-break {
+            word-break: keep-all;
+            white-space: nowrap;
+        }
+
+        .raw {
+            font-size: initial !important;
+            font-family: initial !important;
+            color: initial !important;
+            font-weight: initial !important;
+            padding: initial !important;
+            margin: initial !important;
+            background-color: initial !important;
+            line-height: initial !important;
+        }
+
+        .raw::selection {
+            color: white !important;
+            background-color: blue !important;
+        }
+
+        #main-menu-list {
+            height: auto;
+            width: 100%;
+            display: flex;
+            flex-wrap: nowrap;
+            flex-direction: column;
+            align-content: center;
+            justify-content: flex-start;
+            user-select: none;
+        }
+
+        .menu-item {
+            text-align: center;
+            padding: 1em 0.25em;
+            box-sizing: border-box;
+            cursor: pointer;
+            min-width: 7rem;
+            position: relative;
+        }
+
+        .menu-item::after {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 90%;
+            height: 100%;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -1px);
+            border-bottom: 1.75px var(--egg-whites) solid;
+            z-index: 5;
+        }
+
+        .menu-item:focus {
+            outline: 2px solid #FFFFFF;
+            background-color: #8770FB;
+        }
+
+        .selected:focus {
+            outline: none;
+        }
+
+        .main {
+            display: grid;
+            grid-template-columns: [navigation] calc(8rem - 20px) 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+            grid-gap: 20px;
+            max-width: 120rem;
+        }
+
+        .main section {
+            grid-column: 2 / span 11;
+            padding-left: 1rem;
+            min-height: 100vh;
+            padding-top: 1rem;
+        }
+
+        #final-section {
+            grid-column: 2 / span 11 !important;
+            background-color: var(--plasma-main);
+        }
+
+        .single-column {
+            grid-column: 2 / span 8 !important;
+        }
+
+        .two-column {
+            grid-column: 2 / span 11 !important;
+        }
+
+        .two-column .column-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        .two-column .column-container>div {
+            width: 45%;
+            padding-right: 2.5%;
+        }
+
+        #php-sql {
+            grid-column: 2 / span 9;
+            padding-left: 0;
+            padding-top: 11rem;
+        }
+
+        .unselected {
+            color: var(--egg-whites);
+        }
+
+        .selected {
+            background-color: var(--obsidian) !important;
+            color: var(--egg-whites) !important;
+            transform: scaleY(1.03) !important;
+            z-index: 6 !important;
+        }
+
+        .selected::after {
+            display: none !important;
+        }
+
+        .unselected-title {
+            color: var(--egg-whites);
+        }
+
+        .selected-title {
+            background-color: var(--obsidian);
+            color: var(--egg-whites);
+        }
+
+        .fal {
+            vertical-align: middle;
+        }
+
+        .fa-fw {
+            display: block;
+            height: 1em;
+            width: 1em;
+            margin: 0 auto 0.5em;
+            padding: 0.5em;
+            border-radius: 1000px;
+            text-align: center;
+        }
+
+        .fa-code::before {
+            display: block;
+            transform: translateX(-2px);
+        }
+
+        .fa-browser::before {
+            display: block;
+            transform: translateY(1px);
+        }
+
+        .fa-server::before {
+            display: block;
+            transform: translateY(1px);
+        }
+
+        .unselected-icon {
+            border: 1.75px solid var(--egg-whites);
+            color: var(--egg-whites);
+            transform: scale(0.9);
+            transition: transform ease 0.5s, color ease 0.5s;
+        }
+
+        .selected-icon {
+            background-color: var(--egg-whites);
+            color: var(--obsidian);
+            transition: transform ease 0.5s, color ease 0.5s, border 0.5s ease;
+        }
+
+        .unselected:hover {
+            background-color: var(--plasma-alt);
+        }
+
+        .inline-link[href^="#"]::after {
+            content: "\f354";
+            transform: translateY(-40%) scale(1.5);
+        }
+
+        #floating-enter-notification {
+            position: fixed;
+            font-size: 1rem;
+            bottom: 30px;
+            background-color: rgba(255, 255, 255, 0);
+            right: calc((11vw / 2) - 20px);
+            text-align: left;
+            user-select: none;
+            color: var(--pavement);
+            padding: 1em 1.5em;
+            border-radius: 25px;
+            border: 1px solid black;
+            border-color: var(--pavement);
+            cursor: pointer;
+            transition: opacity 0.7s ease;
+        }
+
+        #floating-enter-notification:hover {
+            background-color: rgba(0, 0, 0, .01);
+        }
+
+        #floating-enter-notification:focus {
+            background-color: rgba(0, 0, 0, .01);
+            outline: none;
+            border-color: #1E4CC1;
+            color: #1E4CC1;
+        }
+
+        #floating-enter-notification:active {
+            background-color: rgba(0, 0, 0, .02);
+            border-color: var(--pavement);
+            color: var(--pavement);
+        }
+
+        .left-space {
+            padding-left: 2rem;
+        }
+
+        .counted-content>* {
+            margin-bottom: 0.8em;
+        }
+
+        .counted-content>h3:first-child {
+            margin-top: -0.5rem !important;
+        }
+
+        .counted-content>*::before {
+            counter-increment: code-counter 1;
+            content: counter(code-counter) " ";
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--pavement);
+        }
+
+        .heading-box {
+            padding-bottom: 1.1rem;
+        }
+
+        .body-list {
+            font-size: 1.15rem;
+            line-height: 1.4;
+        }
+
+        .body-list li {
+            font-size: 1rem;
+            line-height: 1.5;
+            padding: 0 1em 0.8em;
+            list-style: circle;
+            list-style-position: inside;
+        }
+
+        .tab-in {
+            margin: 0.5em 0 0.5em 1.5em;
+            display: inline-block;
+        }
+
+        .stacked-shortcut {
+            position: relative;
+        }
+
+        .stacked-shortcut::before {
+            content: "+";
+            padding: 0 0.5em 0 1.75em;
+        }
+
+        .stacked-shortcut::after {
+            content: "cmd \A ctrl";
+            display: block;
+            font-size: 0.6em;
+            line-height: 1;
+            white-space: pre-wrap;
+            padding-right: 0.25em;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        @media all and (min-width: 120rem) {
+            .main section {
+                padding-left: 2rem;
+                padding-top: 2rem;
+            }
+        }
+
+        @media all and (max-width: 60rem) {
+            .single-column {
+                grid-column: 2 / span 10 !important;
+            }
+
+            .two-column {
+                grid-column: 2 / span 10 !important;
+            }
+
+            .two-column .column-container>div {
+                width: 100%;
+                padding-right: 0;
+            }
+
+            #floating-enter-notification {
+                display: none;
+            }
+        }
+
+        @media all and (max-width: 40rem) {
+            h1 {
+                font-size: 3rem;
+                padding: 1rem;
+            }
+
+            .subtitle-one {
+                font-size: 1.4rem;
+            }
+
+            .subtitle-two {
+                font-size: 1.4rem;
+            }
+
+            nav {
+                width: 100vw;
+                height: auto;
+                border-bottom: 2px var(--obsidian) solid;
+            }
+
+            #main-menu-list {
+                flex-direction: row;
+                overflow-x: scroll;
+                position: relative;
+            }
+
+            .menu-border {
+                display: none;
+            }
+
+            .menu-item {
+                text-align: center;
+                padding: 1em 1.2em;
+                box-sizing: border-box;
+                border-right: 2px var(--obsidian) solid;
+                min-height: 5rem;
+                min-width: 8rem;
+            }
+
+            .menu-item-last {
+                border: none;
+                padding-right: 2em;
+            }
+
+            .main {
+                grid-template-columns: 1rem 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1rem;
+                grid-gap: 0;
+            }
+
+            .main section {
+                grid-column: 1 / span 11 !important;
+                padding-top: 9rem;
+            }
+
+            #final-section {
+                grid-column: 1 / span 12 !important;
+                padding-right: 1rem;
+            }
+
+            #html-css {
+                grid-column: 1 / span 12 !important;
+                padding-left: 0;
+                padding-top: 11rem;
+            }
+
+            .left-space {
+                padding-left: 1rem;
+            }
+
+            .menu-item::after {
+                display: none !important;
+            }
+        }
+
+        @media all and (-ms-high-contrast: none),
+        (-ms-high-contrast: active) {
+            nav {
+                display: none;
+            }
+
+            h1 {
+                color: black;
+            }
+
+            code {
+                color: black;
+                border: 1px solid black;
+            }
+
+            section *::selection {
+                color: white;
+                background: black;
+            }
+
+            th {
+                color: black;
+                background-color: #ffb62e;
+                padding: 0 5rem 0 .5rem;
+            }
+
+            tr:nth-child(even) {
+                background-color: lightgray;
+            }
+
+            #floating-enter-notification {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <ul id="main-menu-list">
+            <li class="menu-item unselected" tabindex="0">
+                <i class="fas fa-browser fa-fw unselected-icon"></i>
+                <h4 class="unselected-title">PHP &amp; SQL</h4>
+            </li>
+            <li class="menu-item unselected" tabindex="0">
+                <i class="fas fa-info unselected-icon fa-fw"></i>
+                <h4 class="unselected-title">General Info</h4>
+            </li>
+            <li class="menu-item unselected" tabindex="0">
+                <i class="fas fa-paper-plane unselected-icon fa-fw"></i>
+                <h4 class="unselected-title">The PHP</h4>
+            </li>
+            <li class="menu-item unselected" tabindex="0">
+                <i class="fas fa-table unselected-icon fa-fw"></i>
+                <h4 class="unselected-title">Databases &amp; Sql</h4>
+            </li>
+            <li class="menu-item unselected" tabindex="0">
+                <i class="fas fa-database unselected-icon fa-fw"></i>
+                <h4 class="unselected-title">Connecting to a Database</h4>
+            </li>
+            <li class="menu-item unselected" tabindex="0">
+                <i class="fas fa-question unselected-icon fa-fw"></i>
+                <h4 class="unselected-title">Help</h4>
+            </li>
+            <li class="menu-item unselected menu-item-last" tabindex="0">
+                <i class="fas fa-sparkles unselected-icon fa-fw"></i>
+                <h4 class="unselected-title">Tips</h4>
+            </li>
+        </ul>
+    </nav>
+    <div id="floating-enter-notification" aria-hidden="true">
+        <i class="fal fa-arrow-square-right"></i>
+    </div>
+    <div class="main">
+        <section id="php-sql" class="main-section">
+            <h1 class="main-title">
+                PHP &amp; SQL, As Easy As ABC, DEF, GHI
+            </h1>
+            <p class="subtitle-one left-space">
+                PHP &amp; SQL Workshop &amp; Information
+            </p>
+            <p class="subtitle-one left-space">
+                JJ Bastida
+            </p>
+        </section>
+        <section class="main-body single-column main-section" id="general-info">
+            <div class="heading-box">
+                <h2 class="main-title">General Info</h2>
+                <p class="js-note">Before we start the lesson...</p>
+            </div>
+            <div class="counted-content">
+                <h3>
+                    Be sure to download either
+                    <a class="inline-link" target="_blank" title="Brackets Homepage"
+                        href="http://brackets.io/">Brackets,</a>
+                    <a class="inline-link" target="_blank" title="Atom Homepage" href="https://atom.io/">Atom,</a>
+                    or
+                    <a class="inline-link" target="_blank" title="Visual Studio Code Homepage"
+                        href="https://code.visualstudio.com/">Visual Studio Code.</a>
+                </h3>
+                <p>
+                    Download a code editor and use it when coding.
+                </p>
+                <h3>
+                    Be sure to also download either
+                    <a class="inline-link" target="_blank" title="Cyberduck Homepage"
+                        href="https://cyberduck.io/">Cyberduck</a>
+                    or
+                    <a class="inline-link" target="_blank" title="FileZilla Homepage"
+                        href="https://filezilla-project.org/">FileZilla.</a>
+                </h3>
+                <p>
+                    Download an FTP client manager to transfer files to your server.
+                </p>
+                <p>
+                    Have a template HTML, PHP, CSS, and JS folder structure so you don’t have to start from
+                    scratch each time,
+                    <a class="inline-link" href="./BlankPhp.zip" title="Zip File with Pre-made Folder Structure">I have
+                        included one here.</a>
+                </p>
+                <p>
+                    For SQL you will need a server and database of some sort to store your data. Our
+                    firebird servers, and most purchased hosting sites, have a plugin for mySql which gives
+                    you access to a database.
+                </p>
+                <p>
+                    Php requires you to make your html files into .php files, they work and look identical
+                    but can now parse and render php. Be sure to also change the DOCTYPE at the top of the
+                    file to php as well.
+                </p>
+                <p>
+                    <strong>Although we are being taught php, it is a dying language!</strong>
+                    Nowadays, the industry tends to use the
+                    <a class="inline-link" href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch"
+                        target="_blank" title="Using the Fetch API"> fetch api,</a>
+                    a simple request protocol that receives the JSON data in a quick way, only if you have
+                    proper request controllers setup.
+                    <span class="js-note">Which I will not show you how to do because that’s C#</span>
+                </p>
+            </div>
+        </section>
+        <section class="main-body two-column main-section" id="the-php">
+            <div class="heading-box">
+                <h2 class="main-title">It's The PHP</h2>
+                <p class="js-note">It's like JS but with more letters and more confusion!</p>
+            </div>
+            <div class="column-container">
+                <div class="counted-content left-column">
+                    <p>
+                        PHP is a server scripting language, a powerful tool for making dynamic interactive
+                        websites and retrieving content for a page.
+                    </p>
+                    <p>
+                        In terms of language, it is relatively close to JS with some minor differences in
+                        syntax, keywords, and scope.
+                    </p>
+                    <p>
+                        Unlike JS, any php code will disappear after the page has rendered.
+                    </p>
+                    <p>
+                        Can be written inline and produce raw html, css, or js, much faster than raw js.
+                    </p>
+                    <p> Opens and closes with a <strong>&lt;?php [CODE GOES HERE] ?&gt;</strong> tag. </p>
+                    <p>
+                        In terms of syntax, variables ALWAYS have a $ before them, and you don't have to
+                        declare them before you use them.
+                    </p>
+                    <p>
+                        In addition to that, when joining together string you use a . as opposed to a +
+                    </p>
+                </div>
+                <div class="right-column">
+                    <code class="php-code"><br>
+                        <span class="code-color-main">&lt;?php</span><br>
+                        <span class="tab-in">
+                            <span class="code-color-main">echo</span> mysqli('<span class="code-color-second">SELECT</span>*<span class="code-color-second">FROM</span>`boi`');
+                        </span><br>
+                        <span class="code-color-main">?&gt;</span>
+                    </code>
+                </div>
+            </div>
+        </section>
+        <section class="main-body two-column ignore-section">
+            <div class="heading-box">
+                <h2 class="main-title">Keywords</h2>
+                <p class="js-note">Be a good kid and play with your string.</p>
+            </div>
+            <div class="column-container">
+                <div class="counted-content left-column">
+                    <p>
+                        <strong>echo()</strong><br>
+                        Echo is a keyword that will output the result or value of whatever is inside of it's
+                        call. It's not really a function, so it can be called without it's brackets. If it is
+                        empty it will output nothing.
+                    </p>
+                    <p>
+                        <strong>print()</strong>
+                        <br>
+                        Print is a very close relative to Echo, it also returns values, but it is actually
+                        function and requires its brackets. When empty it will return a value of 1.
+                    </p>
+                    <p>
+                        <strong>var_dump()</strong>
+                        <br>
+                        var_dump is also a relative to the likes of Print and Echo; it is a function that will
+                        output an object containing the variable types, values, and other properties all at
+                        once. Generally variables are passed into it.
+                    </p>
+                    <p>
+                        <strong>$_POST &amp; $_GET</strong>
+                        <br>
+                        Post and Get are both variables in a sense, that hold the POST and GET requests made
+                        by page forms. Get places all data into the page URL which in many cases can be
+                        unsafe, POST will not do this, and is generally the way to go.
+                    </p>
+                </div>
+                <div class="counted-content right-column">
+                    <p>
+                        <strong>include</strong>
+                        <br>
+                        Include inserts information from another file into the current location so that you
+                        can have separate files with your php.
+                    </p>
+                    <p>
+                        <strong>foreach()</strong>
+                        <br>
+                        foreach is a special kind of function that loops through array values, giving the
+                        current value a local variable that can be used in the function. The syntax for it is
+                        <strong>foreach($originalArray as $singleItem) { //... };</strong>
+                    </p>
+                    <p>
+                        <strong>isset() &amp; empty()</strong>
+                        <br>
+                        isset and empty are two very similar functions. Isset checking if the value has been
+                        set, meaning it is not null or undefined. Empty will check if the variable has a value
+                        of 0, an empty string, or an empty array. Both return either a true or a false boolean
+                        value.
+                    </p>
+                    <p>
+                        <strong>exit() &amp; die()</strong>
+                        <br>
+                        exit and die are two very identical functions. Both will end the current php parsing,
+                        meaning ending the code prematurely and return a value in their function call.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section class="main-body two-column main-section" id="databases-sql">
+            <div class="heading-box">
+                <h2 class="main-title">Databases & SQL</h2>
+                <p class="js-note">Imagine a table, and now imagine a table with columns and rows.</p>
+            </div>
+            <div class="column-container">
+                <div class="counted-content left-column">
+                    <p>
+                        Structured Query Language or SQL, is a query language made for storing, manipulating and
+                        retrieving data
+                        stored in databases.
+                    </p>
+                    <p>
+                        It follows the CRUD model of language, meaning it lets you create, read, update, and
+                        delete data in databases with ease.
+                    </p>
+                    <p>
+                        In addition to that, you can give tables and columns properties. Like creating
+                        connections between tables, sort information, and auto incrementation.
+                    </p>
+                    <p>
+                        It works by stringing together a set of keywords to form a query which then returns a result of
+                        some kind.
+                    </p>
+                    <p>
+                        There are a lot of different keywords with strange syntax which can be reviewed at
+                        <a target="_blank" href="https://www.w3schools.com/sql/sql_ref_keywords.asp"
+                            class="inline-link">
+                            W3's List of SQL Keywords
+                        </a>
+                    </p>
+                    <p>
+                        Data tables look similar to that of a spreadsheet with columns, rows, and a bit extra. Storing
+                        all of the
+                        data in the table rows in their specified column.
+                    </p>
+                </div>
+                <div class="right-column">
+                    <code class="sql-code"><strong><br>CREATE TABLE `wow` (fire int)</strong></code><br>
+                    <p>Table: wow</p>
+                    <table>
+                        <tr>
+                            <th>fire (int)</th>
+                        </tr>
+                        <tr>
+                            <td> </td>
+                        </tr>
+                        <tr>
+                            <td> </td>
+                        </tr>
+                        <tr>
+                            <td> </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <section class="main-body two-column main-section" id="connecting-to-a-database">
+            <div class="heading-box">
+                <h2 class="main-title">Connecting to a Database</h2>
+                <p class="js-note">Paging Mr.Base, Mr.Data Base</p>
+            </div>
+            <div class="column-container">
+                <div class="counted-content left-column">
+                    <h3>Sign In to FTP & Quick Edit PHP</h3>
+                    <p>Using either Cyberduck or Filezilla, go into your public_html and add the blank php file into it.
+                    </p>
+                    <p>In the Cyberduck or Filezilla settings, set Brackets or Visual Studio Code to always be the
+                        default editor.
+                    </p>
+                    <p>Edit all of the files in your code editor through cyberduck, so that when you save it will
+                        automatically get uploaded to the server. Then just view your changes on a regular tab so that
+                        the php has a
+                        chance to run and
+                        render.</p>
+                    <h3>Understanding the Connect.php</h3>
+                    <p>The connect.php provided in the php folder of the blank php folder is the means by which you can
+                        connect to your database and make requests.</p>
+                    <p>With php, you only have to make one request before the page loads, and once the request has been
+                        fulfilled the php (as you know) will vanish.</p>
+                    <p>So the connect.php is an important part to any php file that makes requests, be sure to include
+                        it in the top of every file.</p>
+                </div>
+                <div class="right-column">
+                    <code class="php-code"><br>
+                        <span class="code-color-main">&lt;?php</span><br>
+                        <span class="tab-in">
+                            <span class="code-color-main">$</span>serverName = "phoenix.sheridanc.on.ca"; <span class="js-note">Or whatever server you're using</span><br>
+                            <span class="code-color-main">$</span>username = "JohnSmith"; <span class="js-note">The username for your database profile.</span><br>
+                            <span class="code-color-main">$</span>password = "&bull;&bull;&bull;&bull;&bull;"; <span class="js-note">The password for the databse profile.</span><br>
+                            <span class="code-color-main">$</span>database = "myDatabase"; <span class="js-note">The database name for your database profile.</span><br>
+                            <span class="code-color-main">$</span>conn = <span class="code-color-main">new</span> mysqli(<span class="code-color-main">$serverName</span>, <span class="code-color-main">$username</span>, <span class="code-color-main">$password</span>); <div class="js-note">The actual connection request, it contains all of the information needed to connect to your database.</div><br>
+                            <span class="code-color-main">if</span> (<span class="code-color-main">$conn</span> -> connect_error) {<br>
+                                <span class="tab-in">
+                                    <span class="code-color-main">die</span>("Connection failed: " . <span class="code-color-main">$conn</span> -> connect_error); <div class="js-note">This is incase the connection to the database fails.</div>
+                                </span><br>
+                            }
+                        </span>
+                        <span class="code-color-main">?&gt;</span>
+                    </code>
+                </div>
+            </div>
+        </section>
+        <section class="main-body two-column ignore-section">
+            <div class="heading-box">
+                <h2 class="main-title">Using The Database and The Data</h2>
+                <p class="js-note">Let's GET this bread!🍞</p>
+            </div>
+            <div class="column-container">
+                <div class="counted-content left-column">
+                    <p>
+                        To actually use the database connection and to make requests, you need to use the connection
+                        variable we created in the connect.php to query the database.
+                    </p>
+                    <p>
+                        Be sure to actually have created some data in your database at least to test before making more
+                        complex requests.
+                    </p>
+                    <p>
+                        You can get creative with how php returns and what it returns or sends. You can use forms with a
+                        POST or GET method to retrieve and send data. For more info check this W3Schools explanation
+                        of <a class="inline-link" href="https://www.w3schools.com/php/php_forms.asp">Form Handling</a>
+                    </p>
+                    <p>
+                        PHP print, echo, and die are very important and powerful tools, you can not only return regular
+                        texts but whole tags and even js in a script tag (and it will work!).
+                    </p>
+                </div>
+                <div class="right-column">
+                    <code class="php-code"><br>
+                        <span class="code-color-main">&lt;p&gt;</span> My Name is: <br>
+                        <span class="tab-in">
+                                <span class="code-color-main">&lt;?php</span><br>
+                                    <span class="tab-in">
+                                        <span class='code-color-main'>echo </span>(<span class='code-color-main'>$conn</span> -> query("<span class='code-color-second'>SELECT</span> username <span class='code-color-second'>FROM</span> User <span class='code-color-second'>WHERE</span> userId = '".$userId."';"));
+                                    </span>
+                                <span class="code-color-main">?&gt;</span>
+                            </span><br>
+                        <span class="code-color-main">&lt;/p&gt;</span><br>
+                    </code>
+                </div>
+            </div>
+        </section>
+        <section class="main-body single-column main-section" id="help">
+            <div class="heading-box">
+                <h2 class="main-title">Help &amp; Troubleshooting</h2>
+                <p class="js-note">HELP! MY TABLES HAVE TURNED AND TRUNCATED!</p>
+            </div>
+            <div class="counted-content">
+                <p>Be sure that you have the right kind of data in your tables! And that your column data types are
+                    correct with what you are providing.
+                </p>
+                <p>Be sure to use consistent naming structures when creating both tables, variables and more!</p>
+                <p>Always test data using smaller requests to be sure that your queries and requests are working
+                    properly.
+                </p>
+                <p>Check the syntax of your php, like the . or using that you're properly using the -> top reference
+                    functions inside of objects.
+                </p>
+                <p>Always test queries in your database before making larger scale or even code test requests, just to
+                    be sure that your table is structured properly.
+                </p>
+                <p>Check with a die or an exit to be sure that your code is properly exiting at the right location.</p>
+                <p>The occasional var_dump helps to check what kind of data you are working with and if it is the right
+                    kind of data.
+                </p>
+                <p>
+                    If you are using the foreach function, make sure you are using it correctly and are receiving the
+                    correct data result
+                    from it.
+                </p>
+            </div>
+        </section>
+        <section class="main-body single-column main-section" id="tips">
+            <div class="heading-box">
+                <h2 class="main-title">Tips</h2>
+                <p class="js-note">For all you cool kids 😎</p>
+            </div>
+            <div class="counted-content">
+                <p>Draw and plan out larger scale databases to ensure that everything is properly flowing BEFORE coding.
+                </p>
+                <p>Use features like auto incrementation, column and table relationships, keys, and sorting in your
+                    database!
+                </p>
+                <p>PHP can return a script tag with JS in it so you can essentially create a dataflow into your JS to
+                    make information dynamic if you need it
+                </p>
+                <p>
+                    Be sure to take advantage of more advanced database systems like MongoDB, that relies on JS API
+                    requests which are easier to manage!
+                </p>
+                <p>
+                    Keep any variables that you're going to be constantly using in a separate PHP file that you
+                    "include" in each file you need the variables.
+                </p>
+                <p>
+                    This is less of a tip and more of a suggestion, STYLE THE DATA YOU GET!! DON'T JUST MAKE AN UGLY
+                    TABLE!
+                </p>
+            </div>
+        </section>
+        <section class="main-body ignore-section" id="final-section">
+            <h1 class="main-title">That's all for now!</h1>
+            <p class="subtitle-two left-space">
+                Be sure to contact me if you have any questions or concerns
+                <i class="far fa-sparkles"></i>
+            </p>
+        </section>
+    </div>
+    <script>
+        const currentSection = {
+            element: null,
+            index: null,
+            menuPosition: null,
+        };
+        let scrollingTo;
+        let isScrolling = false;
+        const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+        const mainMenuList = document.querySelector('#main-menu-list');
+        const isMobile = window.innerWidth < 40 * rem;
+        const sections = [].slice.call(document.getElementsByTagName('section'));
+        const mainSections = [].slice.call(document.getElementsByClassName('main-section'));
+        const titles = [].slice.call(document.getElementsByClassName('main-title'));
+        const menuItems = [].slice.call(document.getElementsByClassName('menu-item'));
+        const fen = document.getElementById('floating-enter-notification');
+
+        if (window.innerHeight < parseFloat(getComputedStyle(mainMenuList).height)) {
+            mainMenuList.style.height = '100%';
+            mainMenuList.style.overflowY = 'scroll';
+            mainMenuList.style.overflowX = 'hidden';
+        }
+
+        function handleTarget(event) {
+            const menuChildren = document.querySelector('#main-menu-list').children;
+            let selections;
+
+            Array.prototype.forEach.call(menuChildren, child => {
+                if (event.target === child) {
+                    selections = event.target;
+                } else if (event.target.parentElement === child) {
+                    selections = event.target.parentElement;
+                }
+            });
+
+            return selections;
+        }
+
+        function unselectAll(selected) {
+            selected.children[1].classList.toggle('selected-title');
+            selected.children[1].classList.toggle('unselected-title');
+            selected.children[0].classList.toggle('selected-icon');
+            selected.children[0].classList.toggle('unselected-icon');
+            selected.classList.toggle('unselected');
+            selected.classList.toggle('selected');
+        }
+
+        function handleSelection(targetElement) {
+            const currentSelection = document.getElementsByClassName('selected');
+
+            if (currentSelection.length === 0) {
+                targetElement.classList.toggle('unselected');
+                targetElement.classList.toggle('selected');
+                targetElement.children[1].classList.toggle('selected-title');
+                targetElement.children[1].classList.toggle('unselected-title');
+                targetElement.children[0].classList.toggle('unselected-icon');
+                targetElement.children[0].classList.toggle('selected-icon');
+            } else if (currentSelection.length >= 0) {
+                unselectAll(currentSelection[0]);
+                targetElement.classList.toggle('unselected');
+                targetElement.classList.toggle('selected');
+                targetElement.children[1].classList.toggle('selected-title');
+                targetElement.children[1].classList.toggle('unselected-title');
+                targetElement.children[0].classList.toggle('unselected-icon');
+                targetElement.children[0].classList.toggle('selected-icon');
+            }
+        }
+
+        function scrollToTarget(target, behavior, block, inline) {
+            isScrolling = true;
+            scrollingTo = target;
+
+            target.scrollIntoView({
+                behavior,
+                block,
+                inline,
+            });
+        }
+
+        function scrollToSection(which) {
+            if (sections[currentSection.index + which]) {
+                scrollToTarget(sections[currentSection.index + which], 'smooth', 'start', 'nearest');
+            } else {
+                scrollToTarget(sections[0], 'smooth', 'start', 'nearest');
+            }
+        }
+
+        function cleanUpHTML(target) {
+            let newTarget = target;
+
+            newTarget = newTarget.replace('&amp;', '');
+            newTarget = newTarget.toLowerCase();
+            newTarget = newTarget.replace(/\s/gm, '-');
+            newTarget = newTarget.replace('--', '-');
+
+            return newTarget;
+        }
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.intersectionRatio > 0) {
+                    const thisSection = entry.target.closest('section');
+                    const fen = document.getElementById('floating-enter-notification');
+
+                    currentSection.element = thisSection;
+                    currentSection.index = sections.indexOf(thisSection);
+                    currentSection.menuPosition = mainSections.indexOf(thisSection);
+
+                    if (isScrolling && scrollingTo === thisSection) {
+                        isScrolling = false;
+                    }
+
+                    if (!thisSection.classList.contains('ignore-section') && !isScrolling) {
+                        handleSelection(menuItems[currentSection.menuPosition]);
+                    }
+
+                    if (isMobile && !isScrolling && menuItems[currentSection.menuPosition]) {
+                        const menuTarget = menuItems[currentSection.menuPosition];
+
+                        setTimeout(() => {
+                            menuTarget.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'center',
+                                inline: 'center',
+                            });
+                        }, 500);
+                    }
+
+                    if (currentSection.index === 0) {
+                        fen.innerHTML = "Press Enter to<br>continue <i class='fal fa-arrow-square-right'></i>";
+                        fen.style.opacity = 1;
+                    } else {
+                        fen.innerHTML = "Next <i class='fal fa-arrow-square-right'></i>";
+                        fen.style.opacity = 0.5;
+                    }
+                }
+            });
+        });
+
+        titles.forEach(title => {
+            observer.observe(title);
+        });
+
+        function handleKeyPress(event) {
+            if ((event.key === 'Enter' || event.which === 13 || event.code === 'Enter') || (event.key === 'ArrowRight' || event.which === 39 || event.code === 'ArrowRight')) {
+                event.preventDefault();
+                const selected = handleTarget(event);
+
+                if (selected) {
+                    let target = selected.children[1].innerHTML;
+                    target = cleanUpHTML(target);
+                    scrollToTarget(document.getElementById(target), 'smooth', 'start', 'nearest');
+                    handleSelection(selected);
+                } else {
+                    scrollToSection(+1);
+                }
+            } else if ((event.key === 'Backspace' || event.which === 8 || event.code === 'Backspace') || (event.key === 'ArrowLeft' || event.which === 37 || event.code === 'ArrowLeft')) {
+                event.preventDefault();
+                scrollToSection(-1);
+            }
+        }
+
+        function handleClick(event) {
+            const selected = handleTarget(event);
+
+            if (selected !== undefined) {
+                let target = selected.children[1].innerHTML;
+                target = cleanUpHTML(target);
+                scrollToTarget(document.getElementById(target), 'smooth', 'start', 'nearest');
+                handleSelection(selected);
+            }
+        }
+
+        document.querySelector('#main-menu-list').addEventListener('click', handleClick);
+        fen.addEventListener('click', function () {
+            scrollToSection(+1);
+            event.preventDefault();
+
+        });
+        window.addEventListener('keydown', handleKeyPress);
+    </script>
+</body>
+
+</html>

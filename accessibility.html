@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<!--Code is property of JuanJose Bastida and jjdesign.space, 2019.-->
+
+<head>
+    <!--META STUFF-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--FAVICON-->
+    <link rel="shortcut icon" href="../images/icons/favicon.ico" type="../images/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icons/apple-touch-icon.png">
+    <link rel="icon" type="../images/png" sizes="32x32" href="../images/icons/apple-touch-icon.png">
+    <link rel="icon" type="../images/png" sizes="192x192" href="../images/icons/android-chrome-192x192.png">
+    <link rel="icon" type="../images/png" sizes="256x256" href="../images/icons/android-chrome-256x256.png">
+    <link rel="mask-icon" href="../images/icons/safari-pinned-tab.svg" color="#406eeb">
+    <meta name="apple-mobile-web-app-title" content="JJ Design Space">
+    <meta name="application-name" content="JJ Design Space">
+    <meta name="msapplication-TileColor" content="#406eeb">
+    <meta name="theme-color" content="#406eeb">
+    <meta property="og:image:width" content="1852">
+    <meta property="og:image:height" content="970">
+    <meta property="og:title" content="JJ Design Space">
+    <meta property="og:description"
+        content="This is a portfolio site for JuanJose (JJ) Bastida, showcasing his Interaction Design works. Showing the usage of graphic design, interaction design, and coding skills.">
+    <meta property="og:url" content="jjdesign.space">
+    <meta property="og:image" content="../images/icons/og-image.jpg">
+    <meta name="description"
+        content="This is a portfolio site for JuanJose (JJ) Bastida, showcasing his Interaction Design works. Showing the usage of graphic design, interaction design, and coding skills.">
+    <meta name="google-site-verification" content="lKr7fSiQy1zcJBnhc-0eXUjRWM5udVxFH1ZyrujR-hU" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113867348-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'UA-113867348-1');
+    </script>
+    <title>JJ Bastida Design - Accessibility</title>
+    <!--STYLING-->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-Bx4pytHkyTDy3aJKjGkGoHPt3tvv6zlwwjc3iqN7ktaiEMLDPqLSZYts2OjKcBx1" crossorigin="anonymous">
+    <script src="../js/widowtamer.js"></script>
+    <!--FONTS-->
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i|Source+Serif+Pro:400,600,700"
+        rel="stylesheet">
+    <!--JQUERY-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <!--NAVIGATION-->
+    <nav id="regularNav" class="regColor">
+        <ul id="menuOptions" alt=""> <a href="/" alt="Go to Homepage" title="Go to Homepage" class="tab"
+                tabindex="1"><span class="tabContent" tabindex="-1"><img id="juanjose" src="../images/juanjose.svg"
+                        alt="Go to Homepage"> <span class="cssHide">Home</span></span></a>
+            <li class="dropdown dropHover" class="tab" tabindex="2"><span class="tabContent" tabindex="-1"
+                    aria-label="A dropdown containing projects"><span>works </span><i
+                        class="fas fa-caret-down"></i></span>
+                <ul>
+                    <li><a title="View this project." tabindex="3" class="tab" href="/shoreline-mayhem"><span
+                                class="tabContent" tabindex="-1">Shoreline
+                                Mayhem</span></a></li>
+                    <li><a title="View this project." tabindex="4" class="tab" href="/alto"><span class="tabContent"
+                                tabindex="-1">Alto</span></a></li>
+                    <li><a title="View this project." tabindex="5" class="tab" href="/endless-moji"><span
+                                class="tabContent" tabindex="-1">Endless Moji</span></a></li>
+                </ul>
+            </li>
+            <li id="about"><a href="/about" tabindex="6" class="tab" title="Learn more about me."><span
+                        class="tabContent regBorder" tabindex="-1">about me</span></a></li>
+            <li id="contactM"><a title="Contact me for any questions." href="/contact" tabindex="7" class="tab"><span
+                        class="tabContent" tabindex="-1">contact</span></a></li>
+            <li id="moreM" class="dropdown more dropHover" tabindex="8" class="tab"><span
+                    class="tabContent here regBorder" tabindex="-1">more <i class="fas fa-caret-down"></i></span>
+                <ul>
+                    <li id="aboutMobile">
+                        <a tabindex="9" href="/about" class="tab"><span class="tabContent" tabindex="-1">about
+                                me</span></a></li>
+                    <li><a tabindex="10" class="tab" href="/accessibility">
+                            <span class="tabContent" tabindex="-1">accessibility</span></a></li>
+                    <li><a tabindex="11" class="tab" href="/language"><span class="tabContent"
+                                tabindex="-1">language</span></a></li>
+
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div class="topFix"></div>
+    <div class="sectionedOne mainer">
+        <div class="abouter">
+            <h1 class="access">Accessibility</h1>
+            <p class="topSpace wide">This website was designed to be inclusive and allow anyone to enjoy my web
+                experience. <span>If your needs are not being met please contact me at</span> <a
+                    class="textLink regColor tab" target="_top" href="mailto:jj.bastida@outlook.com"
+                    title="Send me an email." aria-label="Send me an email to jj dot bastida at outlook dot com"
+                    tabindex="13"><span class="tabContent" tabindex="-1">jj.bastida@outlook.com</span></a></p>
+            <br>
+        </div>
+        <div class="buttonArea">
+            <h3>Font </h3> <span class="accButtonHolder">
+                <span class="tab buttonStyle filled longButton" id="reg" tabindex="14"><span class="tabContent"
+                        tabindex="-1">Default</span></span> <span class="tab buttonStyle filled longButton" id="dys"
+                    tabindex="15"><span class="tabContent" tabindex="-1">Dyslexic Friendly</span></span> <span
+                    class="tab buttonStyle filled longButton" id="clr" tabindex="16"><span class="tabContent"
+                        tabindex="-1">Clear Type</span></span>
+                <!--<span class="buttonStyle filled longButton" id="comic">Comic Sans</span>--></span>
+        </div>
+        <div class="buttonArea">
+            <h3>Font Size</h3><span class="accButtonHolder">
+                <span class="buttonStyle filled longButton tab" id="smaller" tabindex="17"><span class="tabContent"
+                        tabindex="-1">smaller –</span></span> <span class="buttonStyle filled longButton tab"
+                    id="bigger" tabindex="18"><span class="tabContent" tabindex="-1">bigger +</span></span>
+            </span>
+        </div>
+        <div class="buttonArea">
+            <h3>Colour</h3><span class="accButtonHolder">
+                <span class="tab buttonStyle filled longButton" id="defaultC" tabindex="19"><span class="tabContent"
+                        tabindex="-1">Default</span></span> <span class="tab buttonStyle filled longButton" id="gS"
+                    tabindex="20"><span class="tabContent" tabindex="-1">Grayscale</span></span> <span
+                    class="tab buttonStyle filled longButton" id="iC" tabindex="21"><span class="tabContent"
+                        tabindex="-1">Improved Contrast</span></span>
+            </span>
+        </div>
+    </div>
+    <script src="../js/script.js"></script>
+    <script>
+        var clicVal = 0;
+        document.getElementById("dys").addEventListener("mousedown", function (e) {
+            dys(e);
+        });
+        document.getElementById("dys").addEventListener("keydown", function (e) {
+            if (document.activeElement === document.getElementById("dys") && e.keyCode == 13) {
+                dys(e);
+            };
+        });
+        document.getElementById("clr").addEventListener("mousedown", function (e) {
+            clr(e);
+        });
+        document.getElementById("clr").addEventListener("keydown", function (e) {
+            if (document.activeElement === document.getElementById("clr") && e.keyCode == 13) {
+                clr(e);
+            };
+        });
+        document.getElementById("reg").addEventListener("mousedown", function (e) {
+            reg(e);
+        });
+        document.getElementById("reg").addEventListener("keydown", function (e) {
+            if (document.activeElement === document.getElementById("reg") && e.keyCode == 13) {
+                reg(e);
+            };
+        });
+        document.getElementById("smaller").addEventListener("mousedown", function (e) {
+            smaller(e);
+        });
+        document.getElementById("smaller").addEventListener("keydown", function (e) {
+            if (document.activeElement === document.getElementById("smaller") && e.keyCode == 13) {
+                smaller(e);
+            };
+        });
+        document.getElementById("bigger").addEventListener("mousedown", function (e) {
+            bigger(e);
+        });
+        document.getElementById("bigger").addEventListener("keydown", function (e) {
+            if (document.activeElement === document.getElementById("bigger") && e.keyCode == 13) {
+                bigger(e);
+            };
+        });
+        document.getElementById("defaultC").addEventListener("mousedown", function (e) {
+            defaultC(e);
+        });
+        document.getElementById("defaultC").addEventListener("keydown", function (e) {
+            if (document.activeElement === document.getElementById("defaultC") && e.keyCode == 13) {
+                defaultC(e);
+            };
+        });
+        document.getElementById("gS").addEventListener("mousedown", function (e) {
+            gS(e);
+        });
+        document.getElementById("gS").addEventListener("keydown", function (e) {
+            if (document.activeElement === document.getElementById("gS") && e.keyCode == 13) {
+                gS(e);
+            };
+        });
+        document.getElementById("iC").addEventListener("mousedown", function (e) {
+            iC(e);
+        });
+        document.getElementById("iC").addEventListener("keydown", function (e) {
+            if (document.activeElement === document.getElementById("iC") && e.keyCode == 13) {
+                iC(e);
+            };
+        });
+
+        function smaller(e) {
+            e.stopImmediatePropagation();
+            e.preventDefault();
+            if (parseFloat(getCookie("fontSize")) >= 0.7) {
+                var addVal = parseFloat(getCookie("fontSize"));
+                addVal -= .1;
+                setCookie("fontSize", addVal);
+                document.body.style.fontSize = getCookie("fontSize") + "rem";
+            };
+        };
+        function bigger(e) {
+            e.stopImmediatePropagation();
+            e.preventDefault();
+            if (parseFloat(getCookie("fontSize")) <= 1.8) {
+                var addVal = parseFloat(getCookie("fontSize"));
+                addVal += .1;
+                setCookie("fontSize", addVal);
+                document.body.style.fontSize = getCookie("fontSize") + "rem";
+            };
+        };
+        function defaultC(e) {
+            e.stopImmediatePropagation();
+            e.preventDefault();
+            if (getCookie("colourMode") != "Default") {
+                clearCol();
+                setCookie("colourMode", "Default");
+            };
+        }
+        function gS(e) {
+            e.stopImmediatePropagation();
+            e.preventDefault();
+            if (getCookie("colourMode") != "Grayscale") {
+                clearCol();
+                setCookie("colourMode", "Grayscale");
+                for (i = 0; i < document.getElementsByClassName("regColor").length; i++) {
+                    document.getElementsByClassName("regColor")[i].classList.add("bwColor");
+                };
+                for (i = 0; i < document.getElementsByClassName("filled").length; i++) {
+                    document.getElementsByClassName("filled")[i].classList.add("bwFilled");
+                };
+                for (i = 0; i < document.getElementsByClassName("ghost").length; i++) {
+                    document.getElementsByClassName("ghost")[i].classList.add("bwGhost");
+                };
+                for (i = 0; i < document.getElementsByClassName("tabContent").length; i++) {
+                    document.getElementsByClassName("tabContent")[i].classList.add("tabBW");
+                };
+                for (i = 0; i < document.getElementsByTagName("h1").length; i++) {
+                    document.getElementsByTagName("h1")[i].classList.add("bwColor");
+                    document.getElementsByTagName("h1")[i].classList.add("bwSelect");
+                };
+                for (i = 0; i < document.getElementsByTagName("h2").length; i++) {
+                    document.getElementsByTagName("h2")[i].classList.add("bwColor");
+                    document.getElementsByTagName("h2")[i].classList.add("bwSelect");
+                };
+                for (i = 0; i < document.getElementsByTagName("h3").length; i++) {
+                    document.getElementsByTagName("h3")[i].classList.add("bwColor");
+                    document.getElementsByTagName("h3")[i].classList.add("bwSelect");
+                };
+                for (i = 0; i < document.getElementsByTagName("h4").length; i++) {
+                    document.getElementsByTagName("h4")[i].classList.add("bwColor");
+                    document.getElementsByTagName("h4")[i].classList.add("bwSelect");
+                };
+                for (i = 0; i < document.getElementsByTagName("h5").length; i++) {
+                    document.getElementsByTagName("h5")[i].classList.add("bwColor");
+                    document.getElementsByTagName("h5")[i].classList.add("bwSelect");
+                };
+                for (i = 0; i < document.getElementsByTagName("p").length; i++) {
+                    document.getElementsByTagName("p")[i].classList.add("bwSelect");
+                };
+                for (i = 0; i < document.getElementsByTagName("span").length; i++) {
+                    document.getElementsByTagName("span")[i].classList.add("bwSelect");
+                };
+                for (i = 0; i < document.getElementsByTagName("img").length; i++) {
+                    document.getElementsByTagName("img")[i].classList.add("bwImageGrey");
+                };
+                for (i = 0; i < document.getElementsByClassName("dropHover").length; i++) {
+                    document.getElementsByClassName("dropHover")[i].classList.add("bwDropHover");
+                };
+                for (i = 0; i < document.getElementsByClassName("textLink").length; i++) {
+                    document.getElementsByClassName("textLink")[i].classList.add("bwTextLink");
+                };
+                for (i = 0; i < document.getElementById("menuOptions").children.length; i++) {
+                    document.getElementById("menuOptions").children[i].children[0].children[0].classList.add("bwMenuHover")
+                };
+                document.getElementById("juanjose").classList.remove("bwImageGrey");
+                document.getElementById("juanjose").classList.add("bwImageBlack");
+                document.getElementsByClassName("here")[0].classList.add("bwBorder");
+            };
+        }; function iC(e) {
+            e.stopImmediatePropagation();
+            e.preventDefault();
+            if (getCookie("colourMode") != "ImprovedContrast") {
+                clearCol();
+                setCookie("colourMode", "ImprovedContrast");
+                for (i = 0; i < document.getElementsByClassName("regColor").length; i++) {
+                    document.getElementsByClassName("regColor")[i].classList.add("hcColor");
+                };
+                for (i = 0; i < document.getElementsByClassName("filled").length; i++) {
+                    document.getElementsByClassName("filled")[i].classList.add("hcFilled");
+                };
+                for (i = 0; i < document.getElementsByClassName("ghost").length; i++) {
+                    document.getElementsByClassName("ghost")[i].classList.add("hcGhost");
+                };
+                for (i = 0; i < document.getElementsByClassName("tabContent").length; i++) {
+                    document.getElementsByClassName("tabContent")[i].classList.add("tabHC");
+                };
+                for (i = 0; i < document.getElementsByTagName("h1").length; i++) {
+                    document.getElementsByTagName("h1")[i].classList.add("hcTitle");
+                    document.getElementsByTagName("h1")[i].classList.add("hcSelect");
+                };
+                for (i = 0; i < document.getElementsByTagName("h2").length; i++) {
+                    document.getElementsByTagName("h2")[i].classList.add("hcTitle");
+                    document.getElementsByTagName("h2")[i].classList.add("hcSelect");
+                };
+                for (i = 0; i < document.getElementsByTagName("h3").length; i++) {
+                    document.getElementsByTagName("h3")[i].classList.add("hcTitle");
+                    document.getElementsByTagName("h3")[i].classList.add("hcSubTitle");
+                    document.getElementsByTagName("h3")[i].classList.add("hcSelect");
+                };
+                for (i = 0; i < document.getElementsByTagName("h4").length; i++) {
+                    document.getElementsByTagName("h4")[i].classList.add("hcTitle");
+                    document.getElementsByTagName("h4")[i].classList.add("hcSelect");
+                };
+                for (i = 0; i < document.getElementsByTagName("h5").length; i++) {
+                    document.getElementsByTagName("h5")[i].classList.add("hcTitle");
+                    document.getElementsByTagName("h5")[i].classList.add("hcSelect");
+                };
+                for (i = 0; i < document.getElementsByClassName("hcTitle").length; i++) {
+                    document.getElementsByClassName("hcTitle")[i].setAttribute("data-shadow-title", document.getElementsByClassName("hcTitle")[i].innerText);
+                };
+                for (i = 0; i < document.getElementsByTagName("p").length; i++) {
+                    document.getElementsByTagName("p")[i].classList.add("hcColor");
+                    document.getElementsByTagName("p")[i].classList.add("hcSelect");
+                };
+                for (i = 0; i < document.getElementsByTagName("span").length; i++) {
+                    document.getElementsByTagName("span")[i].classList.add("hcSelect");
+                };
+                for (i = 0; i < document.getElementsByClassName("dropHover").length; i++) {
+                    document.getElementsByClassName("dropHover")[i].classList.add("hcDropHover");
+                };
+                for (i = 0; i < document.getElementsByClassName("textLink").length; i++) {
+                    document.getElementsByClassName("textLink")[i].classList.add("hcTextLink");
+                };
+                for (i = 0; i < document.getElementById("menuOptions").children.length; i++) {
+                    document.getElementById("menuOptions").children[i].children[0].children[0].classList.add("hcMenuHover")
+                };
+                document.getElementsByClassName("here")[0].classList.add("hcBorder");
+            };
+        };
+
+        function reg(e) {
+            e.stopImmediatePropagation();
+            e.preventDefault();
+            if (getCookie("font") == "Dyslexic") {
+                clearFont();
+            }
+            else if (getCookie("font") == "Clear") {
+                clearFont();
+            }
+        }
+
+        function dys(e) {
+            e.stopImmediatePropagation();
+            e.preventDefault();
+            if (getCookie("font") != "Dyslexic") {
+                clearFont();
+                setCookie("font", "Dyslexic");
+                document.body.classList.add("dysl");
+                document.getElementsByTagName("nav")[0].classList.add("dysl");
+                for (i = 0; i < document.getElementsByTagName("p").length; i++) {
+                    document.getElementsByTagName("p")[i].classList.add("dysl");
+                };
+                for (i = 0; i < document.getElementsByClassName("buttonStyle").length; i++) {
+                    document.getElementsByClassName("buttonStyle")[i].classList.add("dysl");
+                };
+                for (i = 0; i < document.getElementsByTagName("h1").length; i++) {
+                    document.getElementsByTagName("h1")[i].classList.add("dysLine")
+                };
+                for (i = 0; i < document.getElementsByTagName("h3").length; i++) {
+                    document.getElementsByTagName("h3")[i].classList.add("dysLine");
+                };
+            };
+        }
+
+        function clr(e) {
+            e.stopImmediatePropagation();
+            e.preventDefault();
+            if (getCookie("font") != "Clear") {
+                clearFont();
+                setCookie("font", "Clear");
+                document.body.classList.add("clear");
+                document.getElementsByTagName("nav")[0].classList.add("clear");
+                for (i = 0; i < document.getElementsByTagName("p").length; i++) {
+                    document.getElementsByTagName("p")[i].classList.add("clear");
+                };
+                for (i = 0; i < document.getElementsByClassName("buttonStyle").length; i++) {
+                    document.getElementsByClassName("buttonStyle")[i].classList.add("clear");
+                };
+                for (i = 0; i < document.getElementsByClassName("dropdown").length; i++) {
+                    for (h = 0; h < document.getElementsByClassName("dropdown")[i].children[1].children.length; h++) {
+                        document.getElementsByClassName("dropdown")[i].children[1].children[h].children[0].children[0].classList.add("clear");
+                    };
+                };
+                for (i = 0; i < document.getElementsByTagName("h1").length; i++) {
+                    document.getElementsByTagName("h1")[i].classList.add("dysLine")
+                };
+                for (i = 0; i < document.getElementsByTagName("h3").length; i++) {
+                    document.getElementsByTagName("h3")[i].classList.add("dysLine");
+                };
+                for (i = 0; i < document.getElementsByTagName("h3").length; i++) {
+                    document.getElementsByTagName("h3")[i].classList.add("dysLine");
+                };
+            };
+        }
+
+        function clearFont() {
+            if (getCookie("font") == "Dyslexic") {
+                setCookie("font", "Default");
+                var bodyLength = document.getElementsByClassName("dysl").length;
+                var dysLineLength = document.getElementsByClassName("dysLine").length;
+                for (i = 0; i < bodyLength; i++) {
+                    document.getElementsByClassName("dysl")[0].classList.remove("dysl");
+                };
+                for (i = 0; i < dysLineLength; i++) {
+                    document.getElementsByClassName("dysLine")[0].classList.remove("dysLine");
+                };
+            }
+            else if (getCookie("font") == "Clear") {
+                setCookie("font", "Default");
+                var bodyLength = document.getElementsByClassName("clear").length;
+                var dysLineLength = document.getElementsByClassName("dysLine").length;
+                for (i = 0; i < bodyLength; i++) {
+                    document.getElementsByClassName("clear")[0].classList.remove("clear");
+                };
+                for (i = 0; i < dysLineLength; i++) {
+                    document.getElementsByClassName("dysLine")[0].classList.remove("dysLine");
+                };
+            };
+        }
+
+        function clearCol() {
+            if (getCookie("colourMode") == "Grayscale") {
+                //BW CLEAR
+                var bwCLength = document.getElementsByClassName("bwColor").length;
+                var tabBwLength = document.getElementsByClassName("tabBw").length;
+                var bwImageLength = document.getElementsByClassName("bwImageBlack").length;
+                var bwGreyImageLength = document.getElementsByClassName("bwImageGrey").length;
+                var bwBGLength = document.getElementsByClassName("bwBG").length;
+                var bwBorderLength = document.getElementsByClassName("bwBorder").length;
+                var bwFillLength = document.getElementsByClassName("bwFilled").length;
+                var bwGhostLength = document.getElementsByClassName("bwGhost").length;
+                var bwDropHLength = document.getElementsByClassName("bwDropHover").length;
+                var bwSelectLength = document.getElementsByClassName("bwSelect").length;
+                var bwTextLinkLength = document.getElementsByClassName("bwTextLink").length;
+                for (i = 0; i < bwCLength; i++) {
+                    document.getElementsByClassName("bwColor")[0].classList.remove("bwColor")
+                };
+                for (i = 0; i < tabBwLength; i++) {
+                    document.getElementsByClassName("tabBw")[0].classList.remove("tabBw")
+                };
+                for (i = 0; i < bwImageLength; i++) {
+                    document.getElementsByClassName("bwImageBlack")[0].classList.remove("bwImageBlack")
+                };
+                for (i = 0; i < bwGreyImageLength; i++) {
+                    document.getElementsByClassName("bwImageGrey")[0].classList.remove("bwImageGrey")
+                };
+                for (i = 0; i < bwBGLength; i++) {
+                    document.getElementsByClassName("bwBG")[0].classList.remove("bwBG")
+                };
+                for (i = 0; i < bwBorderLength; i++) {
+                    document.getElementsByClassName("bwBorder")[0].classList.remove("bwBorder")
+                };
+                for (i = 0; i < bwFillLength; i++) {
+                    document.getElementsByClassName("bwFilled")[0].classList.remove("bwFilled")
+                };
+                for (i = 0; i < bwGhostLength; i++) {
+                    document.getElementsByClassName("bwGhost")[0].classList.remove("bwGhost")
+                };
+                for (i = 0; i < bwDropHLength; i++) {
+                    document.getElementsByClassName("bwDropHover")[0].classList.remove("bwDropHover")
+                };
+                for (i = 0; i < bwSelectLength; i++) {
+                    document.getElementsByClassName("bwSelect")[0].classList.remove("bwSelect")
+                };
+                for (i = 0; i < bwTextLinkLength; i++) {
+                    document.getElementsByClassName("bwTextLink")[0].classList.remove("bwTextLink")
+                };
+            }
+            else if (getCookie("colourMode") == "ImprovedContrast") {
+                //HC CLEAR
+                var hcCLength = document.getElementsByClassName("hcColor").length;
+                var hcBorderLength = document.getElementsByClassName("hcBorder").length;
+                var hcTitleLength = document.getElementsByClassName("hcTitle").length;
+                var hcSTLength = document.getElementsByClassName("hcSubTitle").length;
+                var tabBwLength = document.getElementsByClassName("tabHC").length;
+                var hcbwFillLength = document.getElementsByClassName("hcFilled").length;
+                var hcGhostLength = document.getElementsByClassName("hcGhost").length;
+                var hcDropHLength = document.getElementsByClassName("hcDropHover").length;
+                var hcSelectLength = document.getElementsByClassName("hcSelect").length;
+                var hcTextLinkLength = document.getElementsByClassName("hcTextLink").length;
+                var hcMenuHover = document.getElementsByClassName("hcMenuHover").length;
+
+                for (i = 0; i < hcCLength; i++) {
+                    document.getElementsByClassName("hcColor")[0].classList.remove("hcColor");
+                };
+                for (i = 0; i < hcBorderLength; i++) {
+                    document.getElementsByClassName("hcBorder")[0].classList.remove("hcBorder");
+                };
+                for (i = 0; i < hcTitleLength; i++) {
+                    document.getElementsByClassName("hcTitle")[0].classList.remove("hcTitle");
+                };
+                for (i = 0; i < hcSTLength; i++) {
+                    document.getElementsByClassName("hcSubTitle")[0].classList.remove("hcSubTitle");
+                };
+                for (i = 0; i < tabBwLength; i++) {
+                    document.getElementsByClassName("tabHC")[0].classList.remove("tabHC");
+                };
+                for (i = 0; i < hcbwFillLength; i++) {
+                    document.getElementsByClassName("hcFilled")[0].classList.remove("hcFilled");
+                };
+                for (i = 0; i < hcGhostLength; i++) {
+                    document.getElementsByClassName("hcGhost")[0].classList.remove("hcGhost");
+                };
+                for (i = 0; i < hcDropHLength; i++) {
+                    document.getElementsByClassName("hcDropHover")[0].classList.remove("hcDropHover");
+                };
+                for (i = 0; i < hcSelectLength; i++) {
+                    document.getElementsByClassName("hcSelect")[0].classList.remove("hcSelect");
+                };
+                for (i = 0; i < hcTextLinkLength; i++) {
+                    document.getElementsByClassName("hcTextLink")[0].classList.remove("hcTextLink");
+                };
+                for (i = 0; i < hcMenuHover; i++) {
+                    document.getElementsByClassName("hcMenuHover")[0].classList.remove("hcMenuHover");
+                };
+            }
+        }
+
+        function setCookie(cname, cvalue) {
+            document.cookie = cname + "=" + cvalue + ";path=/";
+        };
+
+        function getCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        };
+        //              document.getElementById("comic").addEventListener("mousedown", function () {
+        //            clicVal++;
+        //            if (clicVal == 1){
+        //            this.innerHTML = "Ha no..."
+        //            }
+        //            else if (clicVal == 2){
+        //            this.innerHTML = "This wont help you"
+        //            }
+        //            else if (clicVal == 3){
+        //            this.innerHTML = "No, Stop"
+        //            }
+        //            else if (clicVal == 4){
+        //            this.innerHTML = "I refuse"
+        //            }
+        //            else if (clicVal == 5){
+        //            this.innerHTML = "NOPE"
+        //            }
+        //            else if (clicVal == 6){
+        //            this.innerHTML = "You better not"
+        //            }
+        //            else if (clicVal == 7){
+        //            this.innerHTML = "*sigh*"
+        //            }
+        //            else if (clicVal == 8){
+        //            this.innerHTML = "Go to EasterEggs"
+        //            }
+        //            
+        //        })
+    </script>
+</body>
+
+</html>

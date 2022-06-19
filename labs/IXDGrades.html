@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>IXD Grades</title>
+    <link href="https://fonts.googleapis.com/css2?family=Livvic:wght@400;60&display=fallback" rel="stylesheet">
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: Livvic, Helvetica, Arial, sans-serif;
+    }
+
+    html {
+        height: 100%;
+    }
+
+    body {
+        padding: 2rem;
+    }
+
+    body>* {
+        margin-bottom: 1rem;
+    }
+
+    ::selection {
+        background-color: #406EEB;
+        color: #FFFFFF;
+        text-decoration: none;
+    }
+
+    strike {
+        color: #88889F;
+    }
+
+    h1 {
+        font-weight: 600;
+        font-size: 1.9rem;
+        color: #40405A;
+        margin-bottom: .25em;
+    }
+
+    h2 {
+        font-weight: 600;
+        font-size: 1.2rem;
+        color: #40405A;
+        padding-bottom: .2em;
+        line-height: 1.3rem;
+    }
+
+    p {
+        font-weight: 400;
+        font-size: 1rem;
+        line-height: 1.45rem;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td {
+        font-weight: 400;
+        padding: .25em 0
+    }
+
+    tr :nth-child(2) {
+        text-align: right
+    }
+
+    .yearBlock {
+        display: flex;
+        flex-direction: column;
+        width: 25%;
+        padding-right: 2rem;
+        box-sizing: border-box;
+    }
+
+    .yearBlock>*:last-child {
+        margin-top: 1.6rem;
+    }
+
+    .yearContainer {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .headerContainer {
+        display: block;
+        width: 25%;
+
+    }
+
+    .firstYear * {
+        color: #30AA30;
+    }
+
+    .secondYear * {
+        color: #dd7128;
+    }
+
+    .thirdYear * {
+        color: #417FC9;
+    }
+
+    .fourthYear * {
+        color: #DD223D;
+    }
+
+    .plus::after {
+        content: '+';
+        position: absolute;
+        margin-left: 2px;
+    }
+
+    .grade-average {
+        font-weight: 400;
+        font-size: .8em;
+        color: #88889F;
+    }
+
+    @media (max-width: 1399.9px) {
+
+        .yearBlock,
+        .headerContainer {
+            width: 50%;
+        }
+
+        .yearContainer>* {
+            margin-bottom: 2rem;
+        }
+
+        .yearBlock>*:last-child {
+            margin-top: 0;
+        }
+
+        .yearBlock>* {
+            margin-bottom: 1rem;
+        }
+
+    }
+
+    @media (max-width: 959.9px) {
+
+        .yearBlock,
+        .headerContainer {
+            width: 100%;
+        }
+    }
+</style>
+
+<body>
+    <div class="headerContainer">
+        <h1>Interaction Design Grades</h1>
+        <p>
+            These are my marks directly taken from the access sheridan website. For some <strike>fucking</strike> reason
+            their gpa calculations are weird so I'm doing letter marks
+            and percentages.
+        </p><br>
+        <h2 class="grade-average">Overall Average: 83%</h2>
+        <h2 class="grade-average">Final GPA: 3.71</h2>
+    </div>
+    <div class='yearContainer'>
+        <div class="firstYear yearBlock">
+            <div>
+                <h2>Semester One <span class="grade-average">B+</span></h2>
+                <table>
+                    <tr>
+                        <td>Composition &amp; Rhetoric</td>
+                        <td>C</td>
+                    </tr>
+                    <tr>
+                        <td>Conceptual Process 1</td>
+                        <td class="plus">B</td>
+                    </tr>
+                    <tr>
+                        <td>Digital Tools 1</td>
+                        <td class="plus">A</td>
+                    </tr>
+                    <tr>
+                        <td>Design Fundamentals 1</td>
+                        <td>A</td>
+                    </tr>
+                    <tr>
+                        <td>History</td>
+                        <td>A</td>
+                    </tr>
+                    <tr>
+                        <td>Interaction 1</td>
+                        <td>A</td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <div>
+                    <h2>Semester Two <span class="grade-average">A</span></h2>
+                    <table>
+                        <tr>
+                            <td>Conceptual Process 2</td>
+                            <td>A</td>
+                        </tr>
+                        <tr>
+                            <td>Design Fundamentals 2</td>
+                            <td>A</td>
+                        </tr>
+                        <tr>
+                            <td>Digital Tools 2</td>
+                            <td class="plus">A</td>
+                        </tr>
+                        <tr>
+                            <td>Interaction 2</td>
+                            <td>A</td>
+                        </tr>
+                        <tr>
+                            <td>Intro to Creativity</td>
+                            <td>A</td>
+                        </tr>
+                        <tr>
+                            <td>Writing for IXD</td>
+                            <td class="plus">A</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="secondYear yearBlock">
+            <div>
+                <h2>Semester Three <span class="grade-average">83%</span></h2>
+                <table>
+                    <tr>
+                        <td>3D Design</td>
+                        <td>80%</td>
+                    </tr>
+                    <tr>
+                        <td>Creative Problem Solving</td>
+                        <td>82%</td>
+                    </tr>
+                    <tr>
+                        <td>Computational Media</td>
+                        <td>89%</td>
+                    </tr>
+                    <tr>
+                        <td>Design &amp; Systems Thinking</td>
+                        <td>87%</td>
+                    </tr>
+                    <tr>
+                        <td>Research Methods</td>
+                        <td>80%</td>
+                    </tr>
+                    <tr>
+                        <td>Visual Design</td>
+                        <td>84%</td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <h2>Semester Four <span class="grade-average">85%</span></h2>
+                <table>
+                    <tr>
+                        <td>3D Design 2</td>
+                        <td>80%</td>
+                    </tr>
+                    <tr>
+                        <td>Contemporary Problems</td>
+                        <td>87%</td>
+                    </tr>
+                    <tr>
+                        <td>Design &amp; Info Architecture</td>
+                        <td>95%</td>
+                    </tr>
+                    <tr>
+                        <td>Group Dynamics</td>
+                        <td>76%</td>
+                    </tr>
+                    <tr>
+                        <td>Interactive Motion</td>
+                        <td>92%</td>
+                    </tr>
+                    <tr>
+                        <td>Visual Design 2</td>
+                        <td>79%</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="thirdYear yearBlock">
+            <div>
+                <h2>Semester Five <span class="grade-average">82%</span></h2>
+                <table>
+                    <tr>
+                        <td>3D Interactive Objects</td>
+                        <td>78%</td>
+                    </tr>
+                    <tr>
+                        <td>Databases Systems Design</td>
+                        <td>81%</td>
+                    </tr>
+                    <tr>
+                        <td>Modern Europe</td>
+                        <td>82%</td>
+                    </tr>
+                    <tr>
+                        <td>Usability Studies</td>
+                        <td>93%</td>
+                    </tr>
+                    <tr>
+                        <td>Visual Narrative</td>
+                        <td>80%</td>
+                    </tr>
+                    <tr>
+                        <td>Visualizing Information</td>
+                        <td>78%</td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <h2>Semester Six <span class="grade-average">85%</span></h2>
+                <table>
+                    <tr>
+                        <td>Adaptation: Text to Film</td>
+                        <td>88%</td>
+                    </tr>
+                    <tr>
+                        <td>Integrated Systems Design 2</td>
+                        <td>97%</td>
+                    </tr>
+                    <tr>
+                        <td>Interactive Narrative</td>
+                        <td>95%</td>
+                    </tr>
+                    <tr>
+                        <td>Interactive Objects &amp; Environments 2</td>
+                        <td>80%</td>
+                    </tr>
+                    <tr>
+                        <td>Professional Business Practices</td>
+                        <td>82%</td>
+                    </tr>
+                    <tr>
+                        <td>Visualizing Information 2</td>
+                        <td>68%</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="fourthYear yearBlock">
+            <div>
+                <h2>Semester Seven <span class="grade-average">80%</span></h2>
+                <table>
+                    <tr>
+                        <td>Anthropology of Health</td>
+                        <td>73%</td>
+                    </tr>
+                    <tr>
+                        <td>Creative Leadership</td>
+                        <td>89%</td>
+                    </tr>
+                    <tr>
+                        <td>Collaborative Workshop 1</td>
+                        <td>83%</td>
+                    </tr>
+                    <tr>
+                        <td>Interaction Design Studies 1</td>
+                        <td>71%</td>
+                    </tr>
+                    <tr>
+                        <td>Professional Business Practices 2</td>
+                        <td>85%</td>
+                    </tr>
+                    <tr>
+                        <td>Project Management</td>
+                        <td>80%</td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <h2>Semester Eight <span class="grade-average">85%</span></h2>
+                <table>
+                    <tr>
+                        <td>Collaborative Workshop 2</td>
+                        <td>83%</td>
+                    </tr>
+                    <tr>
+                        <td>Computation Studio</td>
+                        <td>90%</td>
+                    </tr>
+                    <tr>
+                        <td>Interaction Design Studies 2</td>
+                        <td>77%</td>
+                    </tr>
+                    <tr>
+                        <td>Portfolio Project</td>
+                        <td>88%</td>
+                    </tr>
+                    <tr>
+                        <td>Understanding Narrative</td>
+                        <td>85%</td>
+                    </tr>
+                    <tr>
+                        <td>World Cinemas</td>
+                        <td>84%</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

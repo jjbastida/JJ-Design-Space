@@ -1,0 +1,1732 @@
+<!DOCTYPE html>
+<!--JuanJose Bastida 2019-->
+<!-- Javascript Workshop V1.1 -->
+<!--These projects were made to be looked into, so if you're reading this that’s great! I tried to keep these to be 'best practice' but that being said please never put all of your CSS and JS in one HTML file, separate them out and if you have multiple pages separate out your files so you only import what you need!-->
+<!--Other than that thank you for reading! Hope it helps, if you have any questions feel free to reach out jj.bastida@outlook.com-->
+<html lang="en-CA">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,700&display=swap" rel="stylesheet" />
+	<script src="https://kit.fontawesome.com/81783a94a9.js" samesite="secure"></script>
+	<title>Teatime With JJ (&amp; some Javascript)</title>
+	<style>
+		:root {
+			--highlighter-main: #fff039;
+			--highlighter-alt: #efd037;
+			--obsidian: #242430;
+			--dusk: #45455b;
+			--pavement: #88889f;
+			--egg-whites: #eaeaea;
+		}
+
+		* {
+			margin: 0;
+			padding: 0;
+			font-family: 'Source Code Pro', 'Ubuntu', monospace;
+		}
+
+		body {
+			counter-reset: code-counter;
+		}
+
+		pre {
+			white-space: break-spaces;
+		}
+
+		nav {
+			height: 100vh;
+			box-sizing: border-box;
+			width: 8rem;
+			position: fixed;
+			background-color: var(--highlighter-main);
+			z-index: 100;
+			overflow-y: auto;
+			overflow-x: hidden;
+		}
+
+		ul {
+			list-style: none;
+		}
+
+		h1 {
+			font-size: 4rem;
+			font-weight: 700;
+			background-color: var(--highlighter-main);
+			padding: 2rem;
+			color: var(--obsidian);
+			max-width: 1080px;
+		}
+
+		h2 {
+			font-size: 2.3rem;
+			font-weight: 700;
+			color: var(--obsidian);
+		}
+
+		h3 {
+			margin-top: 1rem;
+			margin-bottom: .5rem !important;
+			font-size: 1.4rem;
+			font-weight: 700;
+			color: var(--obsidian);
+		}
+
+		h3::before {
+			display: none;
+		}
+
+		strong {
+			font-size: inherit;
+			font-weight: 700;
+			color: inherit;
+		}
+
+		h4 {
+			color: black;
+			color: var(--obsidian);
+			font-size: 0.8rem;
+			text-transform: uppercase;
+			letter-spacing: 0.5px;
+		}
+
+		p {
+			font-size: 1.15rem;
+			line-height: 1.4;
+			font-weight: 400;
+		}
+
+		a {
+			text-decoration: none;
+			color: inherit;
+		}
+
+		.inline-link {
+			color: var(--obsidian);
+			display: inline-block;
+			text-decoration: underline !important;
+			background-color: var(--highlighter-main) !important;
+			padding: 0 0.5em;
+			transition: background-color 0.5s ease;
+			position: relative;
+		}
+
+		.inline-link::before {
+			content: " ";
+			padding: 0 0.5em 0 1em;
+		}
+
+		.inline-link::after {
+			content: "\f019";
+			font-family: "Font Awesome 5 Pro";
+			font-size: 0.65em;
+			padding-left: 1em;
+			position: absolute;
+			top: 1em;
+			left: 0;
+			transform: translateY(-50%) scale(1.3);
+		}
+
+		.inline-link[target="_blank"]::before {
+			padding: 0 0.5em;
+		}
+
+		.inline-link[target="_blank"]::after {
+			content: "\f08e";
+			padding-left: 0.5em;
+			transform: translateY(-50%) scale(1);
+		}
+
+		.inline-link[href^="#"]::after {
+			content: "\f354";
+			transform: translateY(-40%) scale(1.5);
+		}
+
+		.inline-link:hover {
+			background-color: var(--highlighter-alt) !important;
+			padding: 0 0.5em;
+			transition: background-color 0.5s ease;
+		}
+
+		section *::selection {
+			color: white;
+			background: var(--obsidian);
+		}
+
+		pre::before {
+			display: none !important;
+		}
+
+		.not-counted::before {
+			display: none !important;
+		}
+
+		code {
+			display: inline-block;
+			color: white;
+			background-color: var(--obsidian);
+			border-radius: 8px;
+			padding: 2.2rem 1.5em 1.5em;
+			box-sizing: border-box;
+			position: relative;
+			margin: 0.5em 0;
+		}
+
+		code::before {
+			display: block;
+			height: 1.2rem;
+			width: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+			border-top-left-radius: 8px;
+			border-top-right-radius: 8px;
+			padding: 0.5em 0 0.75em;
+			font-weight: 600;
+		}
+
+		code::after {
+			color: white;
+			display: block;
+			width: 100%;
+			position: absolute;
+			box-sizing: border-box;
+			top: 0;
+			left: 0.25rem;
+			padding: 0.5em 0.5em 0;
+			font-weight: 600;
+		}
+
+		.css-code::before {
+			content: '';
+			background-color: #406eeb;
+		}
+
+		.html-code::before {
+			content: '';
+			background-color: #ff4040;
+		}
+
+		.js-code::before {
+			content: '';
+			background-color: #fff039;
+		}
+
+		.js-code::after {
+			color: var(--obsidian);
+		}
+
+		.php-code::before {
+			content: '';
+			background-color: #5332f9;
+		}
+
+		.terminal-code::before {
+			content: '';
+			background-color: #45455b;
+		}
+
+		.css-code::after {
+			content: 'CSS';
+		}
+
+		.html-code::after {
+			content: 'HTML';
+		}
+
+		.js-code::after {
+			content: 'JS';
+		}
+
+		.php-code::after {
+			content: 'PHP';
+		}
+
+		.terminal-code::after {
+			content: 'Terminal';
+		}
+
+		.html-code .code-color-main {
+			color: #ff4040 !important;
+		}
+
+		.css-code .code-color-main {
+			color: #406eeb !important;
+		}
+
+		.js-code .code-color-main {
+			color: #fff039 !important;
+		}
+
+		.php-code .code-color-main {
+			color: #5332f9 !important;
+		}
+
+		.terminal-code .code-color-main {
+			font-weight: 700;
+		}
+
+		.html-note,
+		.css-note,
+		.js-note {
+			font-size: 0.9rem !important;
+			color: var(--pavement) !important;
+		}
+
+		.html-note::before {
+			content: '<!-- ' !important;
+		}
+
+		.html-note::after {
+			content: ' ->' !important;
+		}
+
+		.css-note::before {
+			content: '/* ' !important;
+		}
+
+		.css-note::after {
+			content: ' */' !important;
+		}
+
+		.js-note::before {
+			content: '// ' !important;
+		}
+
+		.subtitle-one {
+			font-size: 1.6rem;
+			line-height: 1.3;
+			padding: 0.5em 0 0;
+		}
+
+		.subtitle-two {
+			font-size: 1.6rem;
+			line-height: 1.3;
+			padding: 0.5em 0 0;
+			color: var(--obsidian);
+		}
+
+		.no-break {
+			word-break: keep-all;
+			white-space: nowrap;
+		}
+
+		.raw {
+			font-size: initial !important;
+			font-family: initial !important;
+			color: initial !important;
+			font-weight: initial !important;
+			padding: initial !important;
+			margin: initial !important;
+			background-color: initial !important;
+			line-height: initial !important;
+		}
+
+		.raw::selection {
+			color: white !important;
+			background-color: blue !important;
+		}
+
+		#main-menu-list {
+			height: auto;
+			width: 100%;
+			display: flex;
+			flex-wrap: nowrap;
+			flex-direction: column;
+			align-content: center;
+			justify-content: flex-start;
+			user-select: none;
+		}
+
+		.menu-item {
+			text-align: center;
+			padding: 1em 0.25em;
+			box-sizing: border-box;
+			cursor: pointer;
+			min-width: 7rem;
+			position: relative;
+		}
+
+		.menu-item::after {
+			content: '';
+			display: block;
+			position: absolute;
+			width: 90%;
+			height: 100%;
+			top: 0;
+			left: 50%;
+			transform: translate(-50%, -1px);
+			border-bottom: 2px var(--obsidian) solid;
+			z-index: 5;
+		}
+
+		.menu-item:focus {
+			outline: 2px solid var(--obsidian);
+			background-color: #FFF688;
+		}
+
+		.main {
+			display: grid;
+			grid-template-columns: [navigation] calc(8rem - 20px) 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+			grid-gap: 20px;
+			max-width: 120rem;
+		}
+
+		.main section {
+			grid-column: 2 / span 11;
+			padding-left: 1rem;
+			min-height: 100vh;
+			padding-top: 1rem;
+		}
+
+		#final-section {
+			grid-column: 2 / span 11 !important;
+			background-color: var(--highlighter-main);
+		}
+
+		.single-column {
+			grid-column: 2 / span 8 !important;
+		}
+
+		.two-column {
+			grid-column: 2 / span 11 !important;
+		}
+
+		.two-column .column-container {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+		}
+
+		.two-column .column-container>div {
+			width: 45%;
+			padding-right: 2.5%;
+		}
+
+		#javascript {
+			grid-column: 2 / span 9;
+			padding-left: 0;
+			padding-top: 11rem;
+		}
+
+		.unselected {
+			color: var(--obsidian);
+		}
+
+		.selected {
+			background-color: var(--obsidian) !important;
+			color: var(--egg-whites) !important;
+			transform: scaleY(1.03) !important;
+		}
+
+		.selected::after {
+			display: none !important;
+		}
+
+		.selected:focus {
+			outline: none;
+		}
+
+		.unselected-title {
+			color: var(--obsidian);
+		}
+
+		.selected-title {
+			background-color: var(--obsidian);
+			color: var(--egg-whites);
+		}
+
+		.fal {
+			vertical-align: middle;
+		}
+
+		.fa-fw {
+			display: block;
+			height: 1em;
+			width: 1em;
+			margin: 0 auto 0.5em;
+			padding: 0.5em;
+			border-radius: 1000px;
+			text-align: center;
+		}
+
+		.fa-code::before {
+			display: block;
+			transform: translateX(-2px);
+		}
+
+		.fa-coffee::before {
+			display: block;
+			transform: translate(-2px, 1px);
+		}
+
+		.fa-brackets-curly::before {
+			display: block;
+			transform: translate(-1px, 1px);
+		}
+
+		.unselected-icon {
+			border: 2px solid var(--obsidian);
+			color: var(--obsidian);
+			transform: scale(0.9);
+			transition: transform ease 0.5s, color ease 0.5s;
+		}
+
+		.selected-icon {
+			background-color: var(--egg-whites);
+			color: var(--obsidian);
+			transition: transform ease 0.5s, color ease 0.5s, border 0.5s ease;
+		}
+
+		.unselected:hover {
+			background-color: var(--highlighter-alt);
+		}
+
+		#floating-enter-notification {
+			position: fixed;
+			font-size: 1rem;
+			bottom: 30px;
+			background-color: rgba(255, 255, 255, 0);
+			right: calc((11vw / 2) - 20px);
+			text-align: left;
+			user-select: none;
+			color: var(--pavement);
+			padding: 1em 1.5em;
+			border-radius: 25px;
+			border: 1px solid black;
+			border-color: var(--pavement);
+			cursor: pointer;
+			transition: opacity 0.7s ease;
+		}
+
+		#floating-enter-notification:hover {
+			background-color: rgba(0, 0, 0, .01);
+		}
+
+		#floating-enter-notification:focus {
+			background-color: rgba(0, 0, 0, .01);
+			outline: none;
+			border-color: #1E4CC1;
+			color: #1E4CC1;
+		}
+
+		#floating-enter-notification:active {
+			background-color: rgba(0, 0, 0, .02);
+			border-color: var(--pavement);
+			color: var(--pavement);
+		}
+
+		.left-space {
+			padding-left: 2rem;
+		}
+
+		.counted-content>* {
+			margin-bottom: 0.8em;
+		}
+
+		.counted-content>h3:first-child {
+			margin-top: -.5rem !important;
+		}
+
+		.counted-content>*::before {
+			counter-increment: code-counter 1;
+			content: counter(code-counter) ' ';
+			font-size: 0.9rem;
+			font-weight: 500;
+			color: var(--pavement);
+		}
+
+		.heading-box {
+			padding-bottom: 1.1rem;
+		}
+
+		.body-list {
+			font-size: 1.15rem;
+			line-height: 1.4;
+		}
+
+		.body-list li {
+			font-size: 1rem;
+			line-height: 1.5;
+			padding: 0 1em 0.8em;
+			list-style: circle;
+			list-style-position: inside;
+		}
+
+		.tab-in {
+			margin: 0.5em 0 0.5em 1.5em;
+			display: inline-block;
+		}
+
+		.stacked-shortcut {
+			position: relative;
+		}
+
+		.stacked-shortcut::before {
+			content: '+';
+			padding: 0 0.5em 0 1.75em;
+		}
+
+		.stacked-shortcut::after {
+			content: 'cmd \A ctrl';
+			display: block;
+			font-size: 0.6em;
+			line-height: 1;
+			white-space: pre-wrap;
+			padding-right: 0.25em;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+
+		@media all and (min-width: 120rem) {
+			.main section {
+				padding-left: 2rem;
+				padding-top: 2rem;
+			}
+		}
+
+		@media all and (max-width: 60rem) {
+			.single-column {
+				grid-column: 2 / span 10 !important;
+			}
+
+			.two-column {
+				grid-column: 2 / span 10 !important;
+			}
+
+			.two-column .column-container>div {
+				width: 100%;
+				padding-right: 0;
+			}
+
+			#floating-enter-notification {
+				display: none;
+			}
+		}
+
+		@media all and (max-width: 40rem) {
+			h1 {
+				font-size: 3rem;
+				padding: 1rem;
+			}
+
+			.subtitle-one {
+				font-size: 1.4rem;
+			}
+
+			.subtitle-two {
+				font-size: 1.4rem;
+			}
+
+			nav {
+				width: 100vw;
+				height: auto;
+				border-bottom: 2px var(--obsidian) solid;
+			}
+
+			#main-menu-list {
+				flex-direction: row;
+				overflow-x: scroll;
+				position: relative;
+			}
+
+			.menu-item {
+				text-align: center;
+				padding: 1em 1.2em;
+				box-sizing: border-box;
+				border-right: 2px var(--obsidian) solid;
+				min-height: 5rem;
+				min-width: 8rem;
+			}
+
+			.menu-item::after {
+				display: none !important;
+			}
+
+			.menu-item-last {
+				border: none;
+				padding-right: 2em;
+			}
+
+			.main {
+				grid-template-columns: 1rem 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1rem;
+				grid-gap: 0;
+			}
+
+			.main section {
+				grid-column: 1 / span 11 !important;
+				padding-top: 9rem;
+			}
+
+			#final-section {
+				grid-column: 1 / span 12 !important;
+				padding-right: 1rem;
+			}
+
+			#html-css {
+				grid-column: 1 / span 12 !important;
+				padding-left: 0;
+				padding-top: 11rem;
+			}
+
+			.left-space {
+				padding-left: 1rem;
+			}
+		}
+
+		@media all and (-ms-high-contrast: none),
+		(-ms-high-contrast: active) {
+			nav {
+				display: none;
+			}
+
+			h1 {
+				color: black;
+			}
+
+			code {
+				color: black;
+				border: 1px solid black;
+			}
+
+			section *::selection {
+				color: white;
+				background: black;
+			}
+
+			th {
+				color: black;
+				background-color: #ffb62e;
+				padding: 0 5rem 0 .5rem;
+			}
+
+			tr:nth-child(even) {
+				background-color: lightgray;
+			}
+
+			#floating-enter-notification {
+				display: none;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<nav>
+		<ul id="main-menu-list">
+			<li class="menu-item unselected" tabindex="0">
+				<i class="fas fa-coffee fa-fw unselected-icon"></i>
+				<h4 class="unselected-title">Javascript</h4>
+			</li>
+			<li class="menu-item unselected" tabindex="0">
+				<i class="fas fa-info unselected-icon fa-fw"></i>
+				<h4 class="unselected-title">General Info</h4>
+			</li>
+			<li class="menu-item unselected" tabindex="0">
+				<i class="fas fa-brackets-curly unselected-icon fa-fw"></i>
+				<h4 class="unselected-title">What's a JS?</h4>
+			</li>
+			<li class="menu-item unselected" tabindex="0">
+				<i class="fas fa-plus unselected-icon fa-fw"></i>
+				<h4 class="unselected-title">Advanced JS</h4>
+			</li>
+			<li class="menu-item unselected" tabindex="0">
+				<i class="fas fa-question unselected-icon fa-fw"></i>
+				<h4 class="unselected-title">Help</h4>
+			</li>
+			<li class="menu-item unselected menu-item-last" tabindex="0">
+				<i class="fas fa-sparkles unselected-icon fa-fw"></i>
+				<h4 class="unselected-title">Tips</h4>
+			</li>
+		</ul>
+	</nav>
+	<button id="floating-enter-notification" aria-hidden="true">
+		<i class="fal fa-arrow-square-right"></i>
+	</button>
+	<div class="main">
+		<section id="javascript" class="main-section">
+			<h1 class="main-title">
+				Teatime With JJ(&amp; some Java
+				<wbr />
+					script)
+				</h1>
+				<p class="subtitle-one left-space">
+					Javascript Workshop &amp; Information
+				</p>
+				<p class="subtitle-one left-space">
+					JJ Bastida
+				</p>
+		</section>
+		<section class="main-body two-column main-section" id="general-info">
+			<div class="heading-box">
+				<h2 class="main-title">General Info</h2>
+				<p class="js-note">Before we start the lesson...</p>
+			</div>
+			<div class="column-container">
+				<div class="counted-content left-column">
+					<h3>
+						Be sure to download either
+						<a class="inline-link" target="_blank" href="http://brackets.io/" title="Brackets Homepage">
+							Brackets,
+						</a>
+						<a class="inline-link" target="_blank" href="https://atom.io/" title="Atom Homepage">
+							Atom,
+						</a>
+						or
+						<a class="inline-link" target="_blank" href="https://code.visualstudio.com/"
+							title="Visual Studio Code Homepage">
+							Visual Studio Code.
+						</a>
+					</h3>
+					<p>Download a code editor and use it when coding.</p>
+					<p>
+						Have a template HTML, CSS, and JS folder structure so you don’t
+						have to start from scratch each time,
+						<a class="inline-link" href="./Blank.zip" title="Zip File with Pre-made Folder Structure">
+							I have included one here.
+						</a>
+					</p>
+					<p>
+						JS like CSS, can be written directly in HTML with
+						<strong>&lt;script&gt;</strong>
+						tag. Itt is good practice to have all scripts on separate
+						files.
+						<strong>&lt;script src='[source].js'&gt;</strong>
+					</p>
+					<p>
+						Follow naming conventions for files, variables, ids, &amp; class
+						names like lowercase or camelCase is suggested (camel
+						<wbr />
+							Case
+						<wbr />
+							Is
+						<wbr />
+							Putting
+						<wbr />
+							No
+						<wbr />
+							Spaces
+						<wbr />
+							But
+						<wbr />
+							Capitalizing
+						<wbr />
+							Each
+						<wbr />
+							Word
+						<wbr />
+							Like
+						<wbr />
+							This)
+						</p>
+						<p>
+							It&rsquo;s generally good code practice to keep variables in their
+							right place, and near the top.
+						</p>
+						<p>
+							Try to keep code concise; don&rsquo;t re-write the same line of
+							code 100 times just make a variable.
+						</p>
+						<p>
+							Be sure to Beautify, Prettier, or Format your code so that it is
+							easily readable.
+						</p>
+				</div>
+				<div class="right-column">
+					<pre>
+<code class='js-code'>
+<span class='js-note'>This is an example of good clean js code</span>
+<span class='code-color-main'>var</span> pageIsSet = false;
+<span class='code-color-main'>var</span> salad = {
+      saladType:'caesar',
+      ingredients: [
+        'lettuce',
+        'croutons',
+        'parmesan'
+      ],
+      dressing: true,
+      dressingType: 'caesar'
+};
+
+<span class='code-color-main'>function</span> eatSalad() {
+    <span class='js-note'>...</span>
+}
+</code>
+                </pre>
+				</div>
+			</div>
+		</section>
+		<section class="main-body single-column main-section" id="what's-a-js?">
+			<div class="heading-box">
+				<h2 class="main-title">What's a JS?</h2>
+				<p class="js-note">Like Java? Like that thing you update???</p>
+			</div>
+			<div class="counted-content">
+				<p>
+					Javascript or JS is one of the basic programming language of HTML and
+					the Web
+				</p>
+				<p>
+					It was written to be an easy entry-level scripting language.
+					<span class="js-note">
+						AND NOT RELATED TO THE JAVA PROGRAMMING LANGUAGE.
+					</span>
+				</p>
+				<p>
+					It lets you create more intricate interactions and make calculations
+					to create dynamic web interactions.
+				</p>
+				<p>Usually, a basic site is built with HTML, CSS, and JS together.</p>
+				<p>
+					At its core JS as a language is used to create, calculate, target,
+					delete, modify or manipulate something.
+					<span class="js-note">Create, Read, Update, Delete</span>
+				</p>
+				<p>
+					A typical line of JS will usually include a declaration of some
+					kind, a function, a function call, or a sequence of the previously
+					mentioned things.
+				</p>
+				<p>
+					JS works in a very atypical way from classic code languages, it was
+					put together to work well with the web but breaks a few fundamental
+					language rules at times.
+				</p>
+				<p>
+					The general way JS flows is top to bottom, and will only run one
+					time
+					<span class="js-note">Most of the time</span>
+				</p>
+			</div>
+		</section>
+		<section class="main-body single-column ignore-section">
+			<div class="heading-box">
+				<h2 class="main-title">Let’s Learn Some Common Keywords!</h2>
+				<p class="js-note">
+					If this document is new will it function? Yes. Yes it will.
+				</p>
+			</div>
+			<div class="counted-content">
+				<p>
+					<strong>var</strong>
+					- A variable is a stored set of information, it can be a boolean,
+					null, undefined, a string, a float/integer, an array, an object, or
+					more.
+				</p>
+				<p>
+					<strong>function</strong>
+					- A function is made up of two parts, the function itself that runs
+					any code inside of it, and the function call.
+				</p>
+				<p>
+					<strong>document</strong>
+					- The document is an object that is essentially a collection of
+					everything on your web page.
+				</p>
+				<p>
+					<strong>if / else if / else</strong>
+					- An if statement creates a situation where if the set parameters
+					are met, it will execute some code.
+				</p>
+				<p>
+					<strong>for</strong>
+					- A for loop is a section of code that will run multiple times until
+					the set parameters are met.
+				</p>
+				<p>
+					<strong>this</strong>
+					- This is a special keyword which essentially references whatever
+					scope you are currently working in.
+				</p>
+				<p>
+					<strong>class</strong>
+					- A class is a type of object that can be cloned to create duplicates of itself, the class
+					object in itself being a clone of the original class.
+				</p>
+				<p>
+					<strong>new</strong>
+					- New is a constructor that creates a copy of a JS class, which is
+					essentially a pre-made sort of object.
+				</p>
+			</div>
+		</section>
+		<section class="main-body two-column ignore-section">
+			<div class="heading-box">
+				<h2 class="main-title">Variable Types</h2>
+				<p class="js-note">Be a good kid and play with your string.</p>
+			</div>
+			<div class="column-container">
+				<div class="counted-content left-column">
+					<p>
+						<strong>Boolean</strong>
+						: true | false
+						<br />
+						A boolean is a set of two states, true and false. They are
+						essentially the foundation of all code.
+					</p>
+					<p>
+						<strong>Number</strong>
+						: float(1.01, 1.02, 1.03) | integer(1, 2, 3)
+						<br />
+						Weirdly enough, a number in JS can be both a float or an integer
+						at the same time. There is no restriction on the type of number it
+						can be.
+					</p>
+					<p>
+						<strong>String</strong>
+						: 'Hi' '🍑'
+						<br />
+						A string is a set of characters or text, it can include other
+						languages, with mainly Unicode text.
+					</p>
+					<p>
+						<strong>Array</strong>
+						: [true, 5, scrollValue, 'eggplant']
+						<br />
+						An array is an ordered collection of any other kind of variable,
+						they are accessed by referencing the number "index" of where a
+						value is.
+						<span class="js-note">example[0] === true</span>
+						<br />
+						Arrays also contain a .length property, it shows how many spots
+						are being held.
+					</p>
+				</div>
+				<div class="counted-content right-column">
+					<p>
+						<strong>Object</strong>
+						: {wig: null, location: ['Outer Space', 'On Mars']}
+						<br />
+						An object (similar to an array), holds values in it but with a
+						specified key and value relationship. It does not have a length,
+						and to reference something you need to use the key.
+						<span class="js-note">example.wig === null</span>
+					</p>
+					<p>
+						<strong>Null</strong>
+						: null
+						<br />
+						A null value is simply an empty variable, it doesn&rsquo;t
+						mean anything and will not do anything.
+					</p>
+					<p>
+						<strong>undefined</strong>
+						: undefined
+						<br />
+						An undefined value is similar to that of a null, however, it more
+						specifically means that the variable you are trying to use has not
+						been defined yet with a value or at all.
+						<span class="js-note">It&rsquo;s the default value</span>
+					</p>
+					<p>
+						<strong>NaN</strong>
+						: NaN
+						<br />
+						A NaN value is similar to both undefined and null, but is more
+						like an error, stating that the value you are trying to use as a
+						value is "Not a Number."
+					</p>
+				</div>
+			</div>
+		</section>
+		<section class="main-body single-column ignore-section">
+			<div class="heading-box">
+				<h2 class="main-title">If statements</h2>
+				<p class="js-note">
+					If the earth is flat, live in fear. Else, just live your life I
+					guess...
+				</p>
+			</div>
+			<div class="counted-content">
+				<p>
+					An if statement, as mentioned earlier, is a code segment that will
+					run, top to bottom only if the provided parameter you set is
+					valid (true).
+				</p>
+				<p>
+					When using && and || it reads left to right, so be sure that for &&
+					you have things in the proper order.
+				</p>
+				<p>
+					You always start with an if, followed by as many else if as you want
+					or simply an else with no parameters.
+				</p>
+				<pre>
+<code class="js-code">
+<span class="code-color-main">if</span> (eggs >= 12) {
+    bakeCake();
+
+} <span class="code-color-main">else if</span> (eggs == 6) {
+    makeOmelette();
+
+} <span class="code-color-main">else if</span> (eggs == 1 && people !> 2) {
+    makeFriedEgg();
+
+} <span class="code-color-main">else</span> {
+    console.log("Buy Eggs")
+}
+</code>
+                    </pre>
+			</div>
+		</section>
+		<section class="main-body single-column ignore-section">
+			<div class="heading-box">
+				<h2 class="main-title">For Loops</h2>
+				<p class="js-note">
+					You are from here on our banished, for i &lt; 100*years.
+				</p>
+			</div>
+			<div class="counted-content">
+				<p>
+					A for loop is a section of code that loops a specified amount of
+					times until it&rsquo;s set condition is no longer valid.
+				</p>
+				<p>
+					Be careful when using a for loop, if your conditions can never be
+					met it will loop infinitely.
+				</p>
+				<p>
+					The for loop has a cousin that serves a relatively similar purpose,
+					the while loop, which will continue until the set condition is
+					false. Be very careful with it, you have to create the iteration
+					condition inside of it and will also loop infinitely if used wrong.
+					<span class="js-note">while( i > 5 )</span>
+				</p>
+				<p>
+					The for loop also has a close sibling, the forEach function, that
+					serves to loop through all of the values inside of an array. It will
+					run your code with the variable name you set for the values and
+					apply the code to all of them in order. You can call the values
+					whatever you want, and if it is an array filled with objects can
+					loop through specific keys.
+					<span class="js-note">
+						array.forEach(function(value){console.log(value)})
+					</span>
+				</p>
+				<pre>
+<code class="js-code">
+<span class="code-color-main">for</span> ( var i = 0; i &lt; 365; i++ ){
+    <span class="code-color-main">console.log</span>(&ldquo;WATCH ME COUNT&rdquo; + i);
+};
+</code>
+                    </pre>
+			</div>
+		</section>
+		<section class="main-body two-column ignore-section">
+			<div class="heading-box">
+				<h2 class="main-title">Comparison Operators</h2>
+				<p class="js-note">
+					if (pineapple === onPizza || pizzaSize != 'large')
+				</p>
+			</div>
+			<div class="column-container">
+				<div class="counted-content left-column">
+					<p>
+						<strong>&gt;</strong>
+						- Greater Than
+					</p>
+					<p>
+						<strong>&lt;</strong>
+						- Less Than
+					</p>
+					<p>
+						<strong>&gt;=</strong>
+						- Greater Than and Equal to
+					</p>
+					<p>
+						<strong>&lt;=</strong>
+						- Less Than and Equal to
+					</p>
+					<p>
+						<strong>==</strong>
+						- Equal to
+					</p>
+					<p>
+						<strong>===</strong>
+						- Equal to and Equal to variable type
+					</p>
+					<p>
+						<strong>!</strong>
+						- not
+					</p>
+					<p>
+						<strong>!=</strong>
+						- Not Equal to
+					</p>
+					<p>
+						<strong>!==</strong>
+						- Not Equal to and Equal to variable type
+					</p>
+					<p>
+						<strong>&&</strong>
+						- And
+					</p>
+					<p>
+						<strong>||</strong>
+						- Or
+					</p>
+				</div>
+				<div class="counted-content right-column">
+					<p>
+						<strong>+</strong>
+						- Add values (or string)
+					</p>
+					<p>
+						<strong>-</strong>
+						- Subtract values
+					</p>
+					<p>
+						<strong>++</strong>
+						- Add 1 to a value
+					</p>
+					<p>
+						<strong>--</strong>
+						- Subtract 1 to a value
+					</p>
+					<p>
+						<strong>*</strong>
+						- Multiply Values
+					</p>
+					<p>
+						<strong>/</strong>
+						- Divide Values
+					</p>
+					<p>
+						<strong>+=</strong>
+						- Add values directly to initial value
+					</p>
+					<p>
+						<strong>-=</strong>
+						- Subtract values directly to initial value
+					</p>
+					<p>
+						<strong>*=</strong>
+						- Multiply values directly to initial value
+					</p>
+					<p>
+						<strong>/=</strong>
+						- Divide values directly to initial value
+					</p>
+				</div>
+			</div>
+		</section>
+		<section class="main-body single-column ignore-section">
+			<div class="heading-box">
+				<h2 class="main-title">Minor Other Stuff</h2>
+				<p class="js-note">
+					I mean just look at ({['"that"']})
+				</p>
+			</div>
+			<div class="counted-content">
+				<h3>Bracket Types</h3>
+				<p>
+					<strong>( )</strong>
+					: functions & conditions
+					<br />
+					Regular round brackets are only used when it comes to functions and
+					conditions when using for loops, while, loops, if statements and
+					more. You use them to create functions with parameters or to call
+					functions.
+				</p>
+				<p>
+					<strong>{ }</strong>
+					: start & end/thing to be executed
+					<br />
+					Squiggly brackets/Braces are used to show the start and end of a set
+					of code to be executed, usually after the if statement, function
+					declaration, or for loop. They are also used with objects showing
+					the start and end of an object.
+				</p>
+				<p>
+					<strong>[ ]</strong>
+					: array
+					<br />
+					Square brackets show the start & end of arrays, they can be used to
+					reference specific spots in arrays and in objects as well!
+					<span class="js-note">object[key] === object.key</span>
+				</p>
+				<h3>Additional Syntax</h3>
+				<p>
+					<strong>.</strong>
+					<br>
+					As you have probably seen already the . is used quite a bit in JS, its purpose is mainly
+					to access
+					properties inside of something, or to apply a function call on something. <span
+						class="js-note">Which does contain that function in it.</span>
+				</p>
+			</div>
+		</section>
+		<section class="main-body two-column main-section" id="advanced-js">
+			<div class="heading-box">
+				<h2 class="main-title">Advanced JS</h2>
+				<p class="css-note">
+					var John {You just don't get the real me John. You don't get me at all!}
+				</p>
+			</div>
+			<div class="column-container">
+				<div class="counted-content left-column">
+					<h3>If you don't have a good understanding of JS SKIP THIS SECTION!</h3>
+					<p>When trying to understand more complex comparators, functions, scope, and calls it's
+						important to
+						properly know basic JS.</p>
+					<p>I'm going to be going over key concepts and a lot of ES5 <span class="js-note">ECMAScript 5 / JS
+							5</span></p>
+					<h3 id="scope">Scope</h3>
+					<p>Scope is a concept that is used in most code languages to dictate where the reach of
+						certain
+						variables and functions are allowed to be used.</p>
+					<p>Compared to most languages JS uses a weird rigged up version of scope, that works in
+						it's own
+						unique way; and has just began opening it's doors to more traditional code syntax
+						with ES5.</p>
+					<p>Scope is generally dictated by functions, classes, and objects; with the global scope
+						being
+						outside of everything.</p>
+				</div>
+				<div class="right-column">
+					<span class="counted-content">
+						<p>I'm sure you've seen that when a variable is in the global scope it can be used
+							anywhere,
+							while when it's declared inside of a function or another scope it cannot be
+							used outside of
+							that scope.</p>
+						<p>Also, be sure to keep in mind that JS looks for variables from the current scope
+							first and
+							moves outwards until it reaches the global scope.</p>
+					</span>
+					<code class='js-code'><br>
+					<span class="code-color-main">var</span> example = true; <span class="js-note">This is an example of global scope</span><br><br>
+						<span class="code-color-main">function</span> functionScope() {<br>
+							<span class="tab-in">
+								<span class="code-color-main">var</span> scoped = true;<span class="js-note">This is an example of lexical scope</span><br><br>
+								<span class="code-color-main">console.log</span>(example)<span class="js-note">works</span>
+							</span><br>
+						}<br><br>
+						<span class="code-color-main">console.log</span>(scoped)<span class="js-note">doesn't work</span>
+					</code>
+				</div>
+			</div>
+		</section>
+		<section class="main-body two-column ignore-section">
+			<div class="heading-box">
+				<h2 class="main-title">Advanced JS +</h2>
+				<p class="css-note">
+					() => {const things = 'are 'bout to get severe up in here.'}
+				</p>
+			</div>
+			<div class="column-container">
+				<div class="counted-content left-column">
+					<h3>Alternate Var declarations</h3>
+					<p>
+						<strong>let</strong>
+						: permanently scoped<br>
+						Let assignment declarations are strictly scoped, which means that even trying to set
+						one outside
+						of its scope will result in an error. They are very useful in for loops, as they
+						retain their
+						values throughout all iterations and don't overlap.
+					</p>
+					<p>
+						<strong>const</strong>
+						: permanent variable & scoped<br>
+						Const, like a let, is scoped to whatever location it is placed in, the only
+						difference is that
+						that constant's value can not be reassigned (updated). <span class="js-note">constantVariable =
+							5;
+							will not work</span>
+					</p>
+					<h3>Callback/Fat Arrow functions</h3>
+					<p>A callback function or fat arrow function is in a way a shorthand on anonymous
+						functions. It
+						works the same as any function, but without a name.</p>
+					<p>Functions can also start themselves after being declared by adding () around and to the
+						end of an
+						anonymous function.</p>
+					<p>It looks like the following: (anyVariablesGoHere) => { //... }</p>
+				</div>
+				<div class="right-column">
+					<code class='js-code'><br>
+					<span class="code-color-main">const</span> example = true; <span class="js-note">This is an example of global scope</span><br><br>
+						(<span class="code-color-main">()</span> => {<br>
+							<span class="tab-in">
+								<span class="code-color-main">let</span> scoped = true;<span class="js-note">This is an example of lexical scope</span><br><br>
+								example = false<span class="js-note">doesn't work</span><br>
+								scoped = false<span class="js-note">works</span><br>
+							</span><br>
+						})()<br><br>
+							scoped = false<span class="js-note">doesn't work</span>
+					</code>
+				</div>
+			</div>
+		</section>
+		<section class="main-body two-column ignore-section">
+			<div class="heading-box">
+				<h2 class="main-title">Advanced JS ++</h2>
+				<p class="css-note">
+					This prototype has got me scoping out some new objects/arrays.
+				</p>
+			</div>
+			<div class="column-container" id='classesAndPrototypes'>
+				<div class="counted-content left-column">
+					<h3>Classes & Prototypes</h3>
+					<p>Classes are essentially like function-y objects, they are templates with
+						keys and properties that are duplicate themselves.</p>
+					<p>That being said, they're not perfect copies, they still connect to their original with
+						a
+						"prototype" or "__proto" key. <span class="js-note">Protos can be modified, but it's
+							bad practice</span></p>
+					<p>When creating a class, they usually contain a "constructor", a function that builds and
+						stores all of the properties that are passed into a class when called.</p>
+					<h3>this</h3>
+					<p>This is something you may have seen before, it is a very useful keyword that references
+						the
+						current scope.</p>
+					<p>It references itself in a sense and allows you to reference other parts of the scope in
+						cases where they may be out of scope.</p>
+					<p>In some cases you may need to "bind" the current this, because when you call a function
+						you're switching also switching the current scope to the scope of that function.</p>
+				</div>
+				<div class="right-column">
+					<code class='js-code'><br>
+						<span class="code-color-main">class</span> Soup {<br>
+							<span class="tab-in">
+								<span class="code-color-main">constructor</span>(soupType, makeSoup) {
+									<span class="tab-in">
+										soupType = <span class="code-color-main">this</span>.soupType,<br>
+										makeSoup = <span class="code-color-main">this</span>.makeSoup().<span class="code-color-main">bind</span>(this),<br>
+								</span><br>
+								}<br><br>
+								<span class="code-color-main">function</span> makeSoup () {<br>
+									<span class="tab-in">console.log('Your ' + this.soupType + ' has been made!');</span>
+								}
+							</span>
+							}<br><br>
+							<span class="code-color-main">let</span> chickenSoup = <span class="code-color-main">new</span> Soup('Chicken Soup');<br><br>
+							chickenSoup.makeSoup(); <span class="js-note">Should return "Your Chicken Soup has been made!"</span>
+					</code>
+				</div>
+			</div>
+		</section>
+		<section class="main-body single-column main-section" id="help">
+			<div class="heading-box">
+				<h2 class="main-title">Help &amp; Troubleshooting</h2>
+				<p class="css-note">HELP! EVERYTHING IS UNDEFINED!</p>
+			</div>
+			<div class="counted-content">
+				<p>
+					Check that everything is spelled correctly &amp; that your
+					stylesheets and external files are linked correctly.
+				</p>
+				<p>
+					<strong>Check it again!</strong>
+					<span class="js-note">
+						Trust me check your code again to be sure you didn&rsquo;t miss
+						anything.
+					</span>
+				</p>
+				<p>
+					Use the Developer Tools Inspector
+					<span class="js-note">
+						generally by right-clicking and selecting inspect.
+					</span>
+				</p>
+				<p>
+					<strong>console.log()</strong>
+					anything you want to check and look at the console tab in the
+					inspector window.
+				</p>
+				<p>
+					If some external file or resource is not loading you can check the
+					network tab to see all the requests the site has made and any failed
+					ones.
+				</p>
+				<p>Try Google-ing the problem.</p>
+				<p>Ask a prof, peer, mentor, or me!</p>
+				<p>
+					If none of that solved your problem.. Honestly just cry and give up
+					at that point.
+				</p>
+			</div>
+		</section>
+		<section class="main-body single-column ignore-section">
+			<div class="heading-box">
+				<h2 class="main-title">Common JS Errors</h2>
+				<p class="css-note">
+					My console has 0 errors and nothing is working...
+				</p>
+			</div>
+			<div class="counted-content">
+				<p><strong>Be sure to check the following:</strong></p>
+				<p>
+					Spelling of Ids and Classes is consistent and correct.
+				</p>
+				<p>
+					When using getElementsByClassName, remember it returns an array so use
+					getElementsByClassName[elementYouWant].
+				</p>
+				<p>
+					Make sure your &gt; and &lt; are facing the right direction.
+				</p>
+				<p>
+					Make sure your brackets are closing properly; sometimes formatting or beautifying your
+					code helps.
+				</p>
+				<p>
+					Make sure the stuff you're referencing is within the function or global (<a class="inline-link"
+						href='#scope' title="Advanced JS - Scope Section">see
+						scope</a>).
+				</p>
+				<p>
+					Check for loops and if statements to make sure they have the right condition.
+				</p>
+				<p>
+					Look for missing semicolons
+					<strong>;</strong>
+					, apostrophes
+					<strong>' ' " "</strong>
+					, squiggly brackets
+					<strong>{ }</strong>
+					, or regular brackets
+					<strong>( )</strong>
+					, or commas
+					<strong>,</strong>
+				</p>
+			</div>
+		</section>
+		<section class="main-body single-column main-section" id="tips">
+			<div class="heading-box">
+				<h2 class="main-title">Tips</h2>
+				<p class="css-note">For all you cool kids 😎</p>
+			</div>
+			<div class="counted-content">
+				<p>
+					Using objects saves the number of variables you have if the
+					variables are related
+				</p>
+				<p>
+					Use querySelector or quereySelectorAll to find stuff easier and faster. <span class="js-note">It's
+						like getElementById, getElementsByClassName, and
+						getElementsByTagName all in one</span>
+				</p>
+				<p>
+					Use incredibly descriptive function and variable names so you know what they do and don't
+					have
+					to take notes.
+				</p>
+				<p>
+					Keep all of your variables near the top, and space out your functions & if statements, it
+					improves the readability of your code.
+				</p>
+				<p>
+					Use eventListeners, they make interactions with things on screen a dream instead of adding
+					onClicks, onMouseOver, etc... in your HTML.
+				</p>
+				<p>
+					Use the import and export functionalities of ES6 (JS6), to separate big chunks of code
+					into other files which you can import when needed.
+				</p>
+				<p>
+					Use Ternary Operators, you can essentially write an if statement in half the time. They
+					work like this [condition] ? [true] : [false]; and they return the value you put in each
+					of the true and false conditions (and yes you can string them together).
+				</p>
+				<p>
+					Use !! before any variable reference to forcibly make it into boolean instead of whatever
+					value it is. <span class="js-note">So if var egg = 1; !!egg is true.</span>
+				</p>
+			</div>
+		</section>
+		<section class="main-body ignore-section" id="final-section">
+			<h1 class="main-title">That&rsquo;s all for now!</h1>
+			<p class="subtitle-two left-space">
+				Be sure to contact me if you have any questions or concerns
+				<i class="far fa-sparkles"></i>
+			</p>
+		</section>
+	</div>
+	<script>
+		const currentSection = {
+			element: null,
+			index: null,
+			menuPosition: null,
+		};
+		let scrollingTo;
+		let isScrolling = false;
+		const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+		const mainMenuList = document.querySelector('#main-menu-list');
+		const isMobile = window.innerWidth < 40 * rem;
+		const sections = [].slice.call(document.getElementsByTagName('section'));
+		const mainSections = [].slice.call(document.getElementsByClassName('main-section'));
+		const titles = [].slice.call(document.getElementsByClassName('main-title'));
+		const menuItems = [].slice.call(document.getElementsByClassName('menu-item'));
+		const fen = document.getElementById('floating-enter-notification');
+		const hash = window.location.hash;
+		const hashItem = hash && document.getElementById(hash.substring(1));
+
+		if (hash && hashItem) {
+			scrollToTarget(hashItem, 'smooth', 'start', 'nearest');
+		}
+
+		if (window.innerHeight < parseFloat(getComputedStyle(mainMenuList).height)) {
+			mainMenuList.style.height = '100%';
+			mainMenuList.style.overflowY = 'scroll';
+			mainMenuList.style.overflowX = 'hidden';
+		}
+
+		function unselectAll(selected) {
+			selected.children[1].classList.toggle('selected-title');
+			selected.children[1].classList.toggle('unselected-title');
+			selected.children[0].classList.toggle('selected-icon');
+			selected.children[0].classList.toggle('unselected-icon');
+			selected.classList.toggle('unselected');
+			selected.classList.toggle('selected');
+		}
+
+		function handleSelection(targetElement) {
+			const currentSelection = document.getElementsByClassName('selected');
+
+			if (currentSelection.length === 0) {
+				targetElement.classList.toggle('unselected');
+				targetElement.classList.toggle('selected');
+				targetElement.children[1].classList.toggle('selected-title');
+				targetElement.children[1].classList.toggle('unselected-title');
+				targetElement.children[0].classList.toggle('unselected-icon');
+				targetElement.children[0].classList.toggle('selected-icon');
+			} else if (currentSelection.length >= 0) {
+				unselectAll(currentSelection[0]);
+				targetElement.classList.toggle('unselected');
+				targetElement.classList.toggle('selected');
+				targetElement.children[1].classList.toggle('selected-title');
+				targetElement.children[1].classList.toggle('unselected-title');
+				targetElement.children[0].classList.toggle('unselected-icon');
+				targetElement.children[0].classList.toggle('selected-icon');
+			}
+		}
+		function scrollToTarget(target, behavior, block, inline) {
+			isScrolling = true;
+			scrollingTo = target;
+
+			target.scrollIntoView({
+				behavior,
+				block,
+				inline,
+			});
+		}
+
+		function scrollToSection(value) {
+			if (sections[currentSection.index + value]) {
+				scrollToTarget(sections[currentSection.index + value], 'smooth', 'start', 'nearest');
+			} else {
+				scrollToTarget(sections[0], 'smooth', 'start', 'nearest');
+			}
+		}
+
+		function cleanUpHTML(target) {
+			const newTarget = target
+				.replace('&amp;', '')
+				.toLowerCase()
+				.replace(/\s/gm, '-')
+				.replace('--', '-');
+			return newTarget;
+		}
+
+		function handleTarget(event) {
+			const menuChildren = document.querySelector('#main-menu-list').children;
+			let selections;
+
+			Array.prototype.forEach.call(menuChildren, child => {
+				if (event.target === child) {
+					selections = event.target;
+				} else if (event.target.parentElement === child) {
+					selections = event.target.parentElement;
+				}
+			});
+
+			return selections;
+		}
+
+		function handleKeyPress(event) {
+			if ((event.key === 'Enter' || event.which === 13 || event.code === 'Enter') || (event.key === 'ArrowRight' || event.which === 39 || event.code === 'ArrowRight')) {
+				event.preventDefault();
+				const selected = handleTarget(event);
+
+				if (selected) {
+					let target = selected.children[1].innerHTML;
+					target = cleanUpHTML(target);
+					scrollToTarget(document.getElementById(target), 'smooth', 'start', 'nearest');
+					handleSelection(selected);
+				} else {
+					scrollToSection(+1);
+				}
+			} else if ((event.key === 'Backspace' || event.which === 8 || event.code === 'Backspace') || (event.key === 'ArrowLeft' || event.which === 37 || event.code === 'ArrowLeft')) {
+				event.preventDefault();
+				scrollToSection(-1);
+			}
+		}
+
+		function handleClick(event) {
+			const selected = handleTarget(event);
+
+			if (selected !== undefined) {
+				let target = selected.children[1].innerHTML;
+				target = cleanUpHTML(target);
+				scrollToTarget(document.getElementById(target), 'smooth', 'start', 'nearest');
+				handleSelection(selected);
+			}
+		}
+
+		document.querySelector('#main-menu-list').addEventListener('click', handleClick);
+		window.addEventListener('keydown', handleKeyPress);
+		fen.addEventListener('click', function () {
+			scrollToSection(+1);
+			event.preventDefault();
+
+		});
+		const observer = new IntersectionObserver(entries => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					const thisSection = entry.target.closest('section');
+
+					currentSection.element = thisSection;
+					currentSection.index = sections.indexOf(thisSection);
+					currentSection.menuPosition = mainSections.indexOf(thisSection);
+
+					if (isScrolling && scrollingTo === thisSection) {
+						isScrolling = false;
+					}
+
+					if (!thisSection.classList.contains('ignore-section') && !isScrolling) {
+						handleSelection(menuItems[currentSection.menuPosition]);
+					}
+
+					if (isMobile && !isScrolling && menuItems[currentSection.menuPosition]) {
+						const menuTarget = menuItems[currentSection.menuPosition];
+						setTimeout(() => {
+							menuTarget.scrollIntoView({
+								behavior: 'smooth',
+								block: 'center',
+								inline: 'center',
+							});
+						}, 500);
+					}
+
+					if (currentSection.index === 0) {
+						fen.innerHTML = "Press Enter to<br>continue <i class='fal fa-arrow-square-right'></i>";
+						fen.style.opacity = 1;
+					} else {
+						fen.innerHTML = "Next <i class='fal fa-arrow-square-right'></i>";
+						fen.style.opacity = 0.5;
+					}
+				}
+			});
+		});
+
+		titles.forEach(title => {
+			observer.observe(title);
+		});
+	</script>
+</body>
+
+</html>

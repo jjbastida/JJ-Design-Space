@@ -227,14 +227,17 @@ CLOSED
 #ix,
 #lx {
     position: absolute;
-    height: 30px;
-    width: 30px;
+    height: 1.4em;
+    width: 1.4em;
+    vertical-align: middle;
     right: 0;
+    border-radius: 100%;
+    border: 2px solid white;
     text-align: center;
     cursor: pointer;
     color: white;
     font-family: "muli", sans-serif;
-    font-size: 1.7em;
+    font-size: 2em;
 }
 
 #ix {
@@ -336,6 +339,7 @@ CLOSED
 }
 #menuright, #menuleft{
     transition: all cubic-bezier(.38, .21, .76, .91) .3s;
+    overflow: hidden;
 }
 #mobileButtons{
     display: none;
@@ -389,12 +393,11 @@ CLOSED
     margin: 1em 0 0 1em;
     padding: 0 1rem 0 0;
     }
-    
+
     #lx, #ix {
     background-color: white;
+    border: none;
     color: #E8474A;
-    padding: 0.3em;
-    border-radius: 5000px;
 }
     #mobileButtons{
     display: flex;

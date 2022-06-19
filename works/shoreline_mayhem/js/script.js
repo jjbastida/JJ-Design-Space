@@ -688,7 +688,7 @@ function barMove() {
             lightCoral();
         }
         setTimeout(function () {
-            $(text).html("Nearly 85 percent of the 29 million gallons of petroleum that enter North American ocean waters each year as a result of human activities comes from land-based runoff, polluted rivers, airplanes, and small boats, while less than 8 percent comes from tanker or pipeline spills, says a new report from the National Academies&#39; National Research Council. <br><br>Our oil consumption and pollution in North America, although decreasing slowly, is still approx. 2.7 billion tonnes of oil according to a BP Report.<br><em class='mobileHide'> Press the yellow button to stop the oil!</em>");
+            $(text).html("Nearly 85 percent of the 29 million gallons of petroleum that enter North American ocean waters each year as a result of human activities comes from land-based runoff, polluted rivers, airplanes, and small boats, while less than 8 percent comes from tanker or pipeline spills, says a new report from the National Academies&#39; National Research Council. <br><br>Our oil consumption and pollution in North America, although decreasing slowly, is still approx. 2.7 billion tonnes of oil according to a BP Report.<br><em> Press the yellow button to stop the oil!</em>");
             $(text).removeClass().addClass("bodyC");
             $(".secondMessage").css("display", "none")
         }, 800)

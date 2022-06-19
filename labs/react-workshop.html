@@ -1,0 +1,1669 @@
+<!DOCTYPE html>
+<!--JuanJose Bastida 2020-->
+<!-- React Workshop V1.0 -->
+<!--These projects were made to be looked into, so if you're reading this that’s great! I tried to keep these to be 'best practice' but that being said please never put all of your CSS and JS in one HTML file, separate them out and if you have multiple pages separate out your files so you only import what you need!-->
+<!--Other than that thank you for reading! Hope it helps, if you have any questions feel free to reach out jj.bastida@outlook.com-->
+<html lang="en-CA">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,700&amp;display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/81783a94a9.js" samesite="secure"></script>
+    <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/latest/css/pro.min.css" media="all">
+    <title>How would you React to some React Reactions.</title>
+    <style>
+        :root {
+            --spark-main: #66FFFF;
+            --spark-alt: #62D9ED;
+            --obsidian: #242430;
+            --dusk: #45455b;
+            --pavement: #88889f;
+            --egg-whites: #eaeaea;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Source Code Pro', 'Ubuntu', monospace;
+        }
+
+        body {
+            counter-reset: code-counter;
+        }
+
+        pre {
+            white-space: break-spaces;
+        }
+
+        nav {
+            height: 100vh;
+            box-sizing: border-box;
+            width: 8rem;
+            position: fixed;
+            background-color: var(--spark-main);
+            z-index: 100;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            background-color: var(--spark-main);
+            padding: 2rem;
+            color: var(--obsidian);
+            max-width: 1080px;
+        }
+
+        h2 {
+            font-size: 2.3rem;
+            font-weight: 700;
+            color: var(--obsidian);
+        }
+
+        h3 {
+            margin-top: 1rem;
+            margin-bottom: .5rem !important;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--obsidian);
+        }
+
+        h3::before {
+            display: none;
+        }
+
+        strong {
+            font-size: inherit;
+            font-weight: 700;
+            color: inherit;
+        }
+
+        h4 {
+            color: black;
+            color: var(--obsidian);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        p {
+            font-size: 1.15rem;
+            line-height: 1.4;
+            font-weight: 400;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .inline-link {
+            color: var(--obsidian);
+            display: inline-block;
+            text-decoration: underline !important;
+            background-color: var(--spark-main) !important;
+            padding: 0 0.5em;
+            transition: background-color 0.5s ease;
+            position: relative;
+        }
+
+        .inline-link::before {
+            content: " ";
+            padding: 0 0.5em 0 1em;
+        }
+
+        .inline-link::after {
+            content: "\f019";
+            font-family: "Font Awesome 5 Pro";
+            font-size: 0.65em;
+            padding-left: 1em;
+            position: absolute;
+            top: 1em;
+            left: 0;
+            transform: translateY(-50%) scale(1.3);
+        }
+
+        .inline-link[target="_blank"]::before {
+            padding: 0 0.75em;
+        }
+
+        .inline-link[target="_blank"]::after {
+            content: "\f08e";
+            padding-left: 1em;
+            transform: translateY(-50%) scale(1);
+        }
+
+        .inline-link[href^="#"]::after {
+            content: "\f354";
+            transform: translateY(-40%) scale(1.5);
+        }
+
+        .inline-link:hover {
+            background-color: var(--spark-alt) !important;
+            padding: 0 0.5em;
+            transition: background-color 0.5s ease;
+        }
+
+        section *::selection {
+            color: white;
+            background: var(--obsidian);
+        }
+
+        pre::before {
+            display: none !important;
+        }
+
+        .not-counted::before {
+            display: none !important;
+        }
+
+        code {
+            display: inline-block;
+            color: white;
+            background-color: var(--obsidian);
+            border-radius: 8px;
+            padding: 2.2rem 1.5em 1.5em;
+            box-sizing: border-box;
+            position: relative;
+            margin: 0.5em 0;
+        }
+
+        code::before {
+            display: block;
+            height: 1.2rem;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            padding: 0.5em 0 0.75em;
+            font-weight: 600;
+        }
+
+        code::after {
+            color: white;
+            display: block;
+            width: 100%;
+            position: absolute;
+            box-sizing: border-box;
+            top: 0;
+            left: 0.25rem;
+            padding: 0.5em 0.5em 0;
+            font-weight: 600;
+        }
+
+        code *::selection {
+            color: var(--obsidian) !important;
+            background: #FFF !important;
+        }
+
+        code::selection {
+            color: var(--obsidian) !important;
+            background: #FFF !important;
+        }
+
+        .css-code::before {
+            content: '';
+            background-color: #406eeb;
+        }
+
+        .react-code::before {
+            content: '';
+            background-color: #66FFFF;
+        }
+
+        .html-code::before {
+            content: '';
+            background-color: #ff4040;
+        }
+
+        .js-code::before {
+            content: '';
+            background-color: #fff039;
+        }
+
+        .js-code::after {
+            color: var(--obsidian);
+        }
+
+        .react-code::after {
+            color: var(--obsidian);
+        }
+
+        .php-code::before {
+            content: '';
+            background-color: #5332f9;
+        }
+
+        .terminal-code::before {
+            content: '';
+            background-color: #45455b;
+        }
+
+        .css-code::after {
+            content: 'CSS';
+        }
+
+        .html-code::after {
+            content: 'HTML';
+        }
+
+        .js-code::after {
+            content: 'JS';
+        }
+
+        .php-code::after {
+            content: 'PHP';
+        }
+
+        .react-code::after {
+            color: #45455b;
+            content: 'React';
+        }
+
+        .terminal-code::after {
+            content: 'Terminal';
+        }
+
+        .html-code .code-color-main {
+            color: #ff4040 !important;
+        }
+
+        .css-code .code-color-main {
+            color: #406eeb !important;
+        }
+
+        .js-code .code-color-main {
+            color: #fff039 !important;
+        }
+
+        .react-code .code-color-main {
+            color: #66FFFF !important;
+        }
+
+        .react-code .code-color-second {
+            color: #ff4040 !important;
+        }
+
+        .php-code .code-color-main {
+            color: #a08eff !important;
+        }
+
+        .html-color {
+            color: #ff4040 !important;
+        }
+
+        .css-color {
+            color: #406eeb !important;
+        }
+
+        .js-color {
+            color: #fff039 !important;
+        }
+
+        .php-color {
+            color: #a08eff !important;
+        }
+
+        .react-color {
+            color: #66FFFF !important;
+        }
+
+        .terminal-code .code-color-main {
+            font-weight: 700;
+        }
+
+        .html-note,
+        .css-note,
+        .js-note,
+        .react-note {
+            font-size: 0.9rem !important;
+            color: var(--pavement) !important;
+        }
+
+        .html-note::before {
+            content: '<!-- ' !important;
+        }
+
+        .html-note::after {
+            content: ' ->' !important;
+        }
+
+        .css-note::before {
+            content: '/* ' !important;
+        }
+
+        .css-note::after {
+            content: ' */' !important;
+        }
+
+        .js-note::before {
+            content: '// ' !important;
+        }
+
+        .react-note::before {
+            content: '{/* ' !important;
+        }
+
+        .react-note::after {
+            content: ' */}' !important;
+        }
+
+        .subtitle-one {
+            font-size: 1.6rem;
+            line-height: 1.3;
+            padding: 0.5em 0 0;
+        }
+
+        .subtitle-two {
+            font-size: 1.6rem;
+            line-height: 1.3;
+            padding: 0.5em 0 0;
+            color: var(--obsidian);
+        }
+
+        .no-break {
+            word-break: keep-all;
+            white-space: nowrap;
+        }
+
+        .raw {
+            font-size: initial !important;
+            font-family: initial !important;
+            color: initial !important;
+            font-weight: initial !important;
+            padding: initial !important;
+            margin: initial !important;
+            background-color: initial !important;
+            line-height: initial !important;
+        }
+
+        .raw::selection {
+            color: white !important;
+            background-color: blue !important;
+        }
+
+        #main-menu-list {
+            height: auto;
+            width: 100%;
+            display: flex;
+            flex-wrap: nowrap;
+            flex-direction: column;
+            align-content: center;
+            justify-content: flex-start;
+            user-select: none;
+        }
+
+        .menu-item {
+            text-align: center;
+            padding: 1em 0.25em;
+            box-sizing: border-box;
+            cursor: pointer;
+            min-width: 7rem;
+            position: relative;
+        }
+
+        .menu-item::after {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 90%;
+            height: 100%;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -1px);
+            border-bottom: 2px var(--obsidian) solid;
+            z-index: 5;
+        }
+
+        .main {
+            display: grid;
+            grid-template-columns: [navigation] calc(8rem - 20px) 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+            grid-gap: 20px;
+            max-width: 120rem;
+        }
+
+        .main section {
+            grid-column: 2 / span 11;
+            padding-left: 1rem;
+            min-height: 100vh;
+            padding-top: 1rem;
+        }
+
+        #final-section {
+            grid-column: 2 / span 11 !important;
+            background-color: var(--spark-main);
+        }
+
+        .single-column {
+            grid-column: 2 / span 8 !important;
+        }
+
+        .two-column {
+            grid-column: 2 / span 11 !important;
+        }
+
+        .two-column .column-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        .two-column .column-container>div {
+            width: 45%;
+            padding-right: 2.5%;
+        }
+
+        #react {
+            grid-column: 2 / span 9;
+            padding-left: 0;
+            padding-top: 11rem;
+        }
+
+        .unselected {
+            color: var(--obsidian);
+        }
+
+        .selected {
+            background-color: var(--obsidian) !important;
+            color: var(--egg-whites) !important;
+            transform: scaleY(1.03) !important;
+        }
+
+        .menu-item:focus {
+            outline: 2px solid var(--obsidian);
+            background-color: #B3FFFF;
+        }
+
+        /* make sure that the other ones have this imporved focus thing */
+
+        .selected::after {
+            display: none !important;
+        }
+
+        .selected:focus {
+            outline: none;
+        }
+
+        .unselected-title {
+            color: var(--obsidian);
+        }
+
+        .selected-title {
+            background-color: var(--obsidian);
+            color: var(--egg-whites);
+        }
+
+        .fal {
+            vertical-align: middle;
+        }
+
+        .fa-fw {
+            display: block;
+            height: 1em;
+            width: 1em;
+            margin: 0 auto 0.5em;
+            padding: 0.5em;
+            border-radius: 1000px;
+            text-align: center;
+        }
+
+        .fa-code::before {
+            display: block;
+            transform: translateX(-2px);
+        }
+
+        .fa-coffee::before {
+            display: block;
+            transform: translate(-2px, 1px);
+        }
+
+        .fa-brackets-curly::before {
+            display: block;
+            transform: translate(-1px, 1px);
+        }
+
+        .unselected-icon {
+            border: 2px solid var(--obsidian);
+            color: var(--obsidian);
+            transform: scale(0.9);
+            transition: transform ease 0.5s, color ease 0.5s;
+        }
+
+        .selected-icon {
+            background-color: var(--egg-whites);
+            color: var(--obsidian);
+            transition: transform ease 0.5s, color ease 0.5s, border 0.5s ease;
+        }
+
+        .unselected:hover {
+            background-color: var(--spark-alt);
+        }
+
+        #floating-enter-notification {
+            position: fixed;
+            font-size: 1rem;
+            bottom: 30px;
+            background-color: rgba(255, 255, 255, 0);
+            right: calc((11vw / 2) - 20px);
+            text-align: left;
+            user-select: none;
+            color: var(--pavement);
+            padding: 1em 1.5em;
+            border-radius: 25px;
+            border: 1px solid black;
+            border-color: var(--pavement);
+            cursor: pointer;
+            transition: opacity 0.7s ease;
+        }
+
+        #floating-enter-notification:hover {
+            background-color: rgba(0, 0, 0, .01);
+        }
+
+        #floating-enter-notification:focus {
+            background-color: rgba(0, 0, 0, .01);
+            outline: none;
+            border-color: #1E4CC1;
+            color: #1E4CC1;
+        }
+
+        #floating-enter-notification:active {
+            background-color: rgba(0, 0, 0, .02);
+            border-color: var(--pavement);
+            color: var(--pavement);
+        }
+
+        .left-space {
+            padding-left: 2rem;
+        }
+
+        .counted-content>* {
+            margin-bottom: 0.8em;
+        }
+
+        .counted-content>h3:first-child {
+            margin-top: -.5rem !important;
+        }
+
+        .counted-content>*::before {
+            counter-increment: code-counter 1;
+            content: counter(code-counter) ' ';
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--pavement);
+        }
+
+        .heading-box {
+            padding-bottom: 1.1rem;
+        }
+
+        .body-list {
+            font-size: 1.15rem;
+            line-height: 1.4;
+        }
+
+        .body-list li {
+            font-size: 1rem;
+            line-height: 1.5;
+            padding: 0 1em 0.8em;
+            list-style: circle;
+            list-style-position: inside;
+        }
+
+        .tab-in {
+            margin: 0.5em 0 0.5em 1.5em;
+            display: inline-block;
+        }
+
+        .stacked-shortcut {
+            position: relative;
+        }
+
+        .stacked-shortcut::before {
+            content: '+';
+            padding: 0 0.5em 0 1.75em;
+        }
+
+        .stacked-shortcut::after {
+            content: 'cmd \A ctrl';
+            display: block;
+            font-size: 0.6em;
+            line-height: 1;
+            white-space: pre-wrap;
+            padding-right: 0.25em;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        @media all and (min-width: 120rem) {
+            .main section {
+                padding-left: 2rem;
+                padding-top: 2rem;
+            }
+        }
+
+        @media all and (max-width: 60rem) {
+            .single-column {
+                grid-column: 2 / span 10 !important;
+            }
+
+            .two-column {
+                grid-column: 2 / span 10 !important;
+            }
+
+            .two-column .column-container>div {
+                width: 100%;
+                padding-right: 0;
+            }
+
+            #floating-enter-notification {
+                display: none;
+            }
+        }
+
+        @media all and (max-width: 40rem) {
+            h1 {
+                font-size: 3rem;
+                padding: 1rem;
+            }
+
+            .subtitle-one {
+                font-size: 1.4rem;
+            }
+
+            .subtitle-two {
+                font-size: 1.4rem;
+            }
+
+            nav {
+                width: 100vw;
+                height: auto;
+                border-bottom: 2px var(--obsidian) solid;
+            }
+
+            #main-menu-list {
+                flex-direction: row;
+                overflow-x: scroll;
+                position: relative;
+            }
+
+            .menu-item {
+                text-align: center;
+                padding: 1em 1.2em;
+                box-sizing: border-box;
+                border-right: 2px var(--obsidian) solid;
+                min-height: 5rem;
+                min-width: 8rem;
+            }
+
+            .menu-item::after {
+                display: none !important;
+            }
+
+            .menu-item-last {
+                border: none;
+                padding-right: 2em;
+            }
+
+            .main {
+                grid-template-columns: 1rem 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1rem;
+                grid-gap: 0;
+            }
+
+            .main section {
+                grid-column: 1 / span 11 !important;
+                padding-top: 9rem;
+            }
+
+            #final-section {
+                grid-column: 1 / span 12 !important;
+                padding-right: 1rem;
+            }
+
+            #html-css {
+                grid-column: 1 / span 12 !important;
+                padding-left: 0;
+                padding-top: 11rem;
+            }
+
+            .left-space {
+                padding-left: 1rem;
+            }
+        }
+
+        @media all and (-ms-high-contrast: none),
+        (-ms-high-contrast: active) {
+            nav {
+                display: none;
+            }
+
+            h1 {
+                color: black;
+            }
+
+            code {
+                color: black;
+                border: 1px solid black;
+            }
+
+            section *::selection {
+                color: white;
+                background: black;
+            }
+
+            th {
+                color: black;
+                background-color: #ffb62e;
+                padding: 0 5rem 0 .5rem;
+            }
+
+            tr:nth-child(even) {
+                background-color: lightgray;
+            }
+
+            #floating-enter-notification {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body data-gr-c-s-loaded="true" fiprocessed="true">
+    <nav>
+        <ul id="main-menu-list">
+            <li class="menu-item unselected" tabindex="0">
+                <i class="fas fa-atom fa-fw unselected-icon" aria-hidden="true"></i>
+                <h4 class="unselected-title">React</h4>
+            </li>
+            <li class="menu-item unselected" tabindex="0">
+                <i class="fas fa-info fa-fw unselected-icon" aria-hidden="true"></i>
+                <h4 class="unselected-title">General Info</h4>
+            </li>
+            <li class="menu-item selected" tabindex="0">
+                <i class="fas fa-stream fa-fw selected-icon" aria-hidden="true"></i>
+                <h4 class="selected-title">What do I React to?</h4>
+            </li>
+            <li class="menu-item unselected" tabindex="0">
+                <i class="fas fa-function unselected-icon fa-fw" aria-hidden="true"></i>
+                <h4 class="unselected-title">Functional Components</h4>
+            </li>
+            <li class="menu-item unselected" tabindex="0">
+                <i class="fas fa-question fa-fw unselected-icon" aria-hidden="true"></i>
+                <h4 class="unselected-title">Help</h4>
+            </li>
+            <li class="menu-item menu-item-last unselected" tabindex="0">
+                <i class="fas fa-sparkles fa-fw unselected-icon" aria-hidden="true"></i>
+                <h4 class="unselected-title">Advanced Tips</h4>
+            </li>
+        </ul>
+    </nav>
+    <button id="floating-enter-notification" aria-hidden="true" style="opacity: 0.5;">Next <i
+            class="fal fa-arrow-square-right" aria-hidden="true"></i></button>
+    <div class="main">
+        <section id="react" class="main-section">
+            <h1 class="main-title">
+                How would you React to some React Reactions.
+            </h1>
+            <p class="subtitle-one left-space">
+                React Workshop &amp; Information
+            </p>
+            <p class="subtitle-one left-space">
+                JJ Bastida
+            </p>
+        </section>
+        <section class="main-body two-column main-section" id="general-info">
+            <div class="heading-box">
+                <h2 class="main-title">General Info</h2>
+                <p class="react-note">Before we start the lesson...</p>
+            </div>
+            <div class="column-container">
+                <div class="left-column">
+                    <span class="counted-content">
+                        <p>
+                            React should really only be done if you have a good knowledge of HTML, CSS, and Javascript.
+                            It should not be attempted if you do not understand standard web code.
+                        </p>
+                        <h3>
+                            Be sure to download and install
+                            <a class="inline-link" target="_blank" href="https://code.visualstudio.com/Download"
+                                title="Visual Studio Code Homepage">
+                                Visual Studio Code
+                            </a>
+                            &amp;
+                            <a class="inline-link" target="_blank" href="https://nodejs.org/en/download/"
+                                title="Visual Studio Code Homepage">
+                                NodeJS.
+                            </a>
+                        </h3>
+                        <p>
+                            When everything has been installed run the following commands on your Terminal, Powershell,
+                            or GitBash in a new folder somewhere on your computer in a safe location:
+                        </p>
+                    </span>
+                    <code class="terminal-code"><br>
+                        <span class="code-color-main">npm i react</span> <span class="react-note">This will install the React library on your machine for this project.</span><br><br>
+                        <span class="code-color-main">npx create-react-app</span> react-app <span class="react-note">This creates a base React app folder. Be sure to replace "react-app" with whatever you app is named.</span><br><br>
+                    </code>
+                    <span class="counted-content">
+                        <p>
+                            After the app folder has been made it cannot be previewed or worked with in the same way
+                            regular HTML files can. A React project needs to be parsed and rendered before it can be
+                            seen.
+                        </p>
+                    </span>
+                </div>
+                <div class="right-column">
+                    <span class="counted-content">
+                        <p>
+                            With web apps, when using library packages you need to install them to the project, using
+                            <a class="inline-link" target="_blank" href="https://www.npmjs.com/"
+                                title="Visual Studio Code Homepage">
+                                NPMjs
+                            </a> is a great resource for easy to implement packages.
+                        </p>
+                        <p>
+                            To properly view and render out your React app you will have to run one of the commands
+                            below. It
+                            auto-refreshes so be sure not to run the command more than once.
+                        </p>
+                    </span>
+                    <code class="terminal-code"><br>
+                        <span class="code-color-main">npm run start</span>  <span class="react-note">This will start the app and render it out locally in browser (not for export, only for preview).</span><br><br>
+                        <span class="code-color-main">npm run build</span>  <span class="react-note">This will build the app and render it out as html, it creates a build folder (put the contents of the build folder in a public_HTML folder to have it  online).</span><br><br>
+                    </code>
+                    <span class="counted-content">
+                        <p>
+                            Try to keep components organized using folders and appropriate names.
+                        </p>
+                        <p>
+                            Make components as re-usable as possible, and if a single component is becoming too big, try
+                            breaking it up into multiple smaller components.
+                        </p>
+                    </span>
+                </div>
+            </div>
+        </section>
+        <section class="main-body two-column main-section" id="what-do-i-react-to?">
+            <div class="heading-box">
+                <h2 class="main-title">What do I React to?</h2>
+                <p class="react-note">Is this like JQuery? Like a library??</p>
+            </div>
+            <div class="column-container">
+                <div class="counted-content left-column">
+                    <p>
+                        React is a Javascript framework made by Facebook that allows you to make web apps with ease. A
+                        web app is a web project that renders out as HTML but is generally written and constructed in a
+                        different language or framework. This allows for more complex code, more structured layouts,
+                        and/or re-usable components.
+                    </p>
+                    <p>
+                        React works in a way that, to many, looks like a combination of HTML and Javascript. It allows
+                        for quick and easy HTML re-renders with minimal effort and dynamic content.
+                    </p>
+                    <p>
+                        React files are type .jsx and must be named with PascalCase to actually work within React.
+                    </p>
+                    <p>
+                        At it's core, React works by creating code blocks called <strong>components</strong> and by
+                        passing <strong>props.</strong> A
+                        component can be used endlessly within other components and allows for easier and more
+                        structured code. And props are simply variable values that can be passed between components with
+                        ease.
+                    </p>
+                    <p>
+                        The other main selling point is being able to have javascript directly in your HTML, and have
+                        things change on the fly.
+                    </p>
+                </div>
+                <div class="right-column">
+                    <span class="counted-content">
+                        <p>
+                            When starting work on a project, you should work off of the App.jsx. It's best
+                            practice to have static components (like a nav or footer) in the App while the page contents
+                            change per route. <a class="inline-link" href="#routing">See routing for more</a>
+                        </p>
+                        <p>
+                            React will generally look something like the following:
+                        </p>
+                    </span>
+                    <code class="react-code"><br>
+                    <pre>class <span class="code-color-main">TextingMeAtFourAM</span> extends <span class="code-color-main">React.Component</span> {
+    constructor(<span class="html-color">props</span>) {
+        super(<span class="html-color">props</span>);
+    }
+
+    render() {
+        return (&lt;&gt;
+            <span class="code-color-main">&lt;h1&gt;</span>
+                This is a big title; Why you comin home 5 in the morning...
+            <span class="code-color-main">&lt;/h1&gt;</span>
+            <span class="code-color-main">&lt;p&gt;</span>
+                {<span class="code-color-main">this.props.description</span>}
+            <span class="code-color-main">&lt;/p&gt;</span>
+        &lt;/&gt;);
+    }
+}
+                </pre>
+                </code>
+                </div>
+            </div>
+        </section>
+        <section class="main-body two-column ignore-section">
+            <div class="heading-box">
+                <h2 class="main-title">Components AND Props?</h2>
+                <p class="react-note">It can be the messiest thing or the cleanest thing on the planet.</p>
+            </div>
+            <div class="column-container">
+                <div class="left-column counted-content">
+                    <p>
+                        A component is simply a section of code that can be re-used endlessly throughout your web app.
+                    </p>
+                    <p>
+                        Components will render out whatever is being returned from the render function, or in the case
+                        of functional components, whatever is returned.<br>
+                        <span class="react-note">
+                            In the following case, the PropBaby is being rendered in the
+                            PropDaddy. The PropBaby is just a p tag. So when it becomes HTML it'll just be one p
+                            tag.
+                        </span>
+                    </p>
+                    <p>
+                        Props are one of the fundamental ways of how React allows information to flow. It's always
+                        better to use props or import data rather than hard code values, this allows components to be
+                        much more reusable.
+                    </p>
+                    <p>
+                        Props can be any variable type, including numbers, boolean, arrays, objects, or even functions.
+                        To pass
+                        something that isn't a string, be sure to wrap it in {squigglyBrackets}.
+                    </p>
+                    <p>
+                        Be careful with the types of props that are passed. If you pass a function and try to make it
+                        work like a string the render might fail.
+                    </p>
+                </div>
+                <div class="right-column">
+                    <span class="counted-content">
+                        <p>
+                            Also keep in mind, props that are passed are read-only. You cannot change a prop in a child
+                            component.
+                        </p>
+                        <p>
+                            Components can be written as class based or functional components.
+                            <a class="inline-link" href="#functional-components">
+                                See below for more on Functional Components
+                            </a>
+                            <a class="inline-link" target="_blank"
+                                href="https://jjdesign.space/labs/js-workshop.html#classesAndPrototypes">
+                                See my JS workshop for a refresher on classes.
+                            </a>
+                        </p>
+                    </span>
+                    <code class="react-code"><br>
+                    <pre>class <span class="code-color-main">PropDaddy</span> extends <span class="code-color-main">React.Component</span> {
+    render() {
+        return <span class="code-color-main">&lt;PropBaby</span> <span class="html-color">name</span>=<span class="js-color">'Baby'</span>/&gt;;
+    }
+}
+
+class <span class="code-color-main">PropBaby</span> extends <span class="code-color-main">React.Component</span> {
+    constructor(<span class="html-color">props</span>) {
+        super(<span class="html-color">props</span>);
+    }
+
+    render() {
+        return <span class="react-color">&lt;p&gt;</span>{<span class="html-color">this.props.name</span>}<span class="react-color">&lt;/p&gt;</span>;
+    }
+}
+                </pre>
+                </code>
+                </div>
+            </div>
+        </section>
+        <section class="main-body two-column ignore-section">
+            <div class="heading-box">
+                <h2 class="main-title">States, life cycle methods, refs, and more!</h2>
+                <p class="react-note">Everything happens at some point, but when is the real question.</p>
+            </div>
+            <div class="column-container">
+                <div class="left-column counted-content">
+                    <p>
+                        When working with React it is important to remember that it does not work in the same way a
+                        regular HTML site does. The code is rendered out but continues to stay alive and open to
+                        re-renders depending on a lot of different things.
+                    </p>
+                    <p>
+                        This also means that a lot of values are changed asynchronously so that other processes can run
+                        at the same time without slowing down the web app.
+                    </p>
+                    <p>
+                        Here are just a few of the tools people use in React to achieve dynamic content.
+                    </p>
+                    <p>
+                        <strong>State</strong> - A state is a user-defined javascript variable that can be changed on
+                        the fly. States are set different to that of a variable, and are available globally whenever
+                        needed (per component or can be passed as props). You cannot modify states by doing this.state
+                        or changing values directly. They should be changed with the proper setState() accompanying
+                        function.
+                    </p>
+                </div>
+                <div class="right-column counted-content">
+                    <p>
+                        <strong>Refs</strong> - A ref or reference, is a reference to a mutable value that can be
+                        modified on the fly. Different to a state, it can directly reference an HTML element and is in
+                        an object structure (not just a value).
+                    </p>
+                    <p>
+                        <strong>ComponentDidMount</strong> - Is an effect method that fires as soon as the component
+                        renders. It fires after the render function successfully mounted.
+                    </p>
+                    <p>
+                        <strong>ComponentWillUnMount</strong> - Is an effect method that fires as soon as the component
+                        un-mounts and is no longer available on the page. This is usually used for cleanup of unused
+                        event listeners or state management.
+                    </p>
+                    <p>
+                        <strong>Context</strong> - Is a global state manager that allows you to use global states across
+                        different components with ease.
+                        <span class="react-note">
+                            It can be a little annoying to set up though.
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section class="main-body two-column ignore-section" id="routing">
+            <div class="heading-box">
+                <h2 class="main-title">Routing</h2>
+                <p class="react-note">It's okay to slug around. I won't judge.</p>
+            </div>
+            <div class="column-container">
+                <div class="left-column counted-content">
+                    <p>
+                        Routing can be done in a multitude of different ways with a multitude of different libraries.
+                    </p>
+                    <p>
+                        The one that gives the most granular control would be <a class="inline-link" target="_blank"
+                            href="https://www.npmjs.com/package/react-router-dom">React Router DOM</a>
+                    </p>
+                    <p>
+                        With the React Router DOM you can easily set url routes, pass props to pages based on url, and
+                        create easy 404 pages.
+                    </p>
+                    <p>
+                        <strong>Router</strong> - The Router is the main container that controls all of the routes and
+                        does a whole bunch of magic.
+                    </p>
+                    <p>
+                        <strong>Switch</strong> - The Switch is the specific component that allows the router to switch
+                        between routes depending on the route.
+                    </p>
+                    <p>
+                        <strong>Route</strong> - The Route is the single URL route, it can render a single component or
+                        even a group of components with props.
+                    </p>
+                    <p>
+                        There are many different properties that you can pass into these components, have fun and <a
+                            class="inline-link" target="_blank" href="https://reacttraining.com/react-router/web">look
+                            into their documentation for
+                            more.</a>
+                    </p>
+                </div>
+                <div class="right-column">
+                    <span class="counted-content">
+                        <p>
+                            This is an example Router; it should be placed in your App render instead of whatever
+                            content you have for the page.
+                        </p>
+                    </span>
+                    <code class="react-code"><br>
+                    <pre>return (
+    <span class="code-color-main">&lt;Router&gt;</span>
+        <span class="code-color-main">&lt;Switch&gt;</span>
+            <span class="code-color-main">&lt;Route</span>
+                <span class="code-color-second">path</span>=<span class="js-color">'/about-me'</span>
+                <span class="code-color-second">component</span>={<span class="react-color">AboutMe</span>}
+                <span class="code-color-second">exact</span>
+            <span class="code-color-main">/&gt;</span>
+            <span class="code-color-main">&lt;Route</span>
+                <span class="code-color-second">component</span>={<span class="react-color">NotFound</span>}
+                <span class="code-color-second">status</span>={404}
+            <span class="code-color-main">/&gt;</span>
+        <span class="code-color-main">&lt;/Switch&gt;</span>
+    <span class="code-color-main">&lt;/Router&gt;</span>
+);
+                </pre>
+                </code>
+                </div>
+            </div>
+        </section>
+
+        <section class="main-body two-column ignore-section">
+            <div class="heading-box">
+                <h2 class="main-title">Synthetic events</h2>
+                <p class="react-note">Don't worry they're allllll real.</p>
+            </div>
+            <div class="column-container">
+                <div class="left-column counted-content">
+                    <p>
+                        React makes component events incredibly easy and allows for a lot of different modifications on
+                        the fly!
+                    </p>
+                    <p>
+                        Events are made using a slew of different event props which take a function to run when the
+                        event is done.
+                        <br><span class="react-note">If you pass anything that isn't a pure function it will
+                            explode.</span>
+                    </p>
+                    <p>
+                        If you want to call a function with props be sure to wrap it in an anonymous function.
+                        <br><span class="react-note">
+                            () =&gt; {doSomething('Hello');}
+                        </span>
+                    </p>
+                </div>
+                <div class="right-column">
+                    <code class="react-code"><br>
+                    <pre>return (
+    <span class="code-color-main">&lt;div&gt;</span>
+        <span class="code-color-main">&lt;button</span> <span class="html-color">onClick</span>={<span class="php-color">Eggplant</span>}<span class="code-color-main">&gt;</span>
+            Touch me for Eggplant!
+        <span class="code-color-main">&lt;/button&gt;</span>
+        <span class="code-color-main">&lt;Crab</span> <span class="html-color">
+            onMouseDown</span>={() =&gt; <span class="php-color">SpinCrab(</span>40<span class="php-color">)</span>}
+            <span class="html-color">onKeyDown</span>={<span class="php-color">DontSpin</span>}
+            <span class="code-color-main">&gt;</span>
+    <span class="code-color-main">&lt;/div&gt;</span>
+);
+                </pre>
+                </code>
+                </div>
+            </div>
+        </section>
+        <section class="main-body two-column main-section" id="functional-components">
+            <div class="heading-box">
+                <h2 class="main-title">Functional Components</h2>
+                <p class="react-note">
+                    Functions; hook, lines and sinker!
+                </p>
+            </div>
+            <div class="column-container">
+                <div class="counted-content left-column">
+                    <p>If you're still here, congrats, this is where React starts to get super fun and easy to
+                        understand!</p>
+                    <p>React is 6 years old at this point, and in mid 2019 they perfected and cleaned up functional
+                        components in a way that makes React so much more beautiful and easy to read.</p>
+                    <p>Functional components, as the name states, are components made with functions instead of classes!
+                    </p>
+                    <p>They make clean code management a lot easier, and hooks (explained later) make React beautiful
+                        again.
+                    </p>
+                    <p>
+                        The React code on the right is a simple functional component. It doesn't need a constructor, or
+                        this.props. Everything works as it normally would and even the React imports stay the same.
+                    </p>
+                </div>
+                <div class="right-column">
+                    <code class="react-code"><br>
+                        <pre>function <span class="code-color-main">AnimeWaifu</span> (<span class="html-color">props</span>) {
+    return (
+        <span class="code-color-main">&lt;div&gt;</span>
+            <span class="code-color-main">&lt;img</span> <span class="html-color">href</span>={<span class="js-color">`/images/</span>${<span class="html-color">props.imgURL</span>}<span class="js-color">`</span>}<span class="code-color-main">&gt;</span>
+            <span class="code-color-main">&lt;h1&gt;</span>
+                {<span class="html-color">props.name</span>}
+            <span class="code-color-main">&lt;/h1&gt;</span>
+            <span class="code-color-main">&lt;p&gt;</span>
+                {<span class="html-color">props.description</span>}
+            <span class="code-color-main">&lt;/p&gt;</span>
+        <span class="code-color-main">&lt;/div&gt;</span>
+    );
+}
+                    </pre>
+                    </code>
+                </div>
+            </div>
+        </section>
+        <section class="main-body two-column ignore-section">
+            <div class="heading-box">
+                <h2 class="main-title">Hooks!</h2>
+                <p class="react-note">
+                    What did you just call me!?
+                </p>
+            </div>
+            <div class="column-container">
+                <div class="counted-content left-column">
+                    <p>
+                        A hook is essentially a simple reusable function that accomplishes a local task per component.
+                    </p>
+                    <p>
+                        React has a few default hooks (explained below) but you can always make your own as well!
+                    </p>
+                    <p>
+                        Before diving into using hooks, remember you should only ever use hooks inside of the functional
+                        components at the top level (in the component function), not inside of loops or if statements,
+                        and definitely not inside of other functions within the component.
+                    </p>
+                    <p>
+                        <strong>useState</strong> - Allows you to create easy to use states and an
+                        accompanying setState function with ease!
+                    </p>
+                    <p>
+                        <strong>useEffect</strong> - Allows for effect functions that listen for a certain variable to
+                        change, and fire when certain variables change.
+                    </p>
+                    <p>
+                        <strong>useRef</strong> - Allows you to make a ref but a lot more streamlined.
+                    </p>
+                    <p>
+                        <strong>useContext</strong> - Gives you access to states and values exported from contexts with
+                        no complex imports or wrapping.
+                    </p>
+                </div>
+                <div class="right-column">
+                    <span class="counted-content">
+
+                    </span>
+                    <code class="react-code"><br>
+                        <pre>function <span class="code-color-main">HeirToTheHair</span> () {
+    const [<span class="html-color">hairColor</span>, <span class="php-color">setHairColor</span>] = <span class="php-color">useState(</span><span class="js-color">'Please write a hair color...'</span><span class="php-color">)</span>;
+    const <span class="html-color">hairInput</span> = <span class="php-color">useRef()</span>;
+    const <span class="html-color">userProps</span> = <span class="php-color">useContext(</span><span class="html-color">UserContext</span><span class="php-color">)</span>;
+
+    <span class="php-color">useEffect(</span>()=&gt;{
+        if (<span class="html-color">hairColor</span> !== <span class="html-color">userProps</span>.globalHair) {
+            <span class="html-color">userProps</span>.<span class="php-color">setGlobalHair</span>(<span class="html-color">hairColor</span>);
+        }
+    },[<span class="html-color">hairColor</span>]<span class="php-color">)</span>;
+
+    return (&lt;&gt;
+        <span class="code-color-main">&lt;input</span> <span class="html-color">ref</span>={<span class="html-color">hairInput</span>}<span class="code-color-main">&gt;</span>
+        <span class="code-color-main">&lt;button</span>
+            <span class="html-color">onClick</span>={() =&gt;
+                 <span class="php-color">setHairColor</span>(<span class="html-color">hairInput</span>.value)
+            }
+        <span class="code-color-main">&gt;</span>
+    &lt;/&gt;);
+}
+                    </pre>
+                    </code>
+                </div>
+            </div>
+        </section>
+        <section class="main-body single-column main-section" id="help">
+            <div class="heading-box">
+                <h2 class="main-title">Help &amp; Troubleshooting</h2>
+                <p class="react-note">NOTHING IS RENDERING!?</p>
+            </div>
+            <div class="counted-content">
+                <p>
+                    Check that everything is spelled correctly &amp; that everything is importing properly.
+                </p>
+                <p>
+                    <strong>Check again!</strong><span class="react-note">Trust me check your code again to be sure
+                        you didn't miss anything.</span>
+                </p>
+                <p>
+                    Use the Developer Tools Inspector
+                    <span class="react-note">generally by right-clicking and selecting inspect.</span>
+                </p>
+                <p>
+                    Console.log your props or variables to make sure you have the right data.
+                </p>
+                <p>
+                    Be sure that your CSS is applying properly, and make sure that your components are ordered in the
+                    right way.
+                </p>
+                <p>
+                    Try searching online for the error you are receiving.
+                </p>
+                <p>
+                    If a build is failing, try doing run start and seeing any errors or warnings that appear in the
+                    console.
+                </p>
+                <p>Try Google-ing the problem.</p>
+            </div>
+        </section>
+        <section class="main-body single-column ignore-section">
+            <div class="heading-box">
+                <h2 class="main-title">Common React Errors</h2>
+                <p class="react-note">
+                    My &lt;FatBaby&gt; component isn't getting props from &lt;Mama&gt;
+                </p>
+            </div>
+            <div class="counted-content">
+                <p><strong>Be sure to check the following:</strong></p>
+                <p>
+                    Check that everything is spelled correctly &amp; that your
+                    components are properly imported!
+                </p>
+                <p>
+                    Make sure that all components are properly wrapped in one big container or React Fragment!
+                    <br><span class="react-note">
+                        A react fragment looks like this &lt;&gt; &lt;/&gt; or
+                        &lt;React.Fragment&gt; &lt;/React.Fragment&gt;
+                    </span>
+                </p>
+                <p>
+                    Make sure synthetic events are receiving functions (not a function call)
+                </p>
+                <p>
+                    Make sure the props being received are the right type you are expecting.
+                </p>
+                <p>
+                    Make sure you know how things are timed, you can't use a ref unless it's in an effect (because it
+                    will probably be null).
+                </p>
+                <p>
+                    Make sure your components are properly returning the right tags (and follow them down the tree if
+                    needed).
+                </p>
+                <p>
+                    Check your routes.
+                </p>
+                <p>
+                    Check library documentation.
+                </p>
+                <p>
+                    Make sure all of your tags are properly closed.
+                </p>
+                <p>
+                    Make sure React is either returning components, a function, or null. It doesn't like strings,
+                    numbers, booleans, or undefined.
+                </p>
+            </div>
+        </section>
+        <section class="main-body two-column main-section" id="advanced-tips">
+            <div class="heading-box">
+                <h2 class="main-title">Advanced Tips!</h2>
+                <p class="react-note">For all you cool kids 😎</p>
+            </div>
+            <div class="column-container">
+                <div class="left-column">
+                    <span class="counted-content">
+                        <p>
+                            De-structure your props to make them easier to use and understand! De-structuring allows you
+                            to
+                            use
+                            your props without having to reference the object every time.<br>
+                            <span class="react-note">
+                                const {name, image, description} = props; or function Baby ({name, image, description})
+                                {...}
+                            </span>
+                        </p>
+                        <p>
+                            Using short-circuit operators and quick conditional statements help make React feel much
+                            more
+                            dynamic and make code a lot shorter!
+                        </p>
+                        <p>
+                            <strong>&&</strong> The && operator will run the last function or variable in the order they
+                            are placed.
+                        </p>
+                        <p>
+                            <strong>||</strong> The || operator will run the whichever of the variables returns true
+                            first.
+                        </p>
+                        <p>
+                            <strong>__ ? TRUE : FALSE</strong> This quick conditional statement checks whether the first
+                            value is true or false and runs the corresponding code.
+                        </p>
+                    </span>
+                    <code class="react-code"><br>
+                <pre>
+const <span class="html-color">loggedIn</span> = props.loggedIn || false;
+const <span class="php-color">getDate</span> = () => new Date().format();
+
+return (&lt;&gt;
+{<span class="html-color">loggedIn</span> ? (
+    <span class="code-color-main">&lt;p&gt;</span>
+        You're logged in!
+    <span class="code-color-main">&lt;/p&gt;</span>
+): null}
+<span class="code-color-main">&lt;p&gt;</span>
+    {!<span class="html-color">props.date</span> && <span class="php-color">getDate()</span>}
+<span class="code-color-main">&lt;/p&gt;</span>
+&lt;/&gt;);
+                </pre>
+            </code>
+                </div>
+                <div class="right-column">
+                    <span class="counted-content">
+                        <p>
+                            A simple and quick way to display data is to use what is called a map. You can take any
+                            array and use the map method to return a modified array of items.
+                        </p>
+                        <p>
+                            In React, a map can return multiple components in succession meaning that you can take a lot
+                            of data and render out the same item with different data very easily.
+                        </p>
+                        <p>
+                            Don't forget to add a unique key value when mapping to the outer most container! React needs
+                            keys to help it manage maps and maintain them well.
+                        </p>
+                    </span>
+                    <code class="react-code"><br>
+                <pre>
+const <span class="html-color">dataSample</span> = [{
+        title: 'Snails!?',
+        body:'What is it?',
+    },
+    {
+        title: 'Clams!?',
+        body:'What on earth??',
+}];
+
+return (&lt;&gt;
+{<span class="html-color">dataSample</span>.map(({<span class="html-color">title</span>, <span class="html-color">body</span>}) => (
+    <span class="code-color-main">&lt;Card</span> key={<span class="html-color">title</span>}<span class="code-color-main">&gt;</span>
+        <span class="code-color-main">&lt;h3&gt;</span>{<span class="html-color">title</span>}<span class="code-color-main">&lt;/h3&gt;</span>
+        <span class="code-color-main">&lt;p&gt;</span>{<span class="html-color">body</span>}<span class="code-color-main">&lt;/p&gt;</span>
+    <span class="code-color-main">&lt;/Card&gt;</span>
+))}
+&lt;/&gt;);
+                </pre>
+            </code>
+                </div>
+            </div>
+        </section>
+        <section class="main-body ignore-section" id="final-section">
+            <h1 class="main-title">That’s all for now!</h1>
+            <p class="subtitle-two left-space">
+                Be sure to contact me if you have any questions or concerns
+                <i class="far fa-sparkles" aria-hidden="true"></i>
+            </p>
+        </section>
+    </div>
+    <script>
+        const currentSection = {
+            element: null,
+            index: null,
+            menuPosition: null,
+        };
+        let scrollingTo;
+        let isScrolling = false;
+        const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+        const mainMenuList = document.querySelector('#main-menu-list');
+        const isMobile = window.innerWidth < 40 * rem;
+        const sections = [].slice.call(document.getElementsByTagName('section'));
+        const mainSections = [].slice.call(document.getElementsByClassName('main-section'));
+        const titles = [].slice.call(document.getElementsByClassName('main-title'));
+        const menuItems = [].slice.call(document.getElementsByClassName('menu-item'));
+        const fen = document.getElementById('floating-enter-notification');
+        const hash = window.location.hash;
+        const hashItem = hash && document.getElementById(hash.substring(1));
+
+        if (hash && hashItem) {
+            scrollToTarget(hashItem, 'smooth', 'start', 'nearest');
+        }
+
+
+        if (window.innerHeight < parseFloat(getComputedStyle(mainMenuList).height)) {
+            mainMenuList.style.height = '100%';
+            mainMenuList.style.overflowY = 'scroll';
+            mainMenuList.style.overflowX = 'hidden';
+        }
+
+        function unselectAll(selected) {
+            selected.children[1].classList.toggle('selected-title');
+            selected.children[1].classList.toggle('unselected-title');
+            selected.children[0].classList.toggle('selected-icon');
+            selected.children[0].classList.toggle('unselected-icon');
+            selected.classList.toggle('unselected');
+            selected.classList.toggle('selected');
+        }
+
+        function handleSelection(targetElement) {
+            const currentSelection = document.getElementsByClassName('selected');
+
+            if (currentSelection.length === 0) {
+                targetElement.classList.toggle('unselected');
+                targetElement.classList.toggle('selected');
+                targetElement.children[1].classList.toggle('selected-title');
+                targetElement.children[1].classList.toggle('unselected-title');
+                targetElement.children[0].classList.toggle('unselected-icon');
+                targetElement.children[0].classList.toggle('selected-icon');
+            } else if (currentSelection.length >= 0) {
+                unselectAll(currentSelection[0]);
+                targetElement.classList.toggle('unselected');
+                targetElement.classList.toggle('selected');
+                targetElement.children[1].classList.toggle('selected-title');
+                targetElement.children[1].classList.toggle('unselected-title');
+                targetElement.children[0].classList.toggle('unselected-icon');
+                targetElement.children[0].classList.toggle('selected-icon');
+            }
+        }
+        function scrollToTarget(target, behavior, block, inline) {
+            isScrolling = true;
+            scrollingTo = target;
+
+            target.scrollIntoView({
+                behavior,
+                block,
+                inline,
+            });
+        }
+
+        function scrollToSection(value) {
+            if (sections[currentSection.index + value]) {
+                scrollToTarget(sections[currentSection.index + value], 'smooth', 'start', 'nearest');
+            } else {
+                scrollToTarget(sections[0], 'smooth', 'start', 'nearest');
+            }
+        }
+
+        function cleanUpHTML(target) {
+            const newTarget = target
+                .replace('&amp;', '')
+                .toLowerCase()
+                .replace(/\s/gm, '-')
+                .replace('--', '-');
+            return newTarget;
+        }
+
+        function handleTarget(event) {
+            const menuChildren = document.querySelector('#main-menu-list').children;
+            let selections;
+
+            Array.prototype.forEach.call(menuChildren, child => {
+                if (event.target === child) {
+                    selections = event.target;
+                } else if (event.target.parentElement === child) {
+                    selections = event.target.parentElement;
+                }
+            });
+
+            return selections;
+        }
+
+        function handleKeyPress(event) {
+            if ((event.key === 'Enter' || event.which === 13 || event.code === 'Enter') || (event.key === 'ArrowRight' || event.which === 39 || event.code === 'ArrowRight')) {
+                event.preventDefault();
+                const selected = handleTarget(event);
+
+                if (selected) {
+                    let target = selected.children[1].innerHTML;
+                    target = cleanUpHTML(target);
+                    scrollToTarget(document.getElementById(target), 'smooth', 'start', 'nearest');
+                    handleSelection(selected);
+                } else {
+                    scrollToSection(+1);
+                }
+            } else if ((event.key === 'Backspace' || event.which === 8 || event.code === 'Backspace') || (event.key === 'ArrowLeft' || event.which === 37 || event.code === 'ArrowLeft')) {
+                event.preventDefault();
+                scrollToSection(-1);
+            }
+        }
+
+        function handleClick(event) {
+            const selected = handleTarget(event);
+
+            if (selected !== undefined) {
+                let target = selected.children[1].innerHTML;
+                target = cleanUpHTML(target);
+                scrollToTarget(document.getElementById(target), 'smooth', 'start', 'nearest');
+                handleSelection(selected);
+            }
+        }
+
+        document.querySelector('#main-menu-list').addEventListener('click', handleClick);
+        window.addEventListener('keydown', handleKeyPress);
+        fen.addEventListener('click', function () {
+            scrollToSection(+1);
+            event.preventDefault();
+
+        });
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const thisSection = entry.target.closest('section');
+
+                    currentSection.element = thisSection;
+                    currentSection.index = sections.indexOf(thisSection);
+                    currentSection.menuPosition = mainSections.indexOf(thisSection);
+
+                    if (isScrolling && scrollingTo === thisSection) {
+                        isScrolling = false;
+                    }
+
+                    if (!thisSection.classList.contains('ignore-section') && !isScrolling) {
+                        handleSelection(menuItems[currentSection.menuPosition]);
+                    }
+
+                    if (isMobile && !isScrolling && menuItems[currentSection.menuPosition]) {
+                        const menuTarget = menuItems[currentSection.menuPosition];
+                        setTimeout(() => {
+                            menuTarget.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'center',
+                                inline: 'center',
+                            });
+                        }, 500);
+                    }
+
+                    if (currentSection.index === 0) {
+                        fen.innerHTML = "Press Enter to<br>continue <i class='fal fa-arrow-square-right'></i>";
+                        fen.style.opacity = 1;
+                    } else {
+                        fen.innerHTML = "Next <i class='fal fa-arrow-square-right'></i>";
+                        fen.style.opacity = 0.5;
+                    }
+                }
+            });
+        });
+
+        titles.forEach(title => {
+            observer.observe(title);
+        });
+    </script>
+</body>
+
+</html>

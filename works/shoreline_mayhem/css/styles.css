@@ -3,11 +3,10 @@
     padding: 0;
     user-select: none;
     font-family: "Montserrat", "Verdana", "Helvetica", sans-serif;
-    /*    border: .01px magenta solid*/
+/*    border: .01px magenta solid*/
 }
-
-*:focus {
-    outline: 0;
+*:focus{
+     outline: 0;
     border: none;
 }
 
@@ -15,7 +14,7 @@ body {
     width: 100%;
     height: 100%;
     margin: 0;
-    padding 0;
+    padding: 0;
     transition: all 2s ease;
 }
 
@@ -29,11 +28,8 @@ button {
     border: 1px solid white;
     background: rgba(255, 255, 255, 0);
 }
-
-a {
-    color: white;
-}
-
+a{
+color: white;}
 .titleOverlay {
     width: 50%;
     max-width: 600px;
@@ -179,7 +175,6 @@ a {
 }
 
 #underbubbles div {
-    background: ;
     width: 13px;
     height: 11px;
     margin: 0 5px;
@@ -222,15 +217,13 @@ a {
 .oilwater {
     background: linear-gradient(to bottom, #606085 0%, #333333 100%);
 }
-
-#buttons {
+#buttons{
     display: block;
     position: absolute;
     bottom: 0;
     width: 100%;
 }
-
-#buttons div {
+#buttons div{
     width: 50%;
     float: left;
     display: block;
@@ -239,24 +232,17 @@ a {
     background-color: white;
     box-sizing: border-box;
 }
-
-#buttons div:last-child {
-    border-left: #88889F solid 1px;
+#buttons div:last-child{
+ border-left: #88889F solid 1px;
 }
-.mobileHide{
-    display: inline
-}
-@media all and (max-width: 47rem) {
-    .mobileHide{
-    display: none
-}
+@media only screen and (max-width: 47rem) {
     .bodyC {
         font-size: 1rem;
         line-height: 1.3rem;
         text-align: left;
         box-sizing: border-box;
         padding: 0 4em;
-    }
+}
     .titleOverlay {
         width: 100vw;
         margin: 10vh 0 0 0;
@@ -264,13 +250,11 @@ a {
         min-width: unset;
         max-width: unset;
     }
+    
     .title {
         text-align: center;
     }
-    .titleTwo {
-    font-size: 16vw;
-        line-height: .9
-}
+
     #underwawa {
         font-weight: 300;
         cursor: pointer;
@@ -300,20 +284,20 @@ a {
         padding: 0 1em;
     }
     .minitext {
-        margin: 1rem 0;
-        font-style: italic;
-        letter-spacing: .02em;
-        word-spacing: .05em;
-        width: 100%;
-        text-align: center;
+    margin: 1rem 0;
+    font-style: italic;
+    letter-spacing: .02em;
+    word-spacing: .05em;
+    width: 100%;
+    text-align: center;
+}
+    #slider{
+    display: none;
     }
-    #slider {
+    #underbubbles{
         display: none;
     }
-    #underbubbles {
-        display: none;
-    }
-    #buttons {
+    #buttons{
         display: block;
     }
 }
