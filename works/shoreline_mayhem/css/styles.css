@@ -9,12 +9,11 @@
      outline: 0;
     border: none;
 }
-
 body {
     width: 100%;
     height: 100%;
     margin: 0;
-    padding: 0;
+    padding 0;
     transition: all 2s ease;
 }
 
@@ -175,6 +174,7 @@ color: white;}
 }
 
 #underbubbles div {
+    background: ;
     width: 13px;
     height: 11px;
     margin: 0 5px;
@@ -250,11 +250,9 @@ color: white;}
         min-width: unset;
         max-width: unset;
     }
-    
     .title {
         text-align: center;
     }
-
     #underwawa {
         font-weight: 300;
         cursor: pointer;
